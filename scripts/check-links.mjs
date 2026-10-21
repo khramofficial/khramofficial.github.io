@@ -14,7 +14,7 @@ const files = [];
     const p = join(d, n);
     if (n === "_next") continue;
     if (statSync(p).isDirectory()) walk(p);
-    else if (n.endsWith(".html")) files.push(p);
+    else if (n.endsWith(".html") && !/^google[0-9a-f]+\.html$/.test(n)) files.push(p); // skip Search Console verification files
   }
 })(OUT);
 

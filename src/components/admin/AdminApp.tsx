@@ -164,11 +164,17 @@ function Login() {
     setError("");
     const { error: err } = await sb().auth.signInWithOtp({
       email: e,
-      options: { emailRedirectTo: `${window.location.origin}/admin/`, shouldCreateUser: true },
+      options: { emailRedirectTo: `${window.location.origin}/admin/`, shouldCreateUser: false },
     });
     if (err) {
       setState("idle");
-      setError(/rate|seconds/i.test(err.message) ? "ขอลิงก์ถี่เกินไป รอสักครู่แล้วลองใหม่" : errText(err));
+      setError(
+        /rate|seconds/i.test(err.message)
+          ? "ขอลิงก์ถี่เกินไป รอสักครู่แล้วลองใหม่"
+          : /signup|not allowed|not found/i.test(err.message)
+            ? "อีเมลนี้ไม่มีสิทธิ์เข้าหลังบ้าน"
+            : errText(err),
+      );
       return;
     }
     setState("sent");

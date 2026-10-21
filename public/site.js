@@ -143,6 +143,10 @@
   }
   function ignored() {
     if (!CFG || navigator.webdriver) return true;
+    // search engines, link scanners and headless browsers (the database filters these too)
+    var ua = navigator.userAgent || "";
+    if (/bot|crawl|spider|slurp|google-inspectiontool|googleother|lighthouse|headlesschrome|phantomjs|facebookexternalhit|meta-externalagent|bingpreview/i.test(ua) && !/cubot/i.test(ua)) return true;
+    if (/@posix/.test(navigator.language || "")) return true;
     if (location.pathname.indexOf("/admin") === 0) return true;
     try {
       return localStorage.getItem("khram_ignore") === "1";

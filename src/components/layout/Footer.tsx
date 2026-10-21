@@ -45,6 +45,7 @@ export function Footer({ lang }: { lang: Lang }) {
           heading={t.footer.khram}
           items={[
             { label: t.nav.story, url: href(lang, routes.ourStory) },
+            { label: t.nav.guides, url: href(lang, routes.guides) },
             { label: t.nav.faq, url: href(lang, routes.faq) },
             { label: t.nav.contact, url: href(lang, routes.contact) },
             { label: t.footer.privacy, url: href(lang, routes.privacy) },

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { ui } from "@/i18n/ui";
+import { findGuide, guides } from "@/data/guides";
 import { buildCatalog, findCollection, findProduct } from "./catalog";
+import { SITE_ORIGIN } from "./config";
 import type { Lang } from "./types";
 import { alternatesFor, routes } from "./utils";
 
-type Page = "home" | "collections" | "story" | "faq" | "contact" | "privacy";
+type Page = "home" | "collections" | "story" | "faq" | "contact" | "privacy" | "guides";
 
 const routeOf: Record<Page, string> = {
   home: routes.home,
@@ -13,6 +15,7 @@ const routeOf: Record<Page, string> = {
   faq: routes.faq,
   contact: routes.contact,
   privacy: routes.privacy,
+  guides: routes.guides,
 };
 
 const ogLocale = (lang: Lang) => (lang === "th" ? "th_TH" : "en_US");
@@ -26,6 +29,7 @@ export function pageMeta(page: Page, lang: Lang): Metadata {
     faq: { title: t.faqPage.title, description: t.faqPage.description },
     contact: { title: t.contactPage.title, description: t.contactPage.description },
     privacy: { title: t.privacyPage.title, description: t.privacyPage.description },
+    guides: { title: t.guidesPage.title, description: t.guidesPage.description },
   };
   const m = map[page];
   const title = m.title ?? { absolute: t.meta.homeTitle };
@@ -33,7 +37,14 @@ export function pageMeta(page: Page, lang: Lang): Metadata {
     title,
     description: m.description,
     alternates: alternatesFor(routeOf[page], lang),
-    openGraph: { title: m.title ? `${m.title} · Khram` : t.meta.homeTitle, description: m.description, locale: ogLocale(lang) },
+    openGraph: {
+      type: "website",
+      siteName: "Khram",
+      title: m.title ? `${m.title} · Khram` : t.meta.homeTitle,
+      description: m.description,
+      locale: ogLocale(lang),
+      images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: t.meta.ogAlt }],
+    },
   };
 }
 
@@ -46,6 +57,8 @@ export function collectionMeta(slug: string, lang: Lang): Metadata {
     description: c.summary,
     alternates: alternatesFor(routes.collection(slug), lang),
     openGraph: {
+      type: "website",
+      siteName: "Khram",
       title: `${title} · Khram`,
       description: c.summary,
       locale: ogLocale(lang),
@@ -67,6 +80,8 @@ export function productMeta(slug: string, lang: Lang): Metadata {
     description: `${p.summary} ${p.subtitle}.`,
     alternates: alternatesFor(routes.product(slug), lang),
     openGraph: {
+      type: "website",
+      siteName: "Khram",
       title: `${title} · Khram`,
       description: p.summary,
       locale: ogLocale(lang),
@@ -77,3 +92,28 @@ export function productMeta(slug: string, lang: Lang): Metadata {
 
 export const collectionParams = () => buildCatalog.collections.map((c) => ({ slug: c.slug }));
 export const productParams = () => buildCatalog.products.map((p) => ({ slug: p.slug }));
+
+/** Guides are English only: canonical without language alternates. */
+export function guideMeta(slug: string): Metadata {
+  const g = findGuide(slug);
+  if (!g) return {};
+  const url = `${SITE_ORIGIN}${routes.guide(slug)}`;
+  return {
+    title: { absolute: `${g.metaTitle} · Khram` },
+    description: g.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: "Khram",
+      url,
+      title: g.metaTitle,
+      description: g.description,
+      locale: "en_US",
+      publishedTime: g.published,
+      modifiedTime: g.updated,
+      images: [{ url: g.ogImage, width: 1200, height: 630, alt: g.image.alt }],
+    },
+  };
+}
+
+export const guideParams = () => guides.map((g) => ({ slug: g.slug }));

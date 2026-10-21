@@ -1,3 +1,4 @@
+import { JsonLd, productLd } from "@/lib/jsonld";
 import { productMeta, productParams } from "@/lib/meta";
 import { ProductView } from "@/views/CatalogViews";
 
@@ -13,5 +14,10 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
-  return <ProductView slug={slug} lang="th" />;
+  return (
+    <>
+      <JsonLd data={productLd(slug, "th")} />
+      <ProductView slug={slug} lang="th" />
+    </>
+  );
 }

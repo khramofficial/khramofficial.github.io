@@ -9,6 +9,7 @@ export function navItems(lang: Lang) {
   const t = ui(lang).nav;
   return [
     { label: t.journals, route: routes.collections },
+    { label: t.guides, route: routes.guides },
     { label: t.story, route: routes.ourStory },
     { label: t.faq, route: routes.faq },
     { label: t.contact, route: routes.contact },
@@ -45,8 +46,8 @@ export function Header({ lang, path }: { lang: Lang; path?: string | null }) {
         <a href={href(lang, routes.home)} className="wordmark" aria-label={t.home}>
           KHRAM
         </a>
-        <nav aria-label="Main" className="hidden md:block">
-          <ul className="flex items-center gap-7 lg:gap-9" role="list">
+        <nav aria-label="Main" className="hidden lg:block">
+          <ul className="flex items-center gap-7 xl:gap-9" role="list">
             {items.map((item) => (
               <li key={item.route}>
                 <a href={href(lang, item.route)} className="nav-link" aria-current={current(item.route) ? "page" : undefined}>
@@ -57,7 +58,7 @@ export function Header({ lang, path }: { lang: Lang; path?: string | null }) {
           </ul>
         </nav>
         <div className="flex items-center gap-3 sm:gap-4">
-          <span className="hidden md:inline">{langLink}</span>
+          <span className="hidden lg:inline">{langLink}</span>
           <a href={href(lang, routes.collection("indigo"))} className="btn btn-primary btn-sm hidden sm:inline-flex">
             {t.getIndigo}
           </a>

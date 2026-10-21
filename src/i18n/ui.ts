@@ -5,6 +5,7 @@ const en = {
   langName: "English",
   meta: {
     homeTitle: "Khram · Shadow work journals for people who feel deeply",
+    ogAlt: "INDIGO shadow work journal by Khram: the moonlit cover beside two inside pages, The Indigo Journey and The Feelings I Hide",
     description:
       "Khram makes art-led shadow work journals for people who feel deeply and think too much. Honest questions, quiet pages and moonlit art. A small studio in Thailand.",
   },
@@ -12,7 +13,7 @@ const en = {
   signoff: "One more dip.",
   notTherapy: "Khram journals are self-reflection tools, not a substitute for professional mental health care.",
   inEnglish: "",
-  nav: { journals: "Journals", story: "Our Story", faq: "FAQ", contact: "Contact", getIndigo: "Get INDIGO", menu: "Menu", skip: "Skip to content", home: "Khram, home", switchTo: "ภาษาไทย", switchLabel: "อ่านเป็นภาษาไทย" },
+  nav: { journals: "Journals", guides: "Guides", story: "Our Story", faq: "FAQ", contact: "Contact", getIndigo: "Get INDIGO", menu: "Menu", skip: "Skip to content", home: "Khram, home", switchTo: "ภาษาไทย", switchLabel: "อ่านเป็นภาษาไทย" },
   status: {
     collection: { available: "Available now", "in-progress": "In the making", planned: "Planned" } as Record<CollectionStatus, string>,
     product: { available: "Available now", free: "Free", "coming-soon": "Coming soon", "in-progress": "In the making" } as Record<ProductStatus, string>,
@@ -164,6 +165,20 @@ const en = {
     seeIndigo: "See INDIGO",
     tryFree: "Try 7 Nights free",
   },
+  guidesPage: {
+    title: "Guides",
+    description: "Plain-spoken guides to shadow work, journaling prompts and emotional healing journals: how to start, what to write, and when a journal isn't enough.",
+    eyebrow: "Guides",
+    h1: "Guides for quiet nights",
+    intro: "How to start shadow work, what to write, how to use a digital journal, and what writing can and can't do. Plain words, sources where it matters.",
+    englishOnly: "",
+    minutes: (n: number) => `${n} min read`,
+    updated: "Updated",
+    sources: "Sources",
+    keepReading: "Keep reading",
+    all: "All guides",
+    read: "Read the guide",
+  },
   faqPage: {
     title: "FAQ",
     description: "Questions about Khram journals: what shadow work is, digital vs paperback, which apps work, refunds, and what to do if a prompt feels too heavy.",
@@ -235,6 +250,7 @@ const th: Dict = {
   langName: "ไทย",
   meta: {
     homeTitle: "Khram · สมุดบันทึกสำรวจใจ สำหรับคนที่รู้สึกลึก",
+    ogAlt: "สมุดบันทึก INDIGO ของ Khram: ปกพระจันทร์เต็มดวงคู่กับหน้าด้านใน The Indigo Journey และ The Feelings I Hide",
     description:
       "Khram ทำสมุดบันทึกสำรวจใจ (shadow work) ที่มีภาพวาดเป็นหัวใจ สำหรับคนที่รู้สึกลึกและคิดเยอะ คำถามตรงๆ หน้ากระดาษเงียบๆ และภาพใต้แสงจันทร์ สตูดิโอเล็กๆ ในประเทศไทย",
   },
@@ -242,7 +258,7 @@ const th: Dict = {
   signoff: "จุ่มอีกรอบ",
   notTherapy: "สมุดของ Khram เป็นเครื่องมือสำหรับทบทวนตัวเอง ไม่ใช่สิ่งทดแทนการดูแลจากผู้เชี่ยวชาญด้านสุขภาพจิต",
   inEnglish: "เนื้อหาในเล่มเป็นภาษาอังกฤษ",
-  nav: { journals: "สมุด", story: "เรื่องของเรา", faq: "คำถามที่พบบ่อย", contact: "ติดต่อ", getIndigo: "ซื้อ INDIGO", menu: "เมนู", skip: "ข้ามไปที่เนื้อหา", home: "Khram หน้าแรก", switchTo: "English", switchLabel: "Read in English" },
+  nav: { journals: "สมุด", guides: "บทความ", story: "เรื่องของเรา", faq: "คำถามที่พบบ่อย", contact: "ติดต่อ", getIndigo: "ซื้อ INDIGO", menu: "เมนู", skip: "ข้ามไปที่เนื้อหา", home: "Khram หน้าแรก", switchTo: "English", switchLabel: "Read in English" },
   status: {
     collection: { available: "พร้อมขาย", "in-progress": "กำลังทำ", planned: "อยู่ในแผน" },
     product: { available: "พร้อมขาย", free: "ฟรี", "coming-soon": "เร็วๆ นี้", "in-progress": "กำลังทำ" },
@@ -393,6 +409,20 @@ const th: Dict = {
     closeP: "การเยียวยาก็เป็นแบบนั้น สิบนาทีคืนนี้ แล้วพรุ่งนี้อีกครั้ง",
     seeIndigo: "ดู INDIGO",
     tryFree: "ลอง 7 Nights ฟรี",
+  },
+  guidesPage: {
+    title: "บทความ",
+    description: "บทความเรื่อง shadow work คำถามสำหรับเขียนบันทึก และสมุดบันทึกเยียวยาใจ: เริ่มยังไง เขียนอะไร และเมื่อไหร่ที่สมุดบันทึกอย่างเดียวไม่พอ (ภาษาอังกฤษ)",
+    eyebrow: "บทความ",
+    h1: "บทความสำหรับคืนที่เงียบ",
+    intro: "เริ่มทำ shadow work ยังไง เขียนอะไรดี ใช้สมุดดิจิทัลบน iPad ยังไง และการเขียนช่วยอะไรได้บ้าง ช่วยอะไรไม่ได้",
+    englishOnly: "ตอนนี้บทความทั้งหมดเป็นภาษาอังกฤษ",
+    minutes: (n: number) => `อ่าน ${n} นาที`,
+    updated: "อัปเดต",
+    sources: "แหล่งอ้างอิง",
+    keepReading: "อ่านต่อ",
+    all: "บทความทั้งหมด",
+    read: "อ่านบทความ",
   },
   faqPage: {
     title: "คำถามที่พบบ่อย",

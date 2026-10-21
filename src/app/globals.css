@@ -325,6 +325,7 @@
     text-decoration: none;
   }
   .nav-link {
+    white-space: nowrap;
     font-family: var(--font-display);
     font-size: 0.8125rem;
     letter-spacing: 0.16em;
@@ -396,7 +397,7 @@
   .js .mobile-menu:not(.is-open) {
     display: none;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .js .menu-button,
     .mobile-menu {
       display: none !important;
@@ -416,6 +417,7 @@
     color: var(--color-gold);
   }
   .lang-switch {
+    white-space: nowrap;
     font-family: var(--font-display);
     font-size: 0.8125rem;
     letter-spacing: 0.06em;
@@ -793,5 +795,33 @@
   .adm :focus-visible {
     outline: 2px solid var(--color-gold);
     outline-offset: 2px;
+  }
+}
+
+/* ---------- Guides ---------- */
+@layer components {
+  .guide-ol,
+  .guide-prompts {
+    list-style: decimal;
+    padding-left: 1.6rem;
+  }
+  .guide-ol > li::marker,
+  .guide-prompts > li::marker {
+    color: var(--color-gold);
+    font-family: var(--font-display);
+    font-size: 0.95em;
+  }
+  .guide-ol > li {
+    padding-left: 0.35rem;
+  }
+  .guide-prompts > li {
+    padding: 0.8rem 0 0.8rem 0.35rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--color-gold) 14%, transparent);
+  }
+  .guide-prompts > li:first-child {
+    border-top: 1px solid color-mix(in oklab, var(--color-gold) 14%, transparent);
+  }
+  .guide-body h2 {
+    scroll-margin-top: calc(var(--header-h) + 1rem);
   }
 }

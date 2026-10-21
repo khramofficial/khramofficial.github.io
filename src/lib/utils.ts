@@ -14,6 +14,8 @@ export const routes = {
   product: (slug: string) => `/products/${slug}/`,
   ourStory: "/our-story/",
   faq: "/faq/",
+  guides: "/guides/",
+  guide: (slug: string) => `/guides/${slug}/`,
   contact: "/contact/",
   privacy: "/privacy/",
 } as const;
@@ -27,6 +29,8 @@ export function href(lang: Lang, route: string): string {
 /** Same page in the other language. */
 export function switchLang(pathname: string, to: Lang): string {
   const bare = pathname.replace(/^\/th(?=\/|$)/, "") || "/";
+  // Guides are written in English only; the Thai side has the guides list.
+  if (/^\/guides\/[^/]+/.test(bare)) return href(to, "/guides/");
   return href(to, bare.endsWith("/") ? bare : `${bare}/`);
 }
 

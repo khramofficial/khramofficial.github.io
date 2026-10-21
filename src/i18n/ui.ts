@@ -15,7 +15,7 @@ const en = {
   nav: { journals: "Journals", story: "Our Story", faq: "FAQ", contact: "Contact", getIndigo: "Get INDIGO", menu: "Menu", skip: "Skip to content", home: "Khram, home", switchTo: "ภาษาไทย", switchLabel: "อ่านเป็นภาษาไทย" },
   status: {
     collection: { available: "Available now", "in-progress": "In the making", planned: "Planned" } as Record<CollectionStatus, string>,
-    product: { available: "Available now", free: "Free", "coming-soon": "In review at Amazon", "in-progress": "In the making" } as Record<ProductStatus, string>,
+    product: { available: "Available now", free: "Free", "coming-soon": "Coming soon", "in-progress": "In the making" } as Record<ProductStatus, string>,
   },
   newTab: "(opens in a new tab)",
   hero: {
@@ -51,7 +51,7 @@ const en = {
     ],
     choose: "Choose a format",
     onStore: (store: string) => `On ${store}`,
-    comingSoon: "In review at Amazon, coming soon",
+    comingSoon: "Coming soon",
     all: "See all of INDIGO",
     coverAlt: "INDIGO paperback cover: full moon over a still lake, a pale-blue butterfly and night wildflowers.",
   },
@@ -245,7 +245,7 @@ const th: Dict = {
   nav: { journals: "สมุด", story: "เรื่องของเรา", faq: "คำถามที่พบบ่อย", contact: "ติดต่อ", getIndigo: "ซื้อ INDIGO", menu: "เมนู", skip: "ข้ามไปที่เนื้อหา", home: "Khram หน้าแรก", switchTo: "English", switchLabel: "Read in English" },
   status: {
     collection: { available: "พร้อมขาย", "in-progress": "กำลังทำ", planned: "อยู่ในแผน" },
-    product: { available: "พร้อมขาย", free: "ฟรี", "coming-soon": "รอ Amazon ตรวจ", "in-progress": "กำลังทำ" },
+    product: { available: "พร้อมขาย", free: "ฟรี", "coming-soon": "เร็วๆ นี้", "in-progress": "กำลังทำ" },
   },
   newTab: "(เปิดในแท็บใหม่)",
   hero: {
@@ -281,7 +281,7 @@ const th: Dict = {
     ],
     choose: "เลือกรูปแบบ",
     onStore: (store: string) => `ที่ ${store}`,
-    comingSoon: "รอ Amazon ตรวจ เร็วๆ นี้",
+    comingSoon: "เร็วๆ นี้",
     all: "ดู INDIGO ทั้งหมด",
     coverAlt: "ปก INDIGO ฉบับพิมพ์: พระจันทร์เต็มดวงเหนือทะเลสาบนิ่ง ผีเสื้อสีฟ้าซีด และดอกไม้ป่ายามค่ำ",
   },

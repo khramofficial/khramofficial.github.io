@@ -37,7 +37,7 @@ const en: FaqGroup[] = [
       },
       { q: "Which apps work with the PDF?", a: "GoodNotes, Notability, Noteshelf, Xodo, Samsung Notes and any app that lets you write on a PDF. It also opens on a computer." },
       { q: "Can I print the digital PDF?", a: "Yes, for personal use. The dark pages use a lot of ink, so the paperback is usually the better choice for paper." },
-      { q: "Is the Black & White paperback available?", a: "It is finished and in review at Amazon. This site will link to it as soon as it is live." },
+      { q: "Is the Black & White paperback available?", a: "Yes. It is on Amazon for $17.99, next to the Full Color edition ($24.99)." },
     ],
   },
   {
@@ -81,7 +81,7 @@ const th: FaqGroup[] = [
       },
       { q: "ใช้กับแอปอะไรได้บ้าง", a: "GoodNotes, Notability, Noteshelf, Xodo, Samsung Notes และแอปที่เขียนบน PDF ได้ทุกตัว เปิดบนคอมพิวเตอร์ได้ด้วย" },
       { q: "พิมพ์ PDF ออกมาได้ไหม", a: "ได้ สำหรับใช้ส่วนตัว แต่หน้าสีเข้มเปลืองหมึกมาก ถ้าจะเขียนบนกระดาษ เล่มพิมพ์มักเหมาะกว่า" },
-      { q: "ฉบับขาวดำวางขายแล้วหรือยัง", a: "ทำเสร็จแล้วและอยู่ระหว่าง Amazon ตรวจ เว็บนี้จะใส่ลิงก์ทันทีที่วางขาย" },
+      { q: "ฉบับขาวดำวางขายแล้วหรือยัง", a: "วางขายแล้วบน Amazon ราคา $17.99 ส่วนฉบับสีทั้งเล่มราคา $24.99" },
     ],
   },
   {

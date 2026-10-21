@@ -1,0 +1,37 @@
+{
+  "name": "khram-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Khram — art-led shadow work journals. Static Next.js site.",
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "node scripts/fetch-catalog.mjs",
+    "build": "next build",
+    "start": "npx --yes serve@14.2.4 out",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "check": "npm run typecheck && npm run lint && npm run build && npm run test:links",
+    "test:links": "node scripts/check-links.mjs",
+    "seed:sql": "JITI_ALIAS=\"{\\\"@\\\":\\\"$PWD/src\\\"}\" jiti scripts/make-seed-sql.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.2",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "10.11.0",
+    "eslint-config-next": "16.4.0",
+    "node-html-parser": "7.0.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

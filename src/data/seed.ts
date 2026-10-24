@@ -27,7 +27,7 @@ export const seedCollections: Collection[] = [
     theme: "Shadow work",
     summary: "Meet the feelings you hide and the patterns you keep repeating, one question a night.",
     description: [
-      "INDIGO is the first Khram journal: for the feelings you keep hidden and the patterns you keep repeating.",
+      "INDIGO is the first Khram journal.",
       "Three Acts move from noticing, to understanding, to growing: The Deep Night, The Still Water and The First Light. Every prompt page is followed by a full page to write on.",
     ],
     art: "A full moon over a still lake, with one pale-blue butterfly.",
@@ -43,7 +43,7 @@ export const seedCollections: Collection[] = [
         theme: "สำรวจด้านมืดในใจ (Shadow work)",
         summary: "ทำความรู้จักความรู้สึกที่ซ่อนไว้ และรูปแบบเดิมๆ ที่เราทำซ้ำ คืนละหนึ่งคำถาม",
         description: [
-          "INDIGO คือสมุดเล่มแรกของ Khram สำหรับความรู้สึกที่เก็บซ่อนไว้ และรูปแบบเดิมๆ ที่เราทำซ้ำ",
+          "INDIGO คือสมุดเล่มแรกของ Khram",
           "สามองก์พาจากการสังเกต ไปสู่การเข้าใจ แล้วค่อยๆ เติบโต: The Deep Night, The Still Water และ The First Light ทุกหน้าคำถามมีหน้าว่างให้เขียนตามมาอีกหนึ่งหน้า",
         ],
         art: "พระจันทร์เต็มดวงเหนือทะเลสาบนิ่ง กับผีเสื้อสีฟ้าซีดหนึ่งตัว",

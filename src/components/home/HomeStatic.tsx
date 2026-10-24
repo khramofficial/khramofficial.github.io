@@ -70,7 +70,7 @@ export function Hero({ lang }: { lang: Lang }) {
           </div>
         </div>
         <figure className="hero-art flex min-w-0 flex-col gap-4">
-          <div className="frame bg-night p-2 sm:p-3">
+          <div className="hero-moon">
             <img src="/images/art/indigo-moon.webp" alt={t.hero.artAlt} width={1400} height={1120} fetchPriority="high" className="reveal-art h-auto w-full" />
           </div>
           <figcaption className="text-[0.9rem] italic text-ivory/80">{t.hero.caption}</figcaption>

@@ -835,6 +835,7 @@
   .journey {
     position: relative;
     clip-path: inset(0);
+    overflow-x: clip; /* the soft mist reaches past the screen edge on phones; never scroll sideways */
     margin-top: calc(-1 * var(--header-h));
   }
   .sky {
@@ -949,8 +950,10 @@
       max-width: 24rem;
     }
   }
-  .hero-art .frame {
-    box-shadow: 0 40px 90px -45px rgb(2 6 18 / 0.95);
+  /* the moon from the INDIGO cover dissolves into the sky instead of sitting in a box */
+  .hero-moon img {
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 47%, #000 58%, rgb(0 0 0 / 0.6) 78%, transparent 100%);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 47%, #000 58%, rgb(0 0 0 / 0.6) 78%, transparent 100%);
   }
   .hero-art figcaption {
     text-shadow:
@@ -988,19 +991,43 @@
     padding-block: clamp(2.5rem, 7vh, 4.5rem);
   }
 
-  /* A journal page: Night Indigo with INDIGO's thin double gold border */
+  /* Text pages are a veil of night mist, not boxes: the dark blurs the sky a little and fades out
+     softly at every edge, so each page becomes part of the sky. The veil sits behind the page on
+     ::before and reaches --feather beyond it; inside the page it is fully dark, so text contrast
+     does not change. */
   .page-k {
     position: relative;
     padding: clamp(1.75rem, 0.9rem + 3.4vw, 4rem);
-    background: color-mix(in oklab, var(--color-night) 88%, transparent);
-    border: 1px solid color-mix(in oklab, var(--color-gold) 42%, transparent);
-    outline: 1px solid color-mix(in oklab, var(--color-gold) 16%, transparent);
-    outline-offset: 7px;
-    box-shadow: 0 50px 120px -60px rgb(2 6 18 / 0.9);
   }
-  @media (max-width: 639px) {
-    .page-k {
-      outline-offset: 5px;
+  .page-k::before,
+  .mist::before {
+    --feather: clamp(44px, 6vw, 96px);
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: calc(var(--feather) * -1);
+    background: rgb(6 15 36 / 0.8);
+    -webkit-backdrop-filter: blur(14px) saturate(1.15);
+    backdrop-filter: blur(14px) saturate(1.15);
+    --edge-x: linear-gradient(to right, transparent, rgb(0 0 0 / 0.55) calc(var(--feather) * 0.5), #000 var(--feather), #000 calc(100% - var(--feather)), rgb(0 0 0 / 0.55) calc(100% - var(--feather) * 0.5), transparent);
+    --edge-y: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.55) calc(var(--feather) * 0.5), #000 var(--feather), #000 calc(100% - var(--feather)), rgb(0 0 0 / 0.55) calc(100% - var(--feather) * 0.5), transparent);
+    -webkit-mask-image: var(--edge-x), var(--edge-y);
+    -webkit-mask-composite: source-in;
+    mask-image: var(--edge-x), var(--edge-y);
+    mask-composite: intersect;
+    pointer-events: none;
+  }
+  .mist {
+    position: relative;
+  }
+  @media (max-width: 820px), (pointer: coarse) {
+    /* phones: skip the live blur (it is redrawn every frame while the sky moves) and darken a touch instead */
+    .page-k::before,
+    .mist::before {
+      --feather: 40px;
+      background: rgb(6 15 36 / 0.86);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
     }
   }
   .display-quote {
@@ -1017,6 +1044,7 @@
     padding-block: 6rem;
   }
   .horizon-copy {
+    position: relative;
     color: var(--color-ink);
     text-shadow:
       0 0 18px rgb(246 241 231 / 0.55),
@@ -1058,18 +1086,40 @@
       border-color 0.4s ease;
   }
   .site-shell:has([data-journey]) .site-header.is-scrolled {
-    background: color-mix(in oklab, var(--color-night) 92%, transparent);
+    background: color-mix(in oklab, var(--color-night) 90%, transparent);
+    border-bottom-color: transparent;
+  }
+  .site-shell:has([data-journey]) .site-header.is-scrolled::after {
+    /* no hard line under the header: it fades into the sky */
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 1px); /* start below the (transparent) 1px border, not on it */
+    height: 2.5rem;
+    background: linear-gradient(to bottom, color-mix(in oklab, var(--color-night) 90%, transparent), transparent);
+    pointer-events: none;
+  }
+  .site-shell:has([data-journey]) footer {
+    border-top-color: transparent;
   }
 
-  /* Gentle reveals, only once site.js is running (content never stays hidden without it) */
-  .reveal-ready .reveal {
+  /* Gentle reveals, only once site.js is running (content never stays hidden without it).
+     The words fade up; the mist behind them stays put, so its blur never pops in. */
+  .reveal-ready .reveal > * {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
+    transform: translate3d(0, 22px, 0);
     transition:
       opacity 1s cubic-bezier(0.2, 0.6, 0.2, 1),
       transform 1s cubic-bezier(0.2, 0.6, 0.2, 1);
   }
-  .reveal-ready .reveal.is-in {
+  .reveal-ready .reveal > *:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+  .reveal-ready .reveal > *:nth-child(n + 3) {
+    transition-delay: 0.22s;
+  }
+  .reveal-ready .reveal.is-in > * {
     opacity: 1;
     transform: none;
   }
@@ -1085,17 +1135,34 @@
   .scroll-cue {
     display: none;
   }
-  .reveal-ready .reveal {
+  .reveal-ready .reveal > * {
     opacity: 1;
     transform: none;
   }
   .horizon-copy,
   .closing-copy {
     padding: clamp(1.75rem, 0.9rem + 3.4vw, 4rem);
-    background: color-mix(in oklab, var(--color-night) 88%, transparent);
-    border: 1px solid color-mix(in oklab, var(--color-gold) 42%, transparent);
     color: var(--color-ivory);
     text-shadow: none;
+  }
+  /* the open-sky text gets the same soft night mist as the pages */
+  .horizon-copy::before,
+  .closing-copy::before {
+    --feather: 64px;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: calc(var(--feather) * -1);
+    background: rgb(6 15 36 / 0.86);
+    -webkit-mask-image:
+      linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
+      linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
+      linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
+    mask-composite: intersect;
+    pointer-events: none;
   }
   .horizon-copy .eyebrow {
     color: var(--color-gold);

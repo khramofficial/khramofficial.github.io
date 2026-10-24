@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /*
-  Layout concept: the page starts in the vat (Night Indigo) and surfaces into Rice Paper at the
-  brand story, the way indigo cloth comes out of the dark and turns blue in the air.
-  Colours, fonts and sizes come from the Khram Brand Guide v1.2. Change them here only.
+  Layout concept: the page starts in the dark (Night Indigo) and opens into Rice Paper at the
+  brand story: someone who has known the dark and still has light inside (Brand Guide v1.3).
+  Colours, fonts and sizes come from the Khram Brand Guide. Change them here only.
 */
 @theme {
   /* Dark edition */
@@ -542,7 +542,7 @@
     max-width: 42rem;
   }
 
-  /* Hero art: shown from a dim resting state, then brightens like cloth meeting air */
+  /* Hero art: shown from a dim resting state, then slowly brightens, a little more light */
   .reveal-art {
     animation: reveal 2.2s cubic-bezier(0.2, 0.6, 0.2, 1) both;
   }

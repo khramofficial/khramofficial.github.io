@@ -23,27 +23,27 @@ export const seedCollections: Collection[] = [
     name: "INDIGO",
     dyeThai: "คราม",
     dyeEnglish: "indigo",
-    dyeNote: "Indigo leaves ferment into a dark vat. Cloth comes out yellow-green and turns blue as it meets the air.",
+    dyeNote: "",
     theme: "Shadow work",
     summary: "Meet the feelings you hide and the patterns you keep repeating, one question a night.",
     description: [
-      "INDIGO is the first Khram journal, and the dye the studio is named after.",
+      "INDIGO is the first Khram journal: for the feelings you keep hidden and the patterns you keep repeating.",
       "Three Acts move from noticing, to understanding, to growing: The Deep Night, The Still Water and The First Light. Every prompt page is followed by a full page to write on.",
     ],
     art: "A full moon over a still lake, with one pale-blue butterfly.",
     accent: { base: "#80B2DB", text: "#80B2DB" },
     status: "available",
     statusNote: "Available now",
-    swatch: { src: "/images/swatches/indigo.webp", alt: "Cotton cloth dyed deep indigo, darker where the dye pooled.", width: 900, height: 1125 },
+    swatch: { src: "/images/swatches/indigo.webp", alt: "Deep indigo texture, darker in places.", width: 900, height: 1125 },
     motif: "butterfly-moon",
     sort: 1,
     i18n: {
       th: {
-        dyeNote: "ใบครามหมักจนกลายเป็นหม้อย้อมสีเข้ม ผ้าที่ยกขึ้นมาเป็นสีเหลืองอมเขียว แล้วกลายเป็นสีน้ำเงินเมื่อเจออากาศ",
+        dyeNote: "",
         theme: "สำรวจด้านมืดในใจ (Shadow work)",
         summary: "ทำความรู้จักความรู้สึกที่ซ่อนไว้ และรูปแบบเดิมๆ ที่เราทำซ้ำ คืนละหนึ่งคำถาม",
         description: [
-          "INDIGO คือสมุดเล่มแรกของ Khram และเป็นสีย้อมที่สตูดิโอใช้ตั้งชื่อ",
+          "INDIGO คือสมุดเล่มแรกของ Khram สำหรับความรู้สึกที่เก็บซ่อนไว้ และรูปแบบเดิมๆ ที่เราทำซ้ำ",
           "สามองก์พาจากการสังเกต ไปสู่การเข้าใจ แล้วค่อยๆ เติบโต: The Deep Night, The Still Water และ The First Light ทุกหน้าคำถามมีหน้าว่างให้เขียนตามมาอีกหนึ่งหน้า",
         ],
         art: "พระจันทร์เต็มดวงเหนือทะเลสาบนิ่ง กับผีเสื้อสีฟ้าซีดหนึ่งตัว",
@@ -56,7 +56,7 @@ export const seedCollections: Collection[] = [
     name: "CRIMSON",
     dyeThai: "ครั่ง",
     dyeEnglish: "lac",
-    dyeNote: "Lac is a resin left on tree branches by a tiny insect. Boiled, it gives a deep red dye.",
+    dyeNote: "",
     theme: "Love and attachment",
     summary: "For anxious attachment: the pull to check, the fear of being left, and learning to steady yourself.",
     description: [
@@ -67,12 +67,12 @@ export const seedCollections: Collection[] = [
     accent: { base: "#8E2A3A", text: "#C96B7A" },
     status: "in-progress",
     statusNote: "In the making",
-    swatch: { src: "/images/swatches/crimson.webp", alt: "Cotton cloth dyed lac red, uneven where the dye soaked in.", width: 900, height: 1125 },
+    swatch: { src: "/images/swatches/crimson.webp", alt: "Deep crimson texture, uneven in places.", width: 900, height: 1125 },
     motif: "thread-moon",
     sort: 2,
     i18n: {
       th: {
-        dyeNote: "ครั่งคือยางที่แมลงตัวเล็กๆ สร้างไว้บนกิ่งไม้ นำมาต้มแล้วได้สีแดงเข้ม",
+        dyeNote: "",
         theme: "ความรักและความผูกพัน",
         summary: "สำหรับคนที่ผูกพันแบบกังวล: อยากเช็คตลอด กลัวถูกทิ้ง และกำลังหัดทำใจให้นิ่ง",
         description: [
@@ -89,7 +89,7 @@ export const seedCollections: Collection[] = [
     name: "SAFFRON",
     dyeThai: "แก่นขนุน",
     dyeEnglish: "jackfruit heartwood",
-    dyeNote: "Chips of jackfruit heartwood, simmered in water, dye the warm yellow of Thai forest monks' robes.",
+    dyeNote: "",
     theme: "Calming the body",
     summary: "Breathing, noticing and resting pages for nights when your thoughts won't slow down.",
     description: [
@@ -100,12 +100,12 @@ export const seedCollections: Collection[] = [
     accent: { base: "#D9A441", text: "#D9A441" },
     status: "planned",
     statusNote: "Planned",
-    swatch: { src: "/images/swatches/saffron.webp", alt: "Cotton cloth dyed a warm saffron yellow with jackfruit heartwood.", width: 900, height: 1125 },
+    swatch: { src: "/images/swatches/saffron.webp", alt: "Warm saffron-yellow texture.", width: 900, height: 1125 },
     motif: "dawn-ripples",
     sort: 3,
     i18n: {
       th: {
-        dyeNote: "เศษแก่นขนุนต้มกับน้ำ ให้สีเหลืองอุ่นแบบจีวรพระป่าของไทย",
+        dyeNote: "",
         theme: "ทำให้ร่างกายสงบ",
         summary: "หน้าสำหรับหายใจ สังเกตร่างกาย และพัก ในคืนที่ความคิดไม่ยอมช้าลง",
         description: [
@@ -122,7 +122,7 @@ export const seedCollections: Collection[] = [
     name: "EBONY",
     dyeThai: "มะเกลือ",
     dyeEnglish: "ebony fruit",
-    dyeNote: "Cloth soaked in crushed ebony fruit is dried in the sun again and again. It darkens to black a little more each time.",
+    dyeNote: "",
     theme: "Grief and loss",
     summary: "A gentle place to remember, and to write what you didn't get to say.",
     description: [
@@ -133,12 +133,12 @@ export const seedCollections: Collection[] = [
     accent: { base: "#2A2622", text: "#B9B4AC" },
     status: "planned",
     statusNote: "Planned",
-    swatch: { src: "/images/swatches/ebony.webp", alt: "Cotton cloth dyed near-black with ebony fruit, with faint brown tones.", width: 900, height: 1125 },
+    swatch: { src: "/images/swatches/ebony.webp", alt: "Near-black ebony texture with faint brown tones.", width: 900, height: 1125 },
     motif: "new-moon-flower",
     sort: 4,
     i18n: {
       th: {
-        dyeNote: "ผ้าที่แช่ในลูกมะเกลือบดจะถูกตากแดดซ้ำแล้วซ้ำเล่า สีเข้มขึ้นจนดำทีละนิดในทุกรอบ",
+        dyeNote: "",
         theme: "ความสูญเสียและความเศร้า",
         summary: "ที่อ่อนโยนสำหรับการระลึกถึง และเขียนสิ่งที่ยังไม่ได้พูด",
         description: [
@@ -191,7 +191,7 @@ const img = {
   },
   crimsonSwatch: {
     src: "/images/swatches/crimson.webp",
-    alt: "Cotton cloth dyed lac red. CRIMSON artwork is still being made.",
+    alt: "Deep crimson texture. CRIMSON artwork is still being made.",
     width: 900,
     height: 1125,
   },

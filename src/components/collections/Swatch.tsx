@@ -2,7 +2,7 @@ import type { Collection } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Motif } from "./Motif";
 
-/** Thread colour per cloth: gold reads on the dark dyes, indigo thread on the light saffron cloth. */
+/** Thread colour per texture: gold reads on the dark colours, indigo thread on the light saffron one. */
 const threads: Record<string, { thread: string; accent: string }> = {
   indigo: { thread: "#D6AD82", accent: "#80B2DB" },
   crimson: { thread: "#EDE6D8", accent: "#D6AD82" },

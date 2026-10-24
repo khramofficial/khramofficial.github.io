@@ -156,7 +156,7 @@ export function CollectionsAdmin({ siteUrl }: { siteUrl: string }) {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h2 className="adm-h2">คอลเลกชัน</h2>
-          <p className="adm-hint">สีย้อมแต่ละสี เปลี่ยนสถานะ (เช่น CRIMSON พร้อมขาย) หรือแก้ข้อความได้ที่นี่</p>
+          <p className="adm-hint">สมุดแต่ละสี เปลี่ยนสถานะ (เช่น CRIMSON พร้อมขาย) หรือแก้ข้อความได้ที่นี่</p>
         </div>
         <button type="button" className="adm-btn adm-primary" onClick={() => setForm(blank(rows ? rows.length + 1 : 1))}>
           + เพิ่มคอลเลกชัน
@@ -183,9 +183,7 @@ export function CollectionsAdmin({ siteUrl }: { siteUrl: string }) {
                 <p className="font-display tracking-[0.1em]" style={{ color: r.accent_text }}>
                   {r.name}
                 </p>
-                <p className="text-sm text-ivory/70">
-                  {r.dye_thai} · {collectionStatusTh[r.status]}
-                </p>
+                <p className="text-sm text-ivory/70">{collectionStatusTh[r.status]}</p>
               </div>
               <button type="button" className="adm-btn-sm adm-primary" onClick={() => setForm(toForm(r))}>
                 แก้ไข
@@ -262,8 +260,6 @@ function Editor({ initial, siteUrl, onClose }: { initial: Form; siteUrl: string;
             disabled={!f.isNew}
             hint={f.isNew ? undefined : "เปลี่ยนไม่ได้หลังสร้าง"}
           />
-          <Text label="ชื่อสีย้อมภาษาไทย" value={f.dyeThai} onChange={(v) => set("dyeThai", v)} placeholder="เช่น ครั่ง" lang="th" />
-          <Text label="ชื่อสีย้อมภาษาอังกฤษ" value={f.dyeEnglish} onChange={(v) => set("dyeEnglish", v)} placeholder="เช่น lac" lang="en" />
           <Select
             label="สถานะ"
             value={f.status}
@@ -273,12 +269,12 @@ function Editor({ initial, siteUrl, onClose }: { initial: Form; siteUrl: string;
           <Text label="ลำดับ" type="number" value={f.sort} onChange={(v) => set("sort", v)} />
           <Text label="สีหลัก" type="color" value={f.accentBase} onChange={(v) => set("accentBase", v)} hint={f.accentBase} />
           <Text label="สีตัวอักษรบนพื้นมืด" type="color" value={f.accentText} onChange={(v) => set("accentText", v)} hint={`${f.accentText} · ต้องอ่านออกบนพื้นกรมท่า`} />
-          <Select label="ลายปักบนผ้า" value={f.motif} options={motifs} onChange={(v) => set("motif", v)} />
+          <Select label="ลายเส้นบนภาพ" value={f.motif} options={motifs} onChange={(v) => set("motif", v)} />
         </div>
       </section>
 
       <section className="adm-section">
-        <h3 className="adm-h3">ภาพผ้าย้อม / ภาพประจำคอลเลกชัน</h3>
+        <h3 className="adm-h3">ภาพประจำคอลเลกชัน</h3>
         <div className="adm-grid">
           <ImageList label="ภาพ (แนวตั้ง 4:5)" images={f.swatch} onChange={(v) => set("swatch", v)} folder={`collections/${f.slug || "new"}`} single />
         </div>
@@ -294,7 +290,6 @@ function Editor({ initial, siteUrl, onClose }: { initial: Form; siteUrl: string;
           <Text label="ข้อความสถานะ" value={t.statusNote} onChange={(v) => setT("statusNote", v)} lang={lang} />
           <Area label="สรุปสั้น" value={t.summary} onChange={(v) => setT("summary", v)} rows={2} lang={lang} />
           <Area label="คำอธิบาย" value={t.description} onChange={(v) => setT("description", v)} rows={5} lang={lang} hint="เว้นบรรทัดว่างระหว่างย่อหน้า" />
-          <Area label="เรื่องของสีย้อม" value={t.dyeNote} onChange={(v) => setT("dyeNote", v)} rows={2} lang={lang} />
           <Area label="ภาพประจำคอลเลกชัน (อธิบาย)" value={t.art} onChange={(v) => setT("art", v)} rows={2} lang={lang} />
         </div>
       </section>

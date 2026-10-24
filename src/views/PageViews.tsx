@@ -34,9 +34,9 @@ export function StoryView({ lang }: { lang: Lang }) {
         </Container>
       </section>
 
-      <section className="section" aria-labelledby="dye-h">
+      <section className="section" aria-labelledby="meaning-h">
         <Container narrow className="flex flex-col gap-6">
-          <h2 id="dye-h" className="display-2 text-moon">
+          <h2 id="meaning-h" className="display-2 text-moon">
             {s.whyH2}
           </h2>
           <div className="flex flex-col gap-5 text-[1.1rem] leading-[1.8] text-ivory/90">
@@ -63,16 +63,16 @@ export function StoryView({ lang }: { lang: Lang }) {
         </Container>
       </section>
 
-      <section className="section" aria-labelledby="dyes-h">
+      <section className="section" aria-labelledby="collections-h">
         <Container className="flex flex-col gap-10">
           <div className="flex flex-col gap-5">
             <p className="eyebrow">{s.tableEyebrow}</p>
-            <h2 id="dyes-h" className="display-2">
+            <h2 id="collections-h" className="display-2">
               {s.tableH2}
             </h2>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[40rem] border-collapse text-left">
+            <table className="w-full min-w-[30rem] border-collapse text-left">
               <caption className="sr-only">{s.tableCaption}</caption>
               <thead>
                 <tr className="border-b border-gold/30">
@@ -91,9 +91,6 @@ export function StoryView({ lang }: { lang: Lang }) {
                         {c.name}
                       </a>
                     </th>
-                    <td className="py-4 pr-6 text-ivory/85">
-                      <span lang="th">{c.dyeThai}</span> · <span lang="en">{c.dyeEnglish}</span>
-                    </td>
                     <td className="py-4 pr-6 text-ivory/85">{c.theme}</td>
                     <td className="py-4 text-lavender">{t.status.collection[c.status]}</td>
                   </tr>

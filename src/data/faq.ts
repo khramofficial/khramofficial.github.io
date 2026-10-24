@@ -12,6 +12,10 @@ const en: FaqGroup[] = [
     heading: "The journals",
     items: [
       {
+        q: "What does Khram mean?",
+        a: "Khram (คราม) is the person who makes these journals: someone who has gotten a lot wrong, more than once, and has lived through dark years, but who still has light inside and keeps walking toward it. It goes back to one sentence from a time they nearly died: \"I did the best I could.\" The full story is on the Our Story page.",
+      },
+      {
         q: "What is shadow work?",
         a: "Shadow work means looking at the feelings, habits and parts of yourself you usually avoid: the anger you swallow, the fear behind people-pleasing, the old rules you still follow. INDIGO does this with one plain question at a time and a page to write on.",
       },
@@ -57,6 +61,10 @@ const th: FaqGroup[] = [
     id: "journals",
     heading: "เกี่ยวกับสมุด",
     items: [
+      {
+        q: "คราม หมายถึงอะไร",
+        a: "ครามคือคนที่ทำสมุดเหล่านี้ คนที่ใช้ชีวิตผิดพลาดมาหลายครั้งหลายคราว เคยผ่านช่วงที่มืดมาจริงๆ แต่ข้างในยังมีแสง และยังเดินไปหาแสงนั้นอยู่ ชื่อนี้เริ่มจากประโยคเดียวตอนที่เกือบตาย: “กูทำดีที่สุดแล้ว” อ่านเรื่องเต็มได้ที่หน้าเรื่องของเรา",
+      },
       {
         q: "Shadow work คืออะไร",
         a: "Shadow work คือการมองเข้าไปในความรู้สึก นิสัย และส่วนในตัวเราที่มักหลีกเลี่ยง เช่น ความโกรธที่กลืนไว้ ความกลัวที่อยู่เบื้องหลังการเอาใจคนอื่น หรือกฎเก่าๆ ที่ยังทำตามอยู่ INDIGO ทำสิ่งนี้ทีละคำถาม พร้อมหน้าให้เขียน",

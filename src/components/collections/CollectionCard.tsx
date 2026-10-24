@@ -28,11 +28,6 @@ export function CollectionCard({
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-2">
-        <p className="text-sm text-lavender">
-          <span lang="th">{collection.dyeThai}</span>
-          <span aria-hidden="true"> · </span>
-          <span lang="en">{collection.dyeEnglish}</span>
-        </p>
         <Heading className="display-3 tracking-[0.12em] text-ivory transition-colors group-hover:text-gold">
           {collection.name}
         </Heading>

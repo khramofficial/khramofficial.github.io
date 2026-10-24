@@ -71,7 +71,35 @@ export function Philosophy({ lang }: { lang: Lang }) {
   );
 }
 
-const dyeImages = ["/images/dye/vat.webp", "/images/dye/air.webp", "/images/dye/deep.webp"];
+/**
+ * The three steps of the Khram story drawn as a waxing moon: a dark moon (the dark was real),
+ * a crescent (the light is still there), a moon that is fuller but not full (still walking, not finished).
+ * Decorative: the step text carries the meaning.
+ */
+const phases = [0, 0.28, 0.72];
+const stars: [number, number, number][] = [
+  [16, 18, 0.9], [82, 14, 0.7], [88, 70, 0.8], [12, 78, 0.6], [30, 88, 0.5], [70, 90, 0.7], [62, 10, 0.5],
+];
+
+function MoonPhase({ lit }: { lit: number }) {
+  const cx = 50;
+  const cy = 50;
+  const r = 24;
+  const rx = Math.abs(1 - 2 * lit) * r;
+  const sweep = lit > 0.5 ? 1 : 0;
+  const litPath = `M ${cx} ${cy - r} A ${r} ${r} 0 0 1 ${cx} ${cy + r} A ${rx} ${r} 0 0 ${sweep} ${cx} ${cy - r} Z`;
+  return (
+    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" className="block aspect-square h-auto w-full">
+      <rect width="100" height="100" fill="#060F24" />
+      <circle cx={cx} cy={cy} r={r * 2.1} fill="url(#khram-glow)" opacity={0.25 + lit * 0.75} />
+      {stars.map(([x, y, o]) => (
+        <circle key={`${x}-${y}`} cx={x} cy={y} r="0.7" fill="#EDE6D8" opacity={o} />
+      ))}
+      <circle cx={cx} cy={cy} r={r} fill="#101C3D" stroke="#D6AD82" strokeOpacity="0.45" strokeWidth="0.8" />
+      {lit > 0 ? <path d={litPath} fill="#D9B584" /> : null}
+    </svg>
+  );
+}
 
 export function BrandStory({ lang }: { lang: Lang }) {
   const t = ui(lang);
@@ -90,11 +118,19 @@ export function BrandStory({ lang }: { lang: Lang }) {
           </p>
         </div>
 
+        <svg width="0" height="0" className="absolute" aria-hidden="true" focusable="false">
+          <defs>
+            <radialGradient id="khram-glow">
+              <stop offset="0" stopColor="#D9B584" stopOpacity="0.35" />
+              <stop offset="1" stopColor="#D9B584" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+        </svg>
         <ol className="grid gap-10 sm:grid-cols-3 sm:gap-8" role="list">
           {t.story.steps.map((s, i) => (
             <li key={s.title} className="grid grid-cols-[6rem_minmax(0,1fr)] items-start gap-5 sm:flex sm:flex-col sm:gap-4">
               <div className="frame p-1">
-                <img src={dyeImages[i]} alt={s.alt} width={480} height={480} loading="lazy" className="aspect-square h-auto w-full object-cover" />
+                <MoonPhase lit={phases[i] ?? 0} />
               </div>
               <div className="flex min-w-0 flex-col gap-2 sm:gap-3">
                 <h3 className="flex items-baseline gap-3 font-display text-[1.15rem] tracking-[0.05em]">

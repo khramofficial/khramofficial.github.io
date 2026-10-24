@@ -75,9 +75,7 @@ export function CollectionView({ slug, lang }: { slug: string; lang: Lang }) {
             </div>
             <div className="flex min-w-0 flex-col gap-7">
               <div className="flex flex-col gap-4">
-                <p className="text-[1rem] text-lavender">
-                  {c.collection} · <span lang="th">{collection.dyeThai}</span> · <span lang="en">{collection.dyeEnglish}</span>
-                </p>
+                <p className="text-[1rem] text-lavender">{c.collection}</p>
                 <h1 id="collection-h" className="display-1 tracking-[0.12em]">
                   {collection.name}
                 </h1>
@@ -96,11 +94,7 @@ export function CollectionView({ slug, lang }: { slug: string; lang: Lang }) {
                   <p key={d}>{d}</p>
                 ))}
               </div>
-              <dl className="grid gap-5 border-t border-gold/15 pt-6 sm:grid-cols-2">
-                <div className="flex flex-col gap-1.5">
-                  <dt className="eyebrow">{c.dye}</dt>
-                  <dd className="text-[0.98rem] text-ivory/85">{collection.dyeNote}</dd>
-                </div>
+              <dl className="grid gap-5 border-t border-gold/15 pt-6">
                 <div className="flex flex-col gap-1.5">
                   <dt className="eyebrow">{c.art}</dt>
                   <dd className="text-[0.98rem] text-ivory/85">{collection.art}</dd>

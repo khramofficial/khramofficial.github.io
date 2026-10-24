@@ -21,7 +21,7 @@ export function MoonTrack({ lang, filled = 4, total = 30, className }: { lang: L
         ))}
       </div>
       <figcaption className="text-[0.95rem] text-lavender">
-        <span className="text-moon">{t.night(filled, total)}</span> {t.dip}
+        <span className="text-moon">{t.night(filled, total)}</span> {t.line}
       </figcaption>
     </figure>
   );

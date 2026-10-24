@@ -1,7 +1,7 @@
 import type { MotifName } from "@/lib/types";
 
 /**
- * Each collection's signature subject, drawn as a running stitch on its dyed cloth.
+ * Each collection's signature subject, drawn as a running stitch over its colour texture.
  * Pure vector, no text, so it stays sharp and replaceable when final artwork arrives.
  */
 export function Motif({ name, thread, accent }: { name: MotifName; thread: string; accent: string }) {

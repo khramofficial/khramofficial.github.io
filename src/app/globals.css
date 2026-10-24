@@ -825,3 +825,277 @@
     scroll-margin-top: calc(var(--header-h) + 1rem);
   }
 }
+
+/* ---------- Home: the sky-to-sea journey ----------
+   One painting (night sky → light → horizon → sea) sits fixed behind the home page and tilts down as
+   you scroll (public/site.js sets --sky-y). .journey clips it, so it never shows behind the footer.
+   Text sits either on open sky where the painting is dark/bright enough (hero, horizon, closing), or on
+   journal-page panels (.page-k) where the painting is mid-tone, so contrast holds at every scroll point. */
+@layer components {
+  .journey {
+    position: relative;
+    clip-path: inset(0);
+    margin-top: calc(-1 * var(--header-h));
+  }
+  .sky {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: #0b1636;
+  }
+  .sky-col {
+    --sky-fx: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: max(100%, 113.5vh);
+    aspect-ratio: 2048 / 4332;
+    transform: translate3d(calc(var(--sky-fx) * -1), var(--sky-y, 0px), 0);
+    will-change: transform;
+  }
+  @media (max-aspect-ratio: 4/5) {
+    /* phones: keep both the moon and the light on the water in view */
+    .sky-col {
+      --sky-fx: 60%;
+    }
+  }
+  .sky-col picture {
+    display: contents;
+  }
+  .sky-col img {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    user-select: none;
+  }
+  .sky-top {
+    top: 0;
+  }
+  .sky-bottom {
+    top: 49.954%;
+  }
+  .sky-clouds {
+    top: 0;
+    animation: sky-drift 75s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes sky-drift {
+    from {
+      transform: translate3d(-1.4%, 0, 0);
+    }
+    to {
+      transform: translate3d(1.4%, 0.3%, 0);
+    }
+  }
+
+  /* Hero: open sky */
+  .hero-sky {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: calc(var(--header-h) + clamp(2.5rem, 6vh, 5rem));
+    padding-bottom: clamp(4.5rem, 10vh, 7rem);
+  }
+  .hero-sky::before {
+    /* a soft shadow of night behind the words, so they read over the clouds */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 50% at 24% 52%, rgb(4 10 29 / 0.62), transparent 72%),
+      linear-gradient(to bottom, rgb(4 10 29 / 0.45), transparent 30%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    gap: clamp(2.75rem, 6vw, 4.5rem);
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    }
+  }
+  .hero-copy .eyebrow {
+    color: var(--color-moon);
+    text-shadow: 0 1px 14px rgb(4 10 29 / 0.9);
+  }
+  .hero-copy .btn-ghost {
+    background: rgb(4 10 29 / 0.38);
+  }
+  .hero-copy .btn-ghost:hover {
+    background: rgb(4 10 29 / 0.6);
+  }
+  .display-hero {
+    font-size: clamp(2.7rem, 1.4rem + 5vw, 5.4rem);
+    line-height: 1.04;
+    letter-spacing: 0.02em;
+    color: var(--color-ivory);
+    text-shadow: 0 2px 30px rgb(4 10 29 / 0.55);
+  }
+  .hero-art {
+    max-width: min(34rem, 100%);
+    justify-self: center;
+    width: 100%;
+  }
+  @media (max-width: 1023px) {
+    .hero-art {
+      max-width: 24rem;
+    }
+  }
+  .hero-art .frame {
+    box-shadow: 0 40px 90px -45px rgb(2 6 18 / 0.95);
+  }
+  .scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 1.4rem;
+    width: 1px;
+    height: 3.25rem;
+    background: linear-gradient(to bottom, transparent, color-mix(in oklab, var(--color-gold) 80%, transparent));
+    transform-origin: top;
+    animation: cue 3.2s ease-in-out infinite;
+  }
+  @keyframes cue {
+    0%,
+    100% {
+      transform: scaleY(0.35);
+      opacity: 0.35;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 0.9;
+    }
+  }
+
+  /* Sections between the open moments: room for the sky to show */
+  .journey-sec {
+    position: relative;
+    padding-block: clamp(5rem, 16vh, 11rem);
+  }
+  .journey-sec-tight {
+    padding-block: clamp(2.5rem, 7vh, 4.5rem);
+  }
+
+  /* A journal page: Night Indigo with INDIGO's thin double gold border */
+  .page-k {
+    position: relative;
+    padding: clamp(1.75rem, 0.9rem + 3.4vw, 4rem);
+    background: color-mix(in oklab, var(--color-night) 88%, transparent);
+    border: 1px solid color-mix(in oklab, var(--color-gold) 42%, transparent);
+    outline: 1px solid color-mix(in oklab, var(--color-gold) 16%, transparent);
+    outline-offset: 7px;
+    box-shadow: 0 50px 120px -60px rgb(2 6 18 / 0.9);
+  }
+  @media (max-width: 639px) {
+    .page-k {
+      outline-offset: 5px;
+    }
+  }
+  .display-quote {
+    font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.2rem);
+    line-height: 1.15;
+  }
+
+  /* Horizon: open sky over the bright line where sky meets water. Ink on light. */
+  .horizon-sec {
+    position: relative;
+    min-height: 92svh;
+    display: flex;
+    align-items: center;
+    padding-block: 6rem;
+  }
+  .horizon-copy {
+    color: var(--color-ink);
+    text-shadow:
+      0 0 18px rgb(246 241 231 / 0.55),
+      0 0 2px rgb(246 241 231 / 0.4);
+  }
+  .horizon-copy .eyebrow {
+    color: var(--color-ink);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .horizon-copy h2 {
+    color: var(--color-ink);
+  }
+
+  /* Closing: deep water near the bottom of the painting */
+  .closing-sea {
+    position: relative;
+    padding-block: clamp(6rem, 18vh, 12rem) clamp(4rem, 10vh, 7rem);
+  }
+  .closing-sea::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, rgb(6 15 36 / 0.55) 45%, rgb(6 15 36 / 0.85));
+    pointer-events: none;
+  }
+  .closing-copy {
+    position: relative;
+  }
+
+  /* Header floats over the sky on the home page until you scroll */
+  .site-shell:has([data-journey]) .site-header:not(.is-scrolled):not(:has(.mobile-menu.is-open)) {
+    background: linear-gradient(to bottom, rgb(4 10 29 / 0.6), rgb(4 10 29 / 0)) border-box no-repeat;
+    border-bottom-color: transparent;
+  }
+  .site-shell:has([data-journey]) .site-header {
+    transition:
+      background-color 0.4s ease,
+      border-color 0.4s ease;
+  }
+  .site-shell:has([data-journey]) .site-header.is-scrolled {
+    background: color-mix(in oklab, var(--color-night) 92%, transparent);
+  }
+
+  /* Gentle reveals, only once site.js is running (content never stays hidden without it) */
+  .reveal-ready .reveal {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition:
+      opacity 1s cubic-bezier(0.2, 0.6, 0.2, 1),
+      transform 1s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  .reveal-ready .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No drifting, no tilting (site.js keeps the sky still), no reveals. Text that relies on a
+     particular part of the painting gets its own page instead. */
+  .sky-clouds,
+  .scroll-cue {
+    animation: none !important;
+  }
+  .scroll-cue {
+    display: none;
+  }
+  .reveal-ready .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .horizon-copy,
+  .closing-copy {
+    padding: clamp(1.75rem, 0.9rem + 3.4vw, 4rem);
+    background: color-mix(in oklab, var(--color-night) 88%, transparent);
+    border: 1px solid color-mix(in oklab, var(--color-gold) 42%, transparent);
+    color: var(--color-ivory);
+    text-shadow: none;
+  }
+  .horizon-copy .eyebrow {
+    color: var(--color-gold);
+  }
+  .horizon-copy h2 {
+    color: var(--color-ivory);
+  }
+}

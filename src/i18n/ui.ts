@@ -20,11 +20,12 @@ const en = {
   },
   newTab: "(opens in a new tab)",
   hero: {
-    h1: "Shadow work journals for people who feel deeply and think too much.",
-    lede: "Honest questions, quiet pages and moonlit art. No forced positivity. Start with one question tonight.",
+    eyebrow: "Khram · Shadow work journals",
+    h1: "Still light inside.",
+    lede: "For people who feel deeply and think too much. Honest questions, quiet pages and moonlit art. No forced positivity.",
     primary: "Explore the journals",
     secondary: "Try 7 Nights free",
-    artAlt: "Painting of a full moon in a swirling night sky above dark hills, with a glowing pale-blue butterfly and a trail of blue sparks.",
+    artAlt: "Painting of a full golden moon in a deep indigo night sky, with soft violet clouds below it and small gold stars.",
     caption: "From the cover of INDIGO, the first Khram journal.",
   },
   philosophy: {
@@ -269,11 +270,12 @@ const th: Dict = {
   },
   newTab: "(เปิดในแท็บใหม่)",
   hero: {
-    h1: "สมุดบันทึกสำรวจใจ สำหรับคนที่รู้สึกลึกและคิดเยอะ",
-    lede: "คำถามตรงๆ หน้ากระดาษเงียบๆ และภาพวาดใต้แสงจันทร์ ไม่ต้องฝืนคิดบวก เริ่มจากคำถามเดียวคืนนี้",
+    eyebrow: "Khram · สมุดบันทึกสำรวจใจ",
+    h1: "ยังมีแสงอยู่ข้างใน",
+    lede: "สำหรับคนที่รู้สึกลึกและคิดเยอะ คำถามตรงๆ หน้ากระดาษเงียบๆ และภาพวาดใต้แสงจันทร์ ไม่ต้องฝืนคิดบวก",
     primary: "ดูสมุดทั้งหมด",
     secondary: "ลอง 7 Nights ฟรี",
-    artAlt: "ภาพวาดพระจันทร์เต็มดวงบนท้องฟ้ากลางคืนเหนือเนินเขา มีผีเสื้อสีฟ้าซีดเรืองแสงและประกายสีฟ้า",
+    artAlt: "ภาพวาดพระจันทร์เต็มดวงสีทองบนท้องฟ้ากลางคืนสีคราม มีเมฆสีม่วงอ่อนด้านล่างและดาวสีทองดวงเล็ก",
     caption: "ภาพจากปกสมุด INDIGO เล่มแรกของ Khram",
   },
   philosophy: {

@@ -201,3 +201,118 @@
     true,
   );
 })();
+
+/* Home page: the sky-to-sea journey.
+   - Tilts the fixed painting down as you scroll. Each section says which part of the painting it
+     belongs to (data-sky-stop, 0 = top of the sky, 1 = deep water); between sections the painting
+     moves evenly, so every section meets the same sky on any screen size.
+   - Header turns solid once you leave the top. Sections fade up gently as they arrive.
+   Reduced motion: the painting stays still and nothing animates. */
+(function () {
+  "use strict";
+  var doc = document;
+  var col = doc.querySelector("[data-sky-col]");
+  var header = doc.querySelector(".site-header");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var stops = [];
+  var travel = 0;
+  var ticking = false;
+
+  function measure() {
+    if (!col) return;
+    var vh = window.innerHeight;
+    travel = Math.max(0, col.offsetHeight - vh);
+    var maxScroll = Math.max(1, doc.documentElement.scrollHeight - vh);
+    var list = [];
+    doc.querySelectorAll("[data-sky-stop]").forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var top = r.top + window.scrollY;
+      var at = Math.min(maxScroll, Math.max(0, top + r.height / 2 - vh / 2));
+      if (el.getAttribute("data-sky-stop") === "0") at = 0;
+      list.push([at, parseFloat(el.getAttribute("data-sky-stop")) || 0]);
+    });
+    list.sort(function (a, b) {
+      return a[0] - b[0];
+    });
+    stops = [];
+    list.forEach(function (s) {
+      var last = stops[stops.length - 1];
+      if (last && s[0] <= last[0] + 1) {
+        last[1] = Math.max(last[1], s[1]);
+        return;
+      }
+      if (last && s[1] < last[1]) s[1] = last[1];
+      stops.push(s);
+    });
+  }
+
+  function progress(y) {
+    if (!stops.length) return 0;
+    if (y <= stops[0][0]) return stops[0][1];
+    for (var i = 1; i < stops.length; i++) {
+      if (y <= stops[i][0]) {
+        var a = stops[i - 1];
+        var b = stops[i];
+        return a[1] + ((b[1] - a[1]) * (y - a[0])) / (b[0] - a[0]);
+      }
+    }
+    return stops[stops.length - 1][1];
+  }
+
+  function update() {
+    ticking = false;
+    var y = window.scrollY;
+    if (header) header.classList.toggle("is-scrolled", y > 40);
+    if (!col) return;
+    var p = reduce.matches ? 0 : progress(y);
+    col.style.setProperty("--sky-y", (-p * travel).toFixed(1) + "px");
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+
+  function refresh() {
+    measure();
+    update();
+  }
+
+  if (col) {
+    refresh();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", refresh);
+    window.addEventListener("load", refresh);
+    if (reduce.addEventListener) reduce.addEventListener("change", refresh);
+    if ("ResizeObserver" in window) {
+      var journey = doc.querySelector("[data-journey]");
+      if (journey) new ResizeObserver(refresh).observe(journey);
+    }
+  } else if (header) {
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* gentle reveals */
+  var items = doc.querySelectorAll(".reveal");
+  if (items.length && "IntersectionObserver" in window && !reduce.matches) {
+    doc.documentElement.classList.add("reveal-ready");
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+    items.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) el.classList.add("is-in");
+      io.observe(el);
+    });
+  }
+})();

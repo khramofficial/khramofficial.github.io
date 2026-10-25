@@ -80,16 +80,14 @@ export function FeaturedJournal({ lang }: { lang: Lang }) {
       <Container>
         <div className="page-k reveal grid items-start gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
           <a href={href(lang, routes.collection("indigo"))} className="group mx-auto block w-full max-w-[22rem] lg:sticky lg:top-[calc(var(--header-h)+2.5rem)]">
-            <div className="frame bg-navy p-3">
-              <img
-                src={cover.cover.src}
-                alt={t.featured.coverAlt}
-                width={cover.cover.width}
-                height={cover.cover.height}
-                loading="lazy"
-                className="h-auto w-full transition-transform duration-700 group-hover:-translate-y-1"
-              />
-            </div>
+            <img
+              src={cover.cover.src}
+              alt={t.featured.coverAlt}
+              width={cover.cover.width}
+              height={cover.cover.height}
+              loading="lazy"
+              className="book-shot h-auto w-full transition-transform duration-700 group-hover:-translate-y-1"
+            />
           </a>
 
           <div className="flex min-w-0 flex-col gap-9">
@@ -186,9 +184,14 @@ export function FreeStart({ lang }: { lang: Lang }) {
     <section className="journey-sec journey-sec-tight" aria-labelledby="free-h" data-sky-stop="0.85">
       <Container>
         <div className="page-k reveal grid items-center gap-10 md:grid-cols-[minmax(0,0.55fr)_minmax(0,1.45fr)] md:gap-16">
-          <div className="frame mx-auto w-full max-w-[15rem] bg-night p-2">
-            <img src={seven.cover.src} alt={seven.cover.alt} width={seven.cover.width} height={seven.cover.height} loading="lazy" className="h-auto w-full" />
-          </div>
+          <img
+            src={seven.cover.src}
+            alt={seven.cover.alt}
+            width={seven.cover.width}
+            height={seven.cover.height}
+            loading="lazy"
+            className="book-shot mx-auto h-auto w-full max-w-[15rem]"
+          />
           <div className="flex min-w-0 flex-col gap-5" data-product={seven.slug}>
             <p className="eyebrow">{t.free.eyebrow}</p>
             <h2 id="free-h" className="display-2">

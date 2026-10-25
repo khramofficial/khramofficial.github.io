@@ -206,12 +206,16 @@
    - Tilts the fixed painting down as you scroll. Each section says which part of the painting it
      belongs to (data-sky-stop, 0 = top of the sky, 1 = deep water); between sections the painting
      moves evenly, so every section meets the same sky on any screen size.
+   - Night falls over the painting while a reading section (.page-k) is on screen and clears again
+     between them (--sky-dim on .sky), so text never needs a box behind it.
    - Header turns solid once you leave the top. Sections fade up gently as they arrive.
    Reduced motion: the painting stays still and nothing animates. */
 (function () {
   "use strict";
   var doc = document;
   var col = doc.querySelector("[data-sky-col]");
+  var sky = doc.querySelector(".sky");
+  var panels = [];
   var header = doc.querySelector(".site-header");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   var stops = [];
@@ -223,6 +227,7 @@
     var vh = window.innerHeight;
     travel = Math.max(0, col.offsetHeight - vh);
     var maxScroll = Math.max(1, doc.documentElement.scrollHeight - vh);
+    panels = Array.prototype.slice.call(doc.querySelectorAll("[data-journey] .page-k"));
     var list = [];
     doc.querySelectorAll("[data-sky-stop]").forEach(function (el) {
       var r = el.getBoundingClientRect();
@@ -266,6 +271,19 @@
     if (!col) return;
     var p = reduce.matches ? 0 : progress(y);
     col.style.setProperty("--sky-y", (-p * travel).toFixed(1) + "px");
+    if (sky) sky.style.setProperty("--sky-dim", dimFor(window.innerHeight).toFixed(3));
+  }
+
+  /* How much of the screen a reading section fills: 0 = none, 1 = a third or more of what it could. */
+  function dimFor(vh) {
+    var cover = 0;
+    for (var i = 0; i < panels.length; i++) {
+      var r = panels[i].getBoundingClientRect();
+      var seen = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+      if (seen > 0) cover = Math.max(cover, seen / Math.min(vh, r.height || 1));
+    }
+    var t = Math.min(1, cover / 0.35);
+    return t * t * (3 - 2 * t);
   }
 
   function onScroll() {

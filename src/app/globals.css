@@ -829,13 +829,14 @@
 /* ---------- Home: the sky-to-sea journey ----------
    One painting (night sky → light → horizon → sea) sits fixed behind the home page and tilts down as
    you scroll (public/site.js sets --sky-y). .journey clips it, so it never shows behind the footer.
-   Text sits either on open sky where the painting is dark/bright enough (hero, horizon, closing), or on
-   journal-page panels (.page-k) where the painting is mid-tone, so contrast holds at every scroll point. */
+   Text sits either on open sky where the painting is dark/bright enough (hero, horizon, closing), or, for
+   the reading sections (.page-k), the whole sky dims to night while they are on screen (--sky-dim, set by
+   site.js). No boxes behind text: the sky itself gets darker, then clears again at the horizon. */
 @layer components {
   .journey {
     position: relative;
     clip-path: inset(0);
-    overflow-x: clip; /* the soft mist reaches past the screen edge on phones; never scroll sideways */
+    overflow-x: clip; /* never scroll sideways */
     margin-top: calc(-1 * var(--header-h));
   }
   .sky {
@@ -845,6 +846,15 @@
     overflow: hidden;
     pointer-events: none;
     background: #0b1636;
+  }
+  /* night falls over the whole painting while a reading section is on screen (site.js sets --sky-dim 0–1).
+     Darker in the middle, a little lighter towards the screen edges, never a shape you can see. */
+  .sky::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 85% 80% at 50% 50%, rgb(4 10 29 / 0.77), rgb(4 10 29 / 0.6) 100%);
+    opacity: var(--sky-dim, 0);
   }
   .sky-col {
     --sky-fx: 50%;
@@ -923,31 +933,15 @@
       grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
     }
   }
-  /* Phones and tablets: the copy runs down over the brighter clouds, so it sits on a soft night mist.
+  /* Phones and tablets: the copy runs down over the brighter clouds, so night deepens across the screen behind it.
      The caption under the books would sit on bright cloud; the price line already says the same. */
   @media (max-width: 1023px) {
     .hero-art figcaption {
       display: none;
     }
-    .hero-copy {
-      position: relative;
-    }
-    .hero-copy::before {
-      --feather: 44px;
-      content: "";
-      position: absolute;
-      z-index: -1;
-      inset: calc(var(--feather) * -0.6) calc(var(--feather) * -1);
-      background: rgb(4 10 29 / 0.58);
-      -webkit-mask-image:
-        linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
-        linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
-      -webkit-mask-composite: source-in;
-      mask-image:
-        linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
-        linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
-      mask-composite: intersect;
-      pointer-events: none;
+    .hero-sky::before {
+      /* full-width night across the copy, fading out over the books: no box */
+      background: linear-gradient(to bottom, rgb(4 10 29 / 0.42), rgb(4 10 29 / 0.64) 22%, rgb(4 10 29 / 0.64) 62%, rgb(4 10 29 / 0) 92%);
     }
   }
   .hero-copy .eyebrow {
@@ -1054,10 +1048,10 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
-  .inside-page {
-    box-shadow:
-      0 18px 40px -18px rgb(0 0 0 / 0.75),
-      0 0 0 1px color-mix(in oklab, var(--color-gold) 22%, transparent);
+  .inside-page,
+  .book-shot {
+    /* the picture alone, lifted off the sky by a soft shadow: no frame, no box behind it */
+    box-shadow: 0 22px 48px -20px rgb(0 0 0 / 0.8);
   }
 
   /* Phones: slim buy bar at the bottom, shown by site.js once the hero is gone */
@@ -1149,44 +1143,12 @@
     padding-block: clamp(2.5rem, 7vh, 4.5rem);
   }
 
-  /* Text pages are a veil of night mist, not boxes: the dark blurs the sky a little and fades out
-     softly at every edge, so each page becomes part of the sky. The veil sits behind the page on
-     ::before and reaches --feather beyond it; inside the page it is fully dark, so text contrast
-     does not change. */
+  /* Reading sections: no box behind them (Bank, 25 Oct). The sky dims instead (.sky::after), and a soft
+     text shadow keeps every line clear where the painting is brightest. */
   .page-k {
     position: relative;
-    padding: clamp(1.75rem, 0.9rem + 3.4vw, 4rem);
-  }
-  .page-k::before,
-  .mist::before {
-    --feather: clamp(44px, 6vw, 96px);
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: calc(var(--feather) * -1);
-    background: rgb(6 15 36 / 0.8);
-    -webkit-backdrop-filter: blur(14px) saturate(1.15);
-    backdrop-filter: blur(14px) saturate(1.15);
-    --edge-x: linear-gradient(to right, transparent, rgb(0 0 0 / 0.55) calc(var(--feather) * 0.5), #000 var(--feather), #000 calc(100% - var(--feather)), rgb(0 0 0 / 0.55) calc(100% - var(--feather) * 0.5), transparent);
-    --edge-y: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.55) calc(var(--feather) * 0.5), #000 var(--feather), #000 calc(100% - var(--feather)), rgb(0 0 0 / 0.55) calc(100% - var(--feather) * 0.5), transparent);
-    -webkit-mask-image: var(--edge-x), var(--edge-y);
-    -webkit-mask-composite: source-in;
-    mask-image: var(--edge-x), var(--edge-y);
-    mask-composite: intersect;
-    pointer-events: none;
-  }
-  .mist {
-    position: relative;
-  }
-  @media (max-width: 820px), (pointer: coarse) {
-    /* phones: skip the live blur (it is redrawn every frame while the sky moves) and darken a touch instead */
-    .page-k::before,
-    .mist::before {
-      --feather: 40px;
-      background: rgb(6 15 36 / 0.86);
-      -webkit-backdrop-filter: none;
-      backdrop-filter: none;
-    }
+    padding-block: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+    text-shadow: 0 1px 14px rgb(4 10 29 / 0.75);
   }
   .display-quote {
     font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.2rem);
@@ -1285,7 +1247,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   /* No drifting, no tilting (site.js keeps the sky still), no reveals. Text that relies on a
-     particular part of the painting gets its own page instead. */
+     particular part of the painting reads over a dimmed sky instead. */
   .sky-clouds,
   .scroll-cue {
     animation: none !important;
@@ -1297,30 +1259,14 @@
     opacity: 1;
     transform: none;
   }
+  /* the sky stays at the top (night), so the horizon text turns ivory and the whole sky stays dimmed */
+  .sky::after {
+    opacity: 0.72 !important;
+  }
   .horizon-copy,
   .closing-copy {
-    padding: clamp(1.75rem, 0.9rem + 3.4vw, 4rem);
     color: var(--color-ivory);
-    text-shadow: none;
-  }
-  /* the open-sky text gets the same soft night mist as the pages */
-  .horizon-copy::before,
-  .closing-copy::before {
-    --feather: 64px;
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: calc(var(--feather) * -1);
-    background: rgb(6 15 36 / 0.86);
-    -webkit-mask-image:
-      linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
-      linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
-      linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
-    mask-composite: intersect;
-    pointer-events: none;
+    text-shadow: 0 1px 14px rgb(4 10 29 / 0.75);
   }
   .horizon-copy .eyebrow {
     color: var(--color-gold);

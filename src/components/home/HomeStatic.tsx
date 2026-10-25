@@ -1,3 +1,4 @@
+import { HeroPrice, OfferLine } from "@/components/home/HomeLive";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { ui } from "@/i18n/ui";
@@ -56,24 +57,29 @@ export function Hero({ lang }: { lang: Lang }) {
   return (
     <section className="hero-sky" aria-labelledby="hero-h" data-sky-stop="0">
       <Container className="hero-grid">
-        <div className="hero-copy flex min-w-0 flex-col gap-7">
+        <div className="hero-copy flex min-w-0 flex-col gap-6">
           <p className="eyebrow">{t.hero.eyebrow}</p>
           <h1 id="hero-h" className="display-hero">
             {t.hero.h1}
           </h1>
           <p className="lede measure text-ivory/90">{t.hero.lede}</p>
-          <div className="flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap">
-            <ButtonLink href={href(lang, routes.collections)}>{t.hero.primary}</ButtonLink>
-            <ButtonLink href={href(lang, routes.product("seven-nights"))} variant="ghost">
-              {t.hero.secondary}
-            </ButtonLink>
+          <HeroPrice lang={lang} />
+          <div className="flex flex-col items-start gap-4 min-[420px]:flex-row min-[420px]:items-center min-[420px]:gap-7">
+            <ButtonLink href="#indigo">{t.hero.primary}</ButtonLink>
+            <a href="#inside" className="link-k hero-link">
+              {t.hero.inside} <span aria-hidden="true">↓</span>
+            </a>
           </div>
+          <ul className="hero-trust" role="list">
+            {t.hero.trust.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <OfferLine lang={lang} className="hero-offer" />
         </div>
-        <figure className="hero-art flex min-w-0 flex-col gap-4">
-          <div className="hero-moon">
-            <img src="/images/art/indigo-moon.webp" alt={t.hero.artAlt} width={1400} height={1120} fetchPriority="high" className="reveal-art h-auto w-full" />
-          </div>
-          <figcaption className="text-[0.9rem] italic text-ivory/80">{t.hero.caption}</figcaption>
+        <figure className="hero-art flex min-w-0 flex-col gap-3">
+          <img src="/images/products/indigo-hero-books.webp" alt={t.hero.artAlt} width={1500} height={1300} fetchPriority="high" className="reveal-art h-auto w-full" />
+          <figcaption className="text-center text-[0.9rem] italic text-ivory/80">{t.hero.caption}</figcaption>
         </figure>
       </Container>
       <span className="scroll-cue" aria-hidden="true" />
@@ -81,10 +87,81 @@ export function Hero({ lang }: { lang: Lang }) {
   );
 }
 
+/** Four real pages from INDIGO, so people see what they get before they choose a format. */
+export function Inside({ lang }: { lang: Lang }) {
+  const t = ui(lang);
+  return (
+    <section id="inside" className="journey-sec journey-sec-tight anchor-sec" aria-labelledby="inside-h" data-sky-stop="0.16">
+      <Container>
+        <div className="page-k reveal flex flex-col gap-10">
+          <div className="flex flex-col gap-4">
+            <p className="eyebrow">{t.inside.eyebrow}</p>
+            <h2 id="inside-h" className="display-2">
+              {t.inside.h2}
+            </h2>
+          </div>
+          <ul className="inside-grid" role="list">
+            {t.inside.pages.map((page) => (
+              <li key={page.src}>
+                <figure className="flex flex-col gap-3">
+                  <img src={page.src} alt={page.alt} width={640} height={967} loading="lazy" className="inside-page h-auto w-full" />
+                  <figcaption className="text-[0.95rem] leading-snug text-ivory/85">{page.caption}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+          <div>
+            <ButtonLink href="#indigo">
+              {t.inside.cta} <span aria-hidden="true">↑</span>
+            </ButtonLink>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+const momentPhases = [0.15, 0.35, 0.6, 0.85];
+
+/** Four moments the reader will recognise, then what INDIGO does about them. */
+export function WhoFor({ lang }: { lang: Lang }) {
+  const t = ui(lang);
+  return (
+    <section className="journey-sec journey-sec-tight" aria-labelledby="who-h" data-sky-stop="0.24">
+      <Container>
+        <div className="page-k reveal grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
+          <div className="flex flex-col gap-4">
+            <p className="eyebrow">{t.whoFor.eyebrow}</p>
+            <h2 id="who-h" className="display-2 text-moon">
+              {t.whoFor.h2}
+            </h2>
+          </div>
+          <div className="flex min-w-0 flex-col gap-8">
+            <ul className="flex flex-col" role="list">
+              {t.whoFor.moments.map((m, i) => (
+                <li key={m} className="grid grid-cols-[2rem_minmax(0,1fr)] items-start gap-4 border-t border-gold/15 py-4 last:border-b">
+                  <MoonPhase lit={momentPhases[i] ?? 0.5} className="mt-1 h-auto w-full" />
+                  <p className="text-[1.12rem] italic leading-relaxed text-ivory/90">{m}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="lede text-ivory">{t.whoFor.p}</p>
+            <p>
+              <a href="#indigo" className="link-k text-[1rem]">
+                {t.whoFor.cta} <span aria-hidden="true">↑</span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 export function Philosophy({ lang }: { lang: Lang }) {
   const t = ui(lang);
   return (
-    <section className="journey-sec" aria-labelledby="philosophy-h" data-sky-stop="0.08">
+    <section className="journey-sec" aria-labelledby="philosophy-h" data-sky-stop="0.32">
       <Container>
         <div className="page-k reveal grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
           <div className="flex flex-col gap-6">
@@ -116,7 +193,7 @@ export function Story({ lang }: { lang: Lang }) {
   const t = ui(lang);
   const [lead, ...rest] = t.storyPage.why.slice(0, 6);
   return (
-    <section className="journey-sec" aria-labelledby="story-h" data-sky-stop="0.28">
+    <section className="journey-sec" aria-labelledby="story-h" data-sky-stop="0.42">
       <Container>
         <article className="page-k page-story reveal grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <div className="flex flex-col gap-6 lg:sticky lg:top-[calc(var(--header-h)+3rem)] lg:self-start">
@@ -125,6 +202,9 @@ export function Story({ lang }: { lang: Lang }) {
               {t.story.h2}
             </h2>
             <p className="font-display text-[1.35rem] tracking-[0.04em] text-ivory">{lead}</p>
+            <div className="story-moon">
+              <img src="/images/art/indigo-moon.webp" alt={t.hero.moonAlt} width={1400} height={1120} loading="lazy" className="h-auto w-full" />
+            </div>
           </div>
           <div className="flex flex-col gap-5 text-[1.08rem] leading-[1.85] text-ivory/90">
             {rest.map((p) => (
@@ -171,10 +251,10 @@ export function Closing({ lang }: { lang: Lang }) {
           <p className="font-display text-[1.15rem] tracking-[0.12em] text-moon">{t.signoff}</p>
         </div>
         <div className="flex flex-col gap-3">
-          <ButtonLink href={href(lang, routes.product("seven-nights"))}>{t.closing.primary}</ButtonLink>
-          <ButtonLink href={href(lang, routes.collection("indigo"))} variant="ghost">
+          <ButtonLink href="#indigo">{t.closing.primary}</ButtonLink>
+          <a href={href(lang, routes.product("seven-nights"))} className="link-k self-center text-[1rem]">
             {t.closing.secondary}
-          </ButtonLink>
+          </a>
         </div>
       </Container>
     </section>

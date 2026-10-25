@@ -316,3 +316,31 @@
     });
   }
 })();
+
+/* Home page, phones: the slim "Get INDIGO" bar. It shows once the hero has scrolled away and hides
+   again while the INDIGO buy block, the closing or the footer is on screen, or the menu is open. */
+(function () {
+  "use strict";
+  var doc = document;
+  var bar = doc.querySelector("[data-buy-bar]");
+  if (!bar || !("IntersectionObserver" in window)) return;
+  var watched = [doc.querySelector(".hero-sky"), doc.getElementById("indigo"), doc.querySelector(".closing-sea"), doc.querySelector("footer")].filter(Boolean);
+  var onScreen = new Set();
+  function update() {
+    var menuOpen = !!doc.querySelector(".mobile-menu.is-open");
+    bar.classList.toggle("is-shown", onScreen.size === 0 && !menuOpen);
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) onScreen.add(e.target);
+      else onScreen.delete(e.target);
+    });
+    update();
+  });
+  watched.forEach(function (el) {
+    io.observe(el);
+  });
+  doc.addEventListener("click", function () {
+    setTimeout(update, 0);
+  });
+})();

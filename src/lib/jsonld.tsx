@@ -50,6 +50,59 @@ export function siteLd(lang: Lang): Json[] {
   ];
 }
 
+/** Countries Gumroad sells the PDFs to that matter most to Khram (Search Console wants a list, not "worldwide"). */
+const DIGITAL_COUNTRIES = ["US", "GB", "CA", "AU", "TH"];
+const days = (min: number, max: number) => ({ "@type": "QuantitativeValue", minValue: min, maxValue: max, unitCode: "DAY" });
+
+/**
+ * Shipping and returns for merchant listings, only what is true:
+ * - Gumroad PDFs: instant download, nothing to ship, 14-day money-back guarantee (refund policy ON in Gumroad); free items can't be refunded.
+ * - Amazon paperbacks: sold and shipped by Amazon, so Amazon is the seller and Amazon's 30-day return policy applies.
+ *   Amazon's shipping cost depends on the buyer's order, so no shipping rate is claimed for them.
+ */
+function offerPolicies(store: string | null, price: number): Json {
+  if (store === "Gumroad") {
+    return {
+      seller: { "@id": organizationId },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "USD" },
+        shippingDestination: DIGITAL_COUNTRIES.map((addressCountry) => ({ "@type": "DefinedRegion", addressCountry })),
+        deliveryTime: { "@type": "ShippingDeliveryTime", handlingTime: days(0, 0), transitTime: days(0, 0) },
+      },
+      hasMerchantReturnPolicy:
+        price > 0
+          ? {
+              "@type": "MerchantReturnPolicy",
+              applicableCountry: DIGITAL_COUNTRIES,
+              returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+              merchantReturnDays: 14,
+              returnFees: "https://schema.org/FreeReturn",
+              refundType: "https://schema.org/FullRefund",
+            }
+          : {
+              "@type": "MerchantReturnPolicy",
+              applicableCountry: DIGITAL_COUNTRIES,
+              returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+            },
+    };
+  }
+  if (store === "Amazon") {
+    return {
+      seller: { "@type": "Organization", name: "Amazon" },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "US",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 30,
+        returnMethod: "https://schema.org/ReturnByMail",
+        merchantReturnLink: "https://www.amazon.com/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7",
+      },
+    };
+  }
+  return {};
+}
+
 export function productLd(slug: string, lang: Lang): Json[] {
   const p = findProduct(buildCatalog, slug, lang);
   if (!p) return [];
@@ -71,6 +124,7 @@ export function productLd(slug: string, lang: Lang): Json[] {
     category: p.format,
   };
   // Google needs offers, reviews or ratings on a Product; items not on sale yet only get breadcrumbs.
+  // No aggregateRating/review until real reviews exist (Search Console lists them as optional; we never invent them).
   if (sellable) {
     product.offers = {
       "@type": "Offer",
@@ -79,6 +133,7 @@ export function productLd(slug: string, lang: Lang): Json[] {
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
+      ...offerPolicies(p.store, Number(p.price)),
     };
   }
   const crumbs: Json = {

@@ -202,12 +202,13 @@
   );
 })();
 
-/* Home page: the sky-to-sea journey.
-   - Tilts the fixed painting down as you scroll. Each section says which part of the painting it
-     belongs to (data-sky-stop, 0 = top of the sky, 1 = deep water); between sections the painting
-     moves evenly, so every section meets the same sky on any screen size.
-   - Night falls over the painting while a reading section (.page-k) is on screen and clears again
-     between them (--sky-dim on .sky), so text never needs a box behind it.
+/* Home page: the journey over the painting (light theme, 25 Oct 2026).
+   - The camera only travels through the bright band of the painting (dawn clouds → horizon → sunlit water,
+     BAND_TOP..BAND_BOTTOM of the column). The column is zoomed (--sky-zoom) so the band is taller than the
+     screen. Each section says where in that band it belongs (data-sky-stop, 0 = top of the band, 1 = bottom);
+     between sections the painting moves evenly, so every section meets the same sky on any screen size.
+   - A light morning haze rises while a reading section (.page-k, closing) is on screen and clears again
+     between them (--sky-dim on .sky), so ink text never needs a box behind it.
    - Header turns solid once you leave the top. Sections fade up gently as they arrive.
    Reduced motion: the painting stays still and nothing animates. */
 (function () {
@@ -219,15 +220,25 @@
   var header = doc.querySelector(".site-header");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   var stops = [];
-  var travel = 0;
+  var BAND_TOP = 0.27; /* bright part of the painting, as a share of the column height */
+  var BAND_BOTTOM = 0.64;
+  var ROOM = 1.25; /* the band is zoomed to at least 1.25 screens tall, so there is a little to travel */
+  var camFrom = 0;
+  var camTo = 0;
   var ticking = false;
 
   function measure() {
     if (!col) return;
     var vh = window.innerHeight;
-    travel = Math.max(0, col.offsetHeight - vh);
+    col.style.setProperty("--sky-zoom", "1");
+    var h0 = col.offsetHeight || 1;
+    var zoom = Math.max(1, (vh * ROOM) / ((BAND_BOTTOM - BAND_TOP) * h0));
+    col.style.setProperty("--sky-zoom", zoom.toFixed(3));
+    var h = h0 * zoom;
+    camFrom = BAND_TOP * h;
+    camTo = Math.max(camFrom, BAND_BOTTOM * h - vh);
     var maxScroll = Math.max(1, doc.documentElement.scrollHeight - vh);
-    panels = Array.prototype.slice.call(doc.querySelectorAll("[data-journey] .page-k"));
+    panels = Array.prototype.slice.call(doc.querySelectorAll("[data-journey] .page-k, [data-journey] .closing-copy"));
     var list = [];
     doc.querySelectorAll("[data-sky-stop]").forEach(function (el) {
       var r = el.getBoundingClientRect();
@@ -270,11 +281,11 @@
     if (header) header.classList.toggle("is-scrolled", y > 40);
     if (!col) return;
     var p = reduce.matches ? 0 : progress(y);
-    col.style.setProperty("--sky-y", (-p * travel).toFixed(1) + "px");
+    col.style.setProperty("--sky-y", (-(camFrom + p * (camTo - camFrom))).toFixed(1) + "px");
     if (sky) sky.style.setProperty("--sky-dim", dimFor(window.innerHeight).toFixed(3));
   }
 
-  /* How much of the screen a reading section fills: 0 = none, 1 = a third or more of what it could. */
+  /* How much of the screen a reading section fills: 0 = none, 1 = a third or more of what it could (drives the haze). */
   function dimFor(vh) {
     var cover = 0;
     for (var i = 0; i < panels.length; i++) {

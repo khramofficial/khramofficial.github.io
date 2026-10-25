@@ -22,7 +22,7 @@ export function SkyJourney() {
         </picture>
         <picture>
           <source media="(max-width: 820px)" srcSet="/images/sky/sky-bottom-m.webp" />
-          <img className="sky-bottom" src="/images/sky/sky-bottom-d.webp" alt="" width={2048} height={2168} loading="lazy" decoding="async" />
+          <img className="sky-bottom" src="/images/sky/sky-bottom-d.webp" alt="" width={2048} height={2168} decoding="async" />
         </picture>
         <picture>
           <source media="(max-width: 820px)" srcSet="/images/sky/sky-clouds-m.webp" />

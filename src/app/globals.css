@@ -829,15 +829,59 @@
 /* ---------- Home: the sky-to-sea journey ----------
    One painting (night sky → light → horizon → sea) sits fixed behind the home page and tilts down as
    you scroll (public/site.js sets --sky-y). .journey clips it, so it never shows behind the footer.
-   Text sits either on open sky where the painting is dark/bright enough (hero, horizon, closing), or, for
-   the reading sections (.page-k), the whole sky dims to night while they are on screen (--sky-dim, set by
-   site.js). No boxes behind text: the sky itself gets darker, then clears again at the horizon. */
+   Light theme (Bank, 25 Oct 10:08: "bright like the painting"): the camera only travels through the bright
+   part of the painting (dawn clouds → horizon → sunlit water), all text is ink with a soft light halo, and
+   while a reading section is on screen a morning haze (--sky-dim, set by site.js) lightens the painting a
+   little more. No boxes behind text. Colour tokens are flipped to their ink versions inside the journey. */
 @layer components {
   .journey {
     position: relative;
     clip-path: inset(0);
     overflow-x: clip; /* never scroll sideways */
     margin-top: calc(-1 * var(--header-h));
+  }
+  /* Ink versions of the light-on-dark tokens, so every utility (text-ivory/85, text-moon, eyebrow, link-k…)
+     reads on the bright painting without touching each component. */
+  .journey,
+  .buy-bar,
+  .site-shell:has([data-journey]) .site-header:not(:has(.mobile-menu.is-open)) {
+    --color-ivory: #1b2547;
+    --color-moon: #5d4426;
+    --color-gold: #7a5a32;
+    --color-lavender: #5a4776;
+    --halo: 0 0 16px rgb(246 241 231 / 0.75), 0 0 2px rgb(246 241 231 / 0.55);
+    color: var(--color-ivory);
+  }
+  .journey .btn-primary,
+  .buy-bar .btn-primary,
+  .site-shell:has([data-journey]) .site-header:not(:has(.mobile-menu.is-open)) .btn-primary {
+    background: #1b2547;
+    color: #f6f1e7;
+    text-shadow: none;
+  }
+  .journey .btn-primary:hover,
+  .buy-bar .btn-primary:hover,
+  .site-shell:has([data-journey]) .site-header:not(:has(.mobile-menu.is-open)) .btn-primary:hover {
+    background: #060f24;
+    color: #f6f1e7;
+  }
+  .journey .btn-ghost {
+    background: rgb(246 241 231 / 0.45);
+    text-shadow: none;
+  }
+  .journey .btn-ghost:hover {
+    background: rgb(246 241 231 / 0.75);
+  }
+  /* small caps lines need more weight to read on the bright painting */
+  .journey .eyebrow {
+    font-weight: 600;
+  }
+  .hero-copy .eyebrow {
+    font-size: 0.9rem;
+  }
+  /* collection colours were picked for a dark page; darken them enough to read on light */
+  .journey .swatch-card .eyebrow {
+    color: color-mix(in oklab, var(--accent) 50%, #1b2547) !important;
   }
   .sky {
     position: fixed;
@@ -847,13 +891,13 @@
     pointer-events: none;
     background: #0b1636;
   }
-  /* night falls over the whole painting while a reading section is on screen (site.js sets --sky-dim 0–1).
-     Darker in the middle, a little lighter towards the screen edges, never a shape you can see. */
+  /* morning haze over the whole painting while a reading section is on screen (site.js sets --sky-dim 0–1).
+     A little stronger in the middle, never a shape you can see. */
   .sky::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 85% 80% at 50% 50%, rgb(4 10 29 / 0.77), rgb(4 10 29 / 0.6) 100%);
+    background: radial-gradient(ellipse 85% 80% at 50% 50%, rgb(246 241 231 / 0.6), rgb(246 241 231 / 0.4) 100%);
     opacity: var(--sky-dim, 0);
   }
   .sky-col {
@@ -861,9 +905,11 @@
     position: absolute;
     top: 0;
     left: 50%;
-    width: max(100%, 113.5vh);
+    /* site.js zooms the column (--sky-zoom) so the bright band is taller than the screen, and moves it
+       (--sky-y) only within that band. The fallback starts at the top of the band (27% down the column). */
+    width: calc(max(100%, 113.5vh) * var(--sky-zoom, 1.15));
     aspect-ratio: 2048 / 4332;
-    transform: translate3d(calc(var(--sky-fx) * -1), var(--sky-y, 0px), 0);
+    transform: translate3d(calc(var(--sky-fx) * -1), var(--sky-y, calc(max(100vw, 113.5vh) * var(--sky-zoom, 1.15) * -0.5711)), 0);
     will-change: transform;
   }
   @media (max-aspect-ratio: 4/5) {
@@ -913,13 +959,13 @@
     padding-bottom: clamp(4.5rem, 10vh, 7rem);
   }
   .hero-sky::before {
-    /* a soft shadow of night behind the words, so they read over the clouds */
+    /* a soft morning light behind the words, so ink reads over the clouds */
     content: "";
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 58% 62% at 25% 56%, rgb(4 10 29 / 0.66), transparent 74%),
-      linear-gradient(to bottom, rgb(4 10 29 / 0.45), transparent 30%);
+      radial-gradient(ellipse 60% 66% at 26% 56%, rgb(246 241 231 / 0.62), transparent 76%),
+      linear-gradient(to bottom, rgb(246 241 231 / 0.4), transparent 30%);
     pointer-events: none;
   }
   .hero-grid {
@@ -933,26 +979,20 @@
       grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
     }
   }
-  /* Phones and tablets: the copy runs down over the brighter clouds, so night deepens across the screen behind it.
+  /* Phones and tablets: the copy runs the full width, so the morning light spreads across the screen behind it.
      The caption under the books would sit on bright cloud; the price line already says the same. */
   @media (max-width: 1023px) {
     .hero-art figcaption {
       display: none;
     }
     .hero-sky::before {
-      /* full-width night across the copy, fading out over the books: no box */
-      background: linear-gradient(to bottom, rgb(4 10 29 / 0.42), rgb(4 10 29 / 0.64) 22%, rgb(4 10 29 / 0.64) 62%, rgb(4 10 29 / 0) 92%);
+      /* full-width light across the copy, fading out over the books: no box */
+      background: linear-gradient(to bottom, rgb(246 241 231 / 0.45), rgb(246 241 231 / 0.62) 22%, rgb(246 241 231 / 0.62) 62%, rgb(246 241 231 / 0) 92%);
     }
   }
   .hero-copy .eyebrow {
     color: var(--color-moon);
-    text-shadow: 0 1px 14px rgb(4 10 29 / 0.9);
-  }
-  .hero-copy .btn-ghost {
-    background: rgb(4 10 29 / 0.38);
-  }
-  .hero-copy .btn-ghost:hover {
-    background: rgb(4 10 29 / 0.6);
+    text-shadow: var(--halo);
   }
   .display-hero {
     /* a full sentence now (what it is, for whom), so smaller than the old two-word headline */
@@ -960,7 +1000,7 @@
     line-height: 1.14;
     letter-spacing: 0.02em;
     color: var(--color-ivory);
-    text-shadow: 0 2px 30px rgb(4 10 29 / 0.55);
+    text-shadow: var(--halo);
   }
   .hero-art {
     max-width: min(34rem, 100%);
@@ -977,19 +1017,19 @@
     font-size: 1.08rem;
     letter-spacing: 0.04em;
     color: var(--color-moon);
-    text-shadow: 0 1px 12px rgb(4 10 29 / 0.9);
+    text-shadow: var(--halo);
   }
   .hero-link {
     font-size: 1.02rem;
-    text-shadow: 0 1px 10px rgb(4 10 29 / 0.95);
+    text-shadow: var(--halo);
   }
   .hero-trust {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem 1.1rem;
     font-size: 0.92rem;
-    color: color-mix(in oklab, var(--color-ivory) 82%, transparent);
-    text-shadow: 0 1px 10px rgb(4 10 29 / 0.95);
+    color: color-mix(in oklab, var(--color-ivory) 86%, transparent);
+    text-shadow: var(--halo);
   }
   .hero-trust li {
     display: flex;
@@ -1007,7 +1047,7 @@
   .hero-offer {
     font-size: 0.95rem;
     color: var(--color-gold);
-    text-shadow: 0 1px 10px rgb(4 10 29 / 0.95);
+    text-shadow: var(--halo);
   }
   html:has([data-journey]) {
     scroll-behavior: smooth;
@@ -1034,7 +1074,7 @@
   }
   .format-row:hover,
   .format-row:focus-visible {
-    background: rgb(214 173 130 / 0.07);
+    background: rgb(246 241 231 / 0.55);
   }
 
   /* See inside: four real pages */
@@ -1051,7 +1091,7 @@
   .inside-page,
   .book-shot {
     /* the picture alone, lifted off the sky by a soft shadow: no frame, no box behind it */
-    box-shadow: 0 22px 48px -20px rgb(0 0 0 / 0.8);
+    box-shadow: 0 22px 44px -22px rgb(27 37 71 / 0.6);
   }
 
   /* Phones: slim buy bar at the bottom, shown by site.js once the hero is gone */
@@ -1067,7 +1107,7 @@
     gap: 1rem;
     padding: 0.65rem 16px calc(0.65rem + env(safe-area-inset-bottom, 0px));
     font-size: 0.98rem;
-    background: rgb(6 15 36 / 0.94);
+    background: rgb(246 241 231 / 0.94);
     transform: translateY(calc(100% + 1.5rem));
     visibility: hidden;
     transition:
@@ -1082,7 +1122,7 @@
     right: 0;
     bottom: 100%;
     height: 1.5rem;
-    background: linear-gradient(to top, rgb(6 15 36 / 0.94), transparent);
+    background: linear-gradient(to top, rgb(246 241 231 / 0.94), transparent);
     pointer-events: none;
   }
   .buy-bar.is-shown {
@@ -1098,19 +1138,20 @@
     }
   }
 
-  /* the moon from the INDIGO cover, beside Our Story, dissolves into the page instead of sitting in a box */
+  /* the moon from the INDIGO cover, beside Our Story: a round window of night in the morning sky */
   .story-moon {
-    max-width: 22rem;
-    margin-top: 0.5rem;
+    max-width: 17rem;
+    margin-top: 0.75rem;
   }
   .story-moon img {
-    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 47%, #000 58%, rgb(0 0 0 / 0.6) 78%, transparent 100%);
-    mask-image: radial-gradient(ellipse 50% 50% at 50% 47%, #000 58%, rgb(0 0 0 / 0.6) 78%, transparent 100%);
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: 50% 47%;
+    border-radius: 50%;
+    box-shadow: 0 24px 50px -24px rgb(27 37 71 / 0.65);
   }
   .hero-art figcaption {
-    text-shadow:
-      0 1px 10px rgb(4 10 29 / 0.95),
-      0 0 2px rgb(4 10 29 / 0.8);
+    text-shadow: var(--halo);
   }
   .scroll-cue {
     position: absolute;
@@ -1143,12 +1184,12 @@
     padding-block: clamp(2.5rem, 7vh, 4.5rem);
   }
 
-  /* Reading sections: no box behind them (Bank, 25 Oct). The sky dims instead (.sky::after), and a soft
-     text shadow keeps every line clear where the painting is brightest. */
+  /* Reading sections: no box behind them (Bank, 25 Oct). A morning haze lightens the sky instead
+     (.sky::after), and a soft light halo keeps every line clear. */
   .page-k {
     position: relative;
     padding-block: clamp(1rem, 0.5rem + 2vw, 2.5rem);
-    text-shadow: 0 1px 14px rgb(4 10 29 / 0.75);
+    text-shadow: var(--halo);
   }
   .display-quote {
     font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.2rem);
@@ -1179,25 +1220,27 @@
     color: var(--color-ink);
   }
 
-  /* Closing: deep water near the bottom of the painting */
+  /* Closing: sunlit water below the horizon; only the last few rem fade into the dark footer */
   .closing-sea {
     position: relative;
-    padding-block: clamp(6rem, 18vh, 12rem) clamp(4rem, 10vh, 7rem);
+    padding-block: clamp(6rem, 18vh, 12rem) clamp(6rem, 13vh, 9rem);
   }
   .closing-sea::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent, rgb(6 15 36 / 0.55) 45%, rgb(6 15 36 / 0.85));
+    inset: 0 0 -2px; /* cover the last pixel row too, so no line of sky shows above the footer */
+    background: linear-gradient(to bottom, transparent calc(100% - 5rem), var(--color-night) calc(100% - 2px));
     pointer-events: none;
   }
   .closing-copy {
     position: relative;
+    text-shadow: var(--halo);
   }
 
   /* Header floats over the sky on the home page until you scroll */
   .site-shell:has([data-journey]) .site-header:not(.is-scrolled):not(:has(.mobile-menu.is-open)) {
-    background: linear-gradient(to bottom, rgb(4 10 29 / 0.6), rgb(4 10 29 / 0)) border-box no-repeat;
+    background: linear-gradient(to bottom, rgb(246 241 231 / 0.65), rgb(246 241 231 / 0)) border-box no-repeat;
     border-bottom-color: transparent;
   }
   .site-shell:has([data-journey]) .site-header {
@@ -1209,6 +1252,11 @@
     background: color-mix(in oklab, var(--color-night) 90%, transparent);
     border-bottom-color: transparent;
   }
+  .site-shell:has([data-journey]) .site-header.is-scrolled:not(:has(.mobile-menu.is-open)) {
+    background: rgb(246 241 231 / 0.86);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
   .site-shell:has([data-journey]) .site-header.is-scrolled::after {
     /* no hard line under the header: it fades into the sky */
     content: "";
@@ -1217,11 +1265,14 @@
     right: 0;
     top: calc(100% + 1px); /* start below the (transparent) 1px border, not on it */
     height: 2.5rem;
-    background: linear-gradient(to bottom, color-mix(in oklab, var(--color-night) 90%, transparent), transparent);
+    background: linear-gradient(to bottom, rgb(246 241 231 / 0.86), transparent);
     pointer-events: none;
   }
+  .site-shell:has([data-journey]) .site-header.is-scrolled:has(.mobile-menu.is-open)::after {
+    display: none;
+  }
   .site-shell:has([data-journey]) footer {
-    border-top-color: transparent;
+    border-top-color: transparent !important; /* beats the footer's border utility class */
   }
 
   /* Gentle reveals, only once site.js is running (content never stays hidden without it).
@@ -1247,7 +1298,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   /* No drifting, no tilting (site.js keeps the sky still), no reveals. Text that relies on a
-     particular part of the painting reads over a dimmed sky instead. */
+     particular part of the painting reads over a steady haze instead. */
   .sky-clouds,
   .scroll-cue {
     animation: none !important;
@@ -1259,19 +1310,8 @@
     opacity: 1;
     transform: none;
   }
-  /* the sky stays at the top (night), so the horizon text turns ivory and the whole sky stays dimmed */
+  /* the sky stays at the top of the bright band, with a steady morning haze so every section reads */
   .sky::after {
-    opacity: 0.72 !important;
-  }
-  .horizon-copy,
-  .closing-copy {
-    color: var(--color-ivory);
-    text-shadow: 0 1px 14px rgb(4 10 29 / 0.75);
-  }
-  .horizon-copy .eyebrow {
-    color: var(--color-gold);
-  }
-  .horizon-copy h2 {
-    color: var(--color-ivory);
+    opacity: 0.6 !important;
   }
 }

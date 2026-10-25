@@ -203,7 +203,7 @@ export function Story({ lang }: { lang: Lang }) {
             </h2>
             <p className="font-display text-[1.35rem] tracking-[0.04em] text-ivory">{lead}</p>
             <div className="story-moon">
-              <img src="/images/art/indigo-moon.webp" alt={t.hero.moonAlt} width={1400} height={1120} loading="lazy" className="h-auto w-full" />
+              <img src="/images/art/indigo-moon-soft.webp" alt={t.hero.moonAlt} width={880} height={880} loading="lazy" className="h-auto w-full" />
             </div>
           </div>
           <div className="flex flex-col gap-5 text-[1.08rem] leading-[1.85] text-ivory/90">

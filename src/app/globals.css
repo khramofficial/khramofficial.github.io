@@ -846,8 +846,9 @@
   .buy-bar,
   .site-shell:has([data-journey]) .site-header:not(:has(.mobile-menu.is-open)) {
     --color-ivory: #1b2547;
-    --color-moon: #5d4426;
-    --color-gold: #7a5a32;
+    /* gold text on a bright sky: deep antique gold, dark enough for small caps (≥ 4.5:1 on the light clouds) */
+    --color-moon: #6b4716;
+    --color-gold: #5a3a0e;
     --color-lavender: #5a4776;
     --halo: 0 0 16px rgb(246 241 231 / 0.75), 0 0 2px rgb(246 241 231 / 0.55);
     color: var(--color-ivory);
@@ -964,8 +965,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 66% at 26% 56%, rgb(246 241 231 / 0.62), transparent 76%),
-      linear-gradient(to bottom, rgb(246 241 231 / 0.4), transparent 30%);
+      radial-gradient(ellipse 60% 72% at 26% 52%, rgb(246 241 231 / 0.62), transparent 76%),
+      linear-gradient(to bottom, rgb(246 241 231 / 0.58), rgb(246 241 231 / 0.3) 26%, transparent 44%);
     pointer-events: none;
   }
   .hero-grid {
@@ -991,7 +992,7 @@
     }
   }
   .hero-copy .eyebrow {
-    color: var(--color-moon);
+    color: var(--color-gold);
     text-shadow: var(--halo);
   }
   .display-hero {
@@ -1138,17 +1139,12 @@
     }
   }
 
-  /* the moon from the INDIGO cover, beside Our Story: a round window of night in the morning sky */
+  /* the moon from the INDIGO cover, beside Our Story: cut out of its night sky with a soft warm glow
+     (indigo-moon-soft.webp, transparent), so it sits in the morning sky like a pale daytime moon */
   .story-moon {
-    max-width: 17rem;
-    margin-top: 0.75rem;
-  }
-  .story-moon img {
-    aspect-ratio: 1;
-    object-fit: cover;
-    object-position: 50% 47%;
-    border-radius: 50%;
-    box-shadow: 0 24px 50px -24px rgb(27 37 71 / 0.65);
+    max-width: 20rem;
+    margin-top: 0.25rem;
+    margin-left: -2rem;
   }
   .hero-art figcaption {
     text-shadow: var(--halo);

@@ -212,7 +212,7 @@
     line-height: 1.2;
     text-align: center;
     border: 1px solid transparent;
-    border-radius: 2px;
+    border-radius: 999px;
     transition:
       background-color 0.25s ease,
       color 0.25s ease,
@@ -222,19 +222,26 @@
   }
   .btn-sm {
     min-height: 2.5rem;
-    padding: 0.5rem 1.05rem;
+    padding: 0.5rem 1.1rem;
     font-size: 0.75rem;
+    letter-spacing: 0.14em;
+  }
+  .btn-lg {
+    min-height: 3.4rem;
+    padding: 0.95rem 2rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
   }
   .btn-primary {
-    background: var(--color-gold);
+    background: var(--color-moon);
     color: var(--color-night);
   }
   .btn-primary:hover {
-    background: var(--color-ivory);
+    background: var(--color-gold);
   }
   .btn-ghost {
-    border-color: color-mix(in oklab, var(--color-gold) 60%, transparent);
-    color: var(--color-gold);
+    border-color: color-mix(in oklab, var(--color-gold) 45%, transparent);
+    color: var(--color-ivory);
   }
   .btn-ghost:hover {
     border-color: var(--color-gold);
@@ -312,25 +319,35 @@
     position: sticky;
     top: env(safe-area-inset-top, 0px);
     z-index: 50;
+    background: color-mix(in oklab, var(--color-night) 86%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-gold) 10%, transparent);
+  }
+  .site-header:has(.mobile-menu.is-open) {
     background: var(--color-night);
-    border-bottom: 1px solid color-mix(in oklab, var(--color-gold) 16%, transparent);
   }
   .wordmark {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 1.05rem;
-    letter-spacing: 0.34em;
-    margin-right: -0.34em;
+    font-size: 1.15rem;
+    letter-spacing: 0.3em;
+    margin-right: -0.3em;
     color: var(--color-gold);
     text-decoration: none;
+  }
+  @media (min-width: 1024px) {
+    .wordmark {
+      font-size: 1.4rem;
+    }
   }
   .nav-link {
     white-space: nowrap;
     font-family: var(--font-display);
-    font-size: 0.8125rem;
-    letter-spacing: 0.16em;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-ivory);
+    color: color-mix(in oklab, var(--color-ivory) 72%, transparent);
     text-decoration: none;
     padding-block: 0.4rem;
     border-bottom: 1px solid transparent;
@@ -346,9 +363,11 @@
   .menu-button {
     display: none;
     align-items: center;
+    justify-content: center;
     gap: 0.55rem;
     min-height: 2.75rem;
-    padding: 0.4rem 0.2rem 0.4rem 0.6rem;
+    min-width: 2.75rem;
+    padding: 0.4rem;
     font-family: var(--font-display);
     font-size: 0.75rem;
     letter-spacing: 0.2em;
@@ -381,6 +400,10 @@
   }
   .menu-icon::after {
     top: 0.6rem;
+    left: 0.35rem;
+  }
+  .menu-button[aria-expanded="true"] .menu-icon::after {
+    left: 0;
   }
   .menu-button[aria-expanded="true"] .menu-icon::before {
     top: 0.375rem;
@@ -393,6 +416,10 @@
   .mobile-menu {
     border-top: 1px solid color-mix(in oklab, var(--color-gold) 14%, transparent);
     background: var(--color-night);
+    /* the menu (shop list + pages) can be taller than a phone screen: scroll inside it */
+    max-height: calc(100svh - var(--header-h) - env(safe-area-inset-top, 0px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .js .mobile-menu:not(.is-open) {
     display: none;
@@ -415,6 +442,46 @@
   }
   .mobile-link[aria-current="page"] {
     color: var(--color-gold);
+  }
+  /* Shop dropdown (desktop header) */
+  .shop-menu > summary {
+    list-style: none;
+  }
+  .shop-menu > summary::-webkit-details-marker {
+    display: none;
+  }
+  .shop-menu[open] > summary {
+    color: var(--color-gold);
+  }
+  .shop-menu[open] .shop-caret {
+    transform: rotate(180deg);
+  }
+  .shop-panel {
+    position: absolute;
+    top: calc(100% + 1.1rem);
+    left: -1.5rem;
+    width: min(46rem, calc(100vw - 4rem));
+    padding: 1.75rem;
+    z-index: 60;
+    background: #08132c;
+    border: 1px solid color-mix(in oklab, var(--color-gold) 16%, transparent);
+    border-radius: 1.25rem;
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.6);
+  }
+  .shop-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 0.7rem;
+    margin-inline: -0.7rem;
+    border-radius: 0.6rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .shop-item:hover,
+  .shop-item:focus-visible {
+    background: color-mix(in oklab, var(--color-navy) 80%, transparent);
   }
   .lang-switch {
     white-space: nowrap;
@@ -826,276 +893,95 @@
   }
 }
 
-/* ---------- Home: the sky-to-sea journey ----------
-   One painting (night sky → light → horizon → sea) sits fixed behind the home page and tilts down as
-   you scroll (public/site.js sets --sky-y). .journey clips it, so it never shows behind the footer.
-   Light theme (Bank, 25 Oct 10:08: "bright like the painting"): the camera only travels through the bright
-   part of the painting (dawn clouds → horizon → sunlit water), all text is ink with a soft light halo, and
-   while a reading section is on screen a morning haze (--sky-dim, set by site.js) lightens the painting a
-   little more. No boxes behind text. Colour tokens are flipped to their ink versions inside the journey. */
+
+/* ---------- Home (UX Pilot layout, 27 Oct 2026) ----------
+   Night and navy surfaces with gold type, rounded cards and pill buttons from the design; Bank's sky-to-sea
+   painting and the moon phases from the earlier home. Desktop layout from 1024px (lg), phone layout below. */
 @layer components {
-  .journey {
-    position: relative;
-    clip-path: inset(0);
-    overflow-x: clip; /* never scroll sideways */
-    margin-top: calc(-1 * var(--header-h));
-  }
-  /* Ink versions of the light-on-dark tokens, so every utility (text-ivory/85, text-moon, eyebrow, link-k…)
-     reads on the bright painting without touching each component. */
-  .journey,
-  .buy-bar,
-  .site-shell:has([data-journey]) .site-header:not(:has(.mobile-menu.is-open)) {
-    --color-ivory: #1b2547;
-    /* gold text on a bright sky: deep antique gold, dark enough for small caps (≥ 4.5:1 on the light clouds) */
-    --color-moon: #6b4716;
-    --color-gold: #5a3a0e;
-    --color-lavender: #5a4776;
-    --halo: 0 0 16px rgb(246 241 231 / 0.75), 0 0 2px rgb(246 241 231 / 0.55);
-    color: var(--color-ivory);
-  }
-  .journey .btn-primary,
-  .buy-bar .btn-primary,
-  .site-shell:has([data-journey]) .site-header:not(:has(.mobile-menu.is-open)) .btn-primary {
-    background: #1b2547;
-    color: #f6f1e7;
-    text-shadow: none;
-  }
-  .journey .btn-primary:hover,
-  .buy-bar .btn-primary:hover,
-  .site-shell:has([data-journey]) .site-header:not(:has(.mobile-menu.is-open)) .btn-primary:hover {
-    background: #060f24;
-    color: #f6f1e7;
-  }
-  .journey .btn-ghost {
-    background: rgb(246 241 231 / 0.45);
-    text-shadow: none;
-  }
-  .journey .btn-ghost:hover {
-    background: rgb(246 241 231 / 0.75);
-  }
-  /* small caps lines need more weight to read on the bright painting */
-  .journey .eyebrow {
+  .h-sec {
+    font-family: var(--font-display);
     font-weight: 600;
+    font-size: clamp(1.95rem, 1.35rem + 1.9vw, 2.75rem);
+    line-height: 1.12;
+    letter-spacing: 0.02em;
   }
-  .hero-copy .eyebrow {
-    font-size: 0.9rem;
+  [data-site-lang="en"] .home .eyebrow {
+    letter-spacing: 0.32em;
   }
-  /* collection colours were picked for a dark page; darken them enough to read on light */
-  .journey .swatch-card .eyebrow {
-    color: color-mix(in oklab, var(--accent) 50%, #1b2547) !important;
+  .no-scrollbar {
+    scrollbar-width: none;
   }
-  .sky {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-    background: #0b1636;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-  /* morning haze over the whole painting while a reading section is on screen (site.js sets --sky-dim 0–1).
-     A little stronger in the middle, never a shape you can see. */
-  .sky::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 85% 80% at 50% 50%, rgb(246 241 231 / 0.6), rgb(246 241 231 / 0.4) 100%);
-    opacity: var(--sky-dim, 0);
+  .home-band {
+    background: color-mix(in oklab, var(--color-navy) 40%, transparent);
   }
-  .sky-col {
-    --sky-fx: 50%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    /* site.js zooms the column (--sky-zoom) so the bright band is taller than the screen, and moves it
-       (--sky-y) only within that band. The fallback starts at the top of the band (27% down the column). */
-    width: calc(max(100%, 113.5vh) * var(--sky-zoom, 1.15));
-    aspect-ratio: 2048 / 4332;
-    transform: translate3d(calc(var(--sky-fx) * -1), var(--sky-y, calc(max(100vw, 113.5vh) * var(--sky-zoom, 1.15) * -0.5711)), 0);
-    will-change: transform;
-  }
-  @media (max-aspect-ratio: 4/5) {
-    /* phones: keep both the moon and the light on the water in view */
-    .sky-col {
-      --sky-fx: 60%;
-    }
-  }
-  .sky-col picture {
-    display: contents;
-  }
-  .sky-col img {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: auto;
-    max-width: none;
-    user-select: none;
-  }
-  .sky-top {
-    top: 0;
-  }
-  .sky-bottom {
-    top: 49.954%;
-  }
-  .sky-clouds {
-    top: 0;
-    animation: sky-drift 75s ease-in-out infinite alternate;
-    will-change: transform;
-  }
-  @keyframes sky-drift {
-    from {
-      transform: translate3d(-1.4%, 0, 0);
-    }
-    to {
-      transform: translate3d(1.4%, 0.3%, 0);
-    }
+  html:has([data-home]) {
+    scroll-behavior: smooth;
   }
 
-  /* Hero: open sky */
+  /* Hero: on desktop the painting sits behind the words; the books float over it */
   .hero-sky {
-    position: relative;
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    padding-top: calc(var(--header-h) + clamp(2.5rem, 6vh, 5rem));
-    padding-bottom: clamp(4.5rem, 10vh, 7rem);
+    animation: hero-sky 2.4s cubic-bezier(0.2, 0.6, 0.2, 1) both;
   }
-  .hero-sky::before {
-    /* a soft morning light behind the words, so ink reads over the clouds */
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 72% at 26% 52%, rgb(246 241 231 / 0.62), transparent 76%),
-      linear-gradient(to bottom, rgb(246 241 231 / 0.58), rgb(246 241 231 / 0.3) 26%, transparent 44%);
-    pointer-events: none;
-  }
-  .hero-grid {
-    position: relative;
-    display: grid;
-    gap: clamp(2.75rem, 6vw, 4.5rem);
-    align-items: center;
-  }
-  @media (min-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  @keyframes hero-sky {
+    from {
+      filter: brightness(0.6) saturate(0.8);
+      transform: scale(1.03);
+    }
+    to {
+      filter: none;
+      transform: none;
     }
   }
-  /* Phones and tablets: the copy runs the full width, so the morning light spreads across the screen behind it.
-     The caption under the books would sit on bright cloud; the price line already says the same. */
-  @media (max-width: 1023px) {
-    .hero-art figcaption {
-      display: none;
-    }
-    .hero-sky::before {
-      /* full-width light across the copy, fading out over the books: no box */
-      background: linear-gradient(to bottom, rgb(246 241 231 / 0.45), rgb(246 241 231 / 0.62) 22%, rgb(246 241 231 / 0.62) 62%, rgb(246 241 231 / 0) 92%);
-    }
-  }
-  .hero-copy .eyebrow {
-    color: var(--color-gold);
-    text-shadow: var(--halo);
-  }
-  .display-hero {
-    /* a full sentence now (what it is, for whom), so smaller than the old two-word headline */
-    font-size: clamp(1.85rem, 1.05rem + 2.2vw, 2.95rem);
-    line-height: 1.14;
-    letter-spacing: 0.02em;
-    color: var(--color-ivory);
-    text-shadow: var(--halo);
-  }
-  .hero-art {
-    max-width: min(34rem, 100%);
-    justify-self: center;
-    width: 100%;
+  .hero-books {
+    filter: drop-shadow(0 28px 40px rgb(0 0 0 / 0.45));
   }
   @media (max-width: 1023px) {
     .hero-art {
-      max-width: 24rem;
+      min-height: 15rem;
     }
   }
-  .hero-price {
-    font-family: var(--font-display);
-    font-size: 1.08rem;
-    letter-spacing: 0.04em;
-    color: var(--color-moon);
-    text-shadow: var(--halo);
+
+  /* Paperback card: the cover on a sheet of rice paper */
+  .paper-stage {
+    background:
+      radial-gradient(ellipse at 30% 20%, rgb(255 255 255 / 0.7), transparent 60%),
+      linear-gradient(160deg, #efe6d4, #e4d7bf);
   }
-  .hero-link {
-    font-size: 1.02rem;
-    text-shadow: var(--halo);
+  .ruled-light {
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 9px, rgb(184 146 95 / 0.4) 9px, rgb(184 146 95 / 0.4) 10px);
   }
-  .hero-trust {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem 1.1rem;
-    font-size: 0.92rem;
-    color: color-mix(in oklab, var(--color-ivory) 86%, transparent);
-    text-shadow: var(--halo);
-  }
-  .hero-trust li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .hero-trust li::before {
-    content: "";
-    width: 0.32rem;
-    height: 0.32rem;
+
+  /* Collection cards: a soft moon in each collection's colour above the name */
+  .coll-moon {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 4.25rem;
+    height: 4.25rem;
     border-radius: 50%;
-    background: var(--color-gold);
-    flex-shrink: 0;
-  }
-  .hero-offer {
-    font-size: 0.95rem;
-    color: var(--color-gold);
-    text-shadow: var(--halo);
-  }
-  html:has([data-journey]) {
-    scroll-behavior: smooth;
-  }
-  .anchor-sec {
-    scroll-margin-top: calc(var(--header-h) * 0.6);
+    transform: translateX(-50%);
+    background: radial-gradient(circle at 38% 36%, #f6f1e7, color-mix(in oklab, var(--accent) 35%, #ede6d8) 72%);
+    box-shadow:
+      0 0 26px 4px color-mix(in oklab, #ede6d8 35%, transparent),
+      0 0 80px 22px color-mix(in oklab, var(--accent) 55%, transparent);
   }
 
-  /* INDIGO formats: each row is one tap to that store */
-  .format-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: baseline;
-    gap: 0.2rem 1.5rem;
-    padding: 1rem 0.75rem;
-    margin-inline: -0.75rem;
-    border-top: 1px solid color-mix(in oklab, var(--color-gold) 15%, transparent);
-    color: inherit;
-    text-decoration: none;
-    transition: background-color 0.25s ease;
+  /* FAQ on the home page */
+  .home-qa > summary {
+    list-style: none;
+    line-height: 1.4;
   }
-  li:last-child > .format-row {
-    border-bottom: 1px solid color-mix(in oklab, var(--color-gold) 15%, transparent);
+  .home-qa > summary::-webkit-details-marker {
+    display: none;
   }
-  .format-row:hover,
-  .format-row:focus-visible {
-    background: rgb(246 241 231 / 0.55);
+  .home-qa[open] .qa-icon {
+    transform: rotate(45deg);
   }
 
-  /* See inside: four real pages */
-  .inside-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.25rem, 3vw, 2.25rem) clamp(1rem, 2.5vw, 2rem);
-  }
-  @media (min-width: 900px) {
-    .inside-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-  .inside-page,
-  .book-shot {
-    /* the picture alone, lifted off the sky by a soft shadow: no frame, no box behind it */
-    box-shadow: 0 22px 44px -22px rgb(27 37 71 / 0.6);
-  }
-
-  /* Phones: slim buy bar at the bottom, shown by site.js once the hero is gone */
+  /* Phones and tablets: slim "Get INDIGO" bar, shown by site.js once the hero is gone */
   .buy-bar {
     position: fixed;
     left: 0;
@@ -1104,27 +990,17 @@
     z-index: 40;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.65rem 16px calc(0.65rem + env(safe-area-inset-bottom, 0px));
-    font-size: 0.98rem;
-    background: rgb(246 241 231 / 0.94);
-    transform: translateY(calc(100% + 1.5rem));
+    gap: 0.75rem;
+    padding: 0.7rem 16px calc(0.7rem + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in oklab, var(--color-night) 95%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid color-mix(in oklab, var(--color-gold) 15%, transparent);
+    transform: translateY(calc(100% + 1rem));
     visibility: hidden;
     transition:
       transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1),
       visibility 0s linear 0.35s;
-  }
-  .buy-bar::before {
-    /* no hard top edge: the bar fades up into the page */
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 100%;
-    height: 1.5rem;
-    background: linear-gradient(to top, rgb(246 241 231 / 0.94), transparent);
-    pointer-events: none;
   }
   .buy-bar.is-shown {
     transform: none;
@@ -1133,181 +1009,42 @@
       transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1),
       visibility 0s;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .buy-bar {
       display: none;
     }
   }
-
-  /* the moon from the INDIGO cover, beside Our Story: cut out of its night sky with a soft warm glow
-     (indigo-moon-soft.webp, transparent), so it sits in the morning sky like a pale daytime moon */
-  .story-moon {
-    max-width: 20rem;
-    margin-top: 0.25rem;
-    margin-left: -2rem;
+  .site-shell:has([data-home]) .site-footer {
+    padding-bottom: 5.5rem;
   }
-  .hero-art figcaption {
-    text-shadow: var(--halo);
-  }
-  .scroll-cue {
-    position: absolute;
-    left: 50%;
-    bottom: 1.4rem;
-    width: 1px;
-    height: 3.25rem;
-    background: linear-gradient(to bottom, transparent, color-mix(in oklab, var(--color-gold) 80%, transparent));
-    transform-origin: top;
-    animation: cue 3.2s ease-in-out infinite;
-  }
-  @keyframes cue {
-    0%,
-    100% {
-      transform: scaleY(0.35);
-      opacity: 0.35;
-    }
-    50% {
-      transform: scaleY(1);
-      opacity: 0.9;
+  @media (min-width: 1024px) {
+    .site-shell:has([data-home]) .site-footer {
+      padding-bottom: 0;
     }
   }
+}
 
-  /* Sections between the open moments: room for the sky to show */
-  .journey-sec {
-    position: relative;
-    padding-block: clamp(5rem, 16vh, 11rem);
-  }
-  .journey-sec-tight {
-    padding-block: clamp(2.5rem, 7vh, 4.5rem);
-  }
-
-  /* Reading sections: no box behind them (Bank, 25 Oct). A morning haze lightens the sky instead
-     (.sky::after), and a soft light halo keeps every line clear. */
-  .page-k {
-    position: relative;
-    padding-block: clamp(1rem, 0.5rem + 2vw, 2.5rem);
-    text-shadow: var(--halo);
-  }
-  .display-quote {
-    font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.2rem);
-    line-height: 1.15;
-  }
-
-  /* Horizon: open sky over the bright line where sky meets water. Ink on light. */
-  .horizon-sec {
-    position: relative;
-    min-height: 92svh;
-    display: flex;
-    align-items: center;
-    padding-block: 6rem;
-  }
-  .horizon-copy {
-    position: relative;
-    color: var(--color-ink);
-    text-shadow:
-      0 0 18px rgb(246 241 231 / 0.55),
-      0 0 2px rgb(246 241 231 / 0.4);
-  }
-  .horizon-copy .eyebrow {
-    color: var(--color-ink);
-    font-size: 0.82rem;
-    font-weight: 600;
-  }
-  .horizon-copy h2 {
-    color: var(--color-ink);
-  }
-
-  /* Closing: sunlit water below the horizon; only the last few rem fade into the dark footer */
-  .closing-sea {
-    position: relative;
-    padding-block: clamp(6rem, 18vh, 12rem) clamp(6rem, 13vh, 9rem);
-  }
-  .closing-sea::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    inset: 0 0 -2px; /* cover the last pixel row too, so no line of sky shows above the footer */
-    background: linear-gradient(to bottom, transparent calc(100% - 5rem), var(--color-night) calc(100% - 2px));
-    pointer-events: none;
-  }
-  .closing-copy {
-    position: relative;
-    text-shadow: var(--halo);
-  }
-
-  /* Header floats over the sky on the home page until you scroll */
-  .site-shell:has([data-journey]) .site-header:not(.is-scrolled):not(:has(.mobile-menu.is-open)) {
-    background: linear-gradient(to bottom, rgb(246 241 231 / 0.65), rgb(246 241 231 / 0)) border-box no-repeat;
-    border-bottom-color: transparent;
-  }
-  .site-shell:has([data-journey]) .site-header {
-    transition:
-      background-color 0.4s ease,
-      border-color 0.4s ease;
-  }
-  .site-shell:has([data-journey]) .site-header.is-scrolled {
-    background: color-mix(in oklab, var(--color-night) 90%, transparent);
-    border-bottom-color: transparent;
-  }
-  .site-shell:has([data-journey]) .site-header.is-scrolled:not(:has(.mobile-menu.is-open)) {
-    background: rgb(246 241 231 / 0.86);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-  }
-  .site-shell:has([data-journey]) .site-header.is-scrolled::after {
-    /* no hard line under the header: it fades into the sky */
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(100% + 1px); /* start below the (transparent) 1px border, not on it */
-    height: 2.5rem;
-    background: linear-gradient(to bottom, rgb(246 241 231 / 0.86), transparent);
-    pointer-events: none;
-  }
-  .site-shell:has([data-journey]) .site-header.is-scrolled:has(.mobile-menu.is-open)::after {
-    display: none;
-  }
-  .site-shell:has([data-journey]) footer {
-    border-top-color: transparent !important; /* beats the footer's border utility class */
-  }
-
-  /* Gentle reveals, only once site.js is running (content never stays hidden without it).
-     The words fade up; the mist behind them stays put, so its blur never pops in. */
-  .reveal-ready .reveal > * {
-    opacity: 0;
-    transform: translate3d(0, 22px, 0);
-    transition:
-      opacity 1s cubic-bezier(0.2, 0.6, 0.2, 1),
-      transform 1s cubic-bezier(0.2, 0.6, 0.2, 1);
-  }
-  .reveal-ready .reveal > *:nth-child(2) {
-    transition-delay: 0.12s;
-  }
-  .reveal-ready .reveal > *:nth-child(n + 3) {
-    transition-delay: 0.22s;
-  }
-  .reveal-ready .reveal.is-in > * {
-    opacity: 1;
-    transform: none;
+/* Thai: wide letter-spacing breaks Thai words and tone marks. Unlayered, so it beats the tracking utilities. */
+[data-site-lang="th"] .home [class*="tracking-"],
+[data-site-lang="th"] .site-header [class*="tracking-"],
+[data-site-lang="th"] .site-footer [class*="tracking-"] {
+  letter-spacing: 0.02em;
+}
+[data-site-lang="th"] :is(.nav-link, .eyebrow, .btn, .mobile-link, .chip, .lang-switch) {
+  letter-spacing: 0.04em;
+}
+@media (max-width: 639px) {
+  .btn-lg {
+    padding-inline: 1.25rem;
+    letter-spacing: 0.1em;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* No drifting, no tilting (site.js keeps the sky still), no reveals. Text that relies on a
-     particular part of the painting reads over a steady haze instead. */
-  .sky-clouds,
-  .scroll-cue {
+  .hero-sky {
     animation: none !important;
   }
-  .scroll-cue {
-    display: none;
-  }
-  .reveal-ready .reveal > * {
-    opacity: 1;
-    transform: none;
-  }
-  /* the sky stays at the top of the bright band, with a steady morning haze so every section reads */
-  .sky::after {
-    opacity: 0.6 !important;
+  html:has([data-home]) {
+    scroll-behavior: auto;
   }
 }

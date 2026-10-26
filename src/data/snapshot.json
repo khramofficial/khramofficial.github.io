@@ -9,7 +9,7 @@
    "theme": "Shadow work",
    "summary": "Meet the feelings you hide and the patterns you keep repeating, one question a night.",
    "description": [
-    "INDIGO is the first Khram journal, and the dye the studio is named after.",
+    "INDIGO is the first Khram journal.",
     "Three Acts move from noticing, to understanding, to growing: The Deep Night, The Still Water and The First Light. Every prompt page is followed by a full page to write on."
    ],
    "art": "A full moon over a still lake, with one pale-blue butterfly.",
@@ -18,7 +18,7 @@
    "status": "available",
    "status_note": "Available now",
    "swatch": {
-    "alt": "Cotton cloth dyed deep indigo, darker where the dye pooled.",
+    "alt": "Deep indigo texture, darker in places.",
     "src": "/images/swatches/indigo.webp",
     "width": 900,
     "height": 1125
@@ -32,13 +32,13 @@
      "summary": "ทำความรู้จักความรู้สึกที่ซ่อนไว้ และรูปแบบเดิมๆ ที่เราทำซ้ำ คืนละหนึ่งคำถาม",
      "statusNote": "พร้อมขาย",
      "description": [
-      "INDIGO คือสมุดเล่มแรกของ Khram และเป็นสีย้อมที่สตูดิโอใช้ตั้งชื่อ",
+      "INDIGO คือสมุดเล่มแรกของ Khram",
       "สามองก์พาจากการสังเกต ไปสู่การเข้าใจ แล้วค่อยๆ เติบโต: The Deep Night, The Still Water และ The First Light ทุกหน้าคำถามมีหน้าว่างให้เขียนตามมาอีกหนึ่งหน้า"
      ]
     }
    },
    "sort": 1,
-   "updated_at": "2026-10-21T11:35:58.75357+00:00"
+   "updated_at": "2026-10-24T21:31:21.343953+00:00"
   },
   {
    "slug": "crimson",
@@ -58,7 +58,7 @@
    "status": "in-progress",
    "status_note": "In the making",
    "swatch": {
-    "alt": "Cotton cloth dyed lac red, uneven where the dye soaked in.",
+    "alt": "Deep crimson texture, uneven in places.",
     "src": "/images/swatches/crimson.webp",
     "width": 900,
     "height": 1125
@@ -78,7 +78,7 @@
     }
    },
    "sort": 2,
-   "updated_at": "2026-10-21T11:35:58.75357+00:00"
+   "updated_at": "2026-10-24T21:31:56.526156+00:00"
   },
   {
    "slug": "saffron",
@@ -98,7 +98,7 @@
    "status": "planned",
    "status_note": "Planned",
    "swatch": {
-    "alt": "Cotton cloth dyed a warm saffron yellow with jackfruit heartwood.",
+    "alt": "Warm saffron-yellow texture.",
     "src": "/images/swatches/saffron.webp",
     "width": 900,
     "height": 1125
@@ -118,7 +118,7 @@
     }
    },
    "sort": 3,
-   "updated_at": "2026-10-21T11:35:58.75357+00:00"
+   "updated_at": "2026-10-24T21:32:18.480084+00:00"
   },
   {
    "slug": "ebony",
@@ -138,7 +138,7 @@
    "status": "planned",
    "status_note": "Planned",
    "swatch": {
-    "alt": "Cotton cloth dyed near-black with ebony fruit, with faint brown tones.",
+    "alt": "Near-black ebony texture with faint brown tones.",
     "src": "/images/swatches/ebony.webp",
     "width": 900,
     "height": 1125
@@ -158,7 +158,7 @@
     }
    },
    "sort": 4,
-   "updated_at": "2026-10-21T11:35:58.75357+00:00"
+   "updated_at": "2026-10-24T21:32:36.229144+00:00"
   }
  ],
  "products": [
@@ -1055,14 +1055,14 @@
    "sample_prompts": null,
    "faq": null,
    "cover": {
-    "alt": "Cotton cloth dyed lac red. CRIMSON artwork is still being made.",
+    "alt": "Deep crimson texture. CRIMSON artwork is still being made.",
     "src": "/images/swatches/crimson.webp",
     "width": 900,
     "height": 1125
    },
    "gallery": [
     {
-     "alt": "Cotton cloth dyed lac red. CRIMSON artwork is still being made.",
+     "alt": "Deep crimson texture. CRIMSON artwork is still being made.",
      "src": "/images/swatches/crimson.webp",
      "width": 900,
      "height": 1125
@@ -1071,6 +1071,7 @@
    "og_image": "/images/og/crimson.jpg",
    "i18n": {
     "th": {
+     "faq": null,
      "notes": [
       "กำลังเขียนและออกแบบ",
       "ติดตาม Khram บน Amazon หรือ TikTok เพื่อรู้ตอนออก"
@@ -1094,6 +1095,7 @@
       }
      ],
      "format": "เวิร์กบุ๊ก",
+     "outline": null,
      "summary": "คำอธิบาย เครื่องมือ และคำถาม สำหรับแรงดึงที่อยากเช็คตลอด ความกลัวถูกทิ้ง และการหัดทำใจให้นิ่ง",
      "ctaLabel": "ยังไม่วางขาย",
      "included": [
@@ -1103,6 +1105,7 @@
       "ตารางด้าย 30 คืน"
      ],
      "subtitle": "เวิร์กบุ๊กสำหรับความผูกพันแบบกังวล",
+     "howItWorks": null,
      "priceLabel": "ยังไม่กำหนดราคา",
      "description": [
       "CRIMSON เป็นทั้งเวิร์กบุ๊กและสมุดบันทึก แต่ละส่วนอธิบายด้วยภาษาง่ายๆ ว่าความผูกพันแบบกังวลมักทำงานยังไง ให้เครื่องมือไว้ลองใช้ แล้วตามด้วยคำถามให้เขียน",
@@ -1114,7 +1117,7 @@
    "published": true,
    "sort": 5,
    "created_at": "2026-10-21T11:35:59.42876+00:00",
-   "updated_at": "2026-10-21T11:35:59.42876+00:00"
+   "updated_at": "2026-10-24T21:33:09.395474+00:00"
   }
  ],
  "settings": {
@@ -1125,5 +1128,5 @@
   "amazonAuthor": "https://www.amazon.com/stores/Khram/author/B0HNP4N18N",
   "gumroadStore": "https://khramofficial.gumroad.com"
  },
- "fetchedAt": "2026-10-21T13:36:19.841Z"
+ "fetchedAt": "2026-10-26T21:10:29.620Z"
 }

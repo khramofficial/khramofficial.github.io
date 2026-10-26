@@ -1,29 +1,33 @@
-import { BuyBar, CollectionsPreview, FeaturedJournal, FreeStart } from "@/components/home/HomeLive";
-import { Closing, Hero, Horizon, Inside, Philosophy, SkyJourney, Story, WhoFor } from "@/components/home/HomeStatic";
+import { BuyBar, Collections, FinalCta, Formats, FreeSample } from "@/components/home/HomeLive";
+import { Believe, Faq, FromThePages, Hero, Pain, Platforms, Product, ProofStrip, WhyKhram } from "@/components/home/HomeStatic";
+import { buildCatalog, findProduct } from "@/lib/catalog";
 import type { Lang } from "@/lib/types";
 
 /**
- * One continuous journey down the painting, ordered to sell: hero (what it is, price, one button) → INDIGO buy block →
- * real inside pages → who it's for → why Khram → our story → horizon (collections intro) → collections → 7 Nights free → close.
- * The phone buy bar sits outside the journey because .journey clips everything fixed inside it.
+ * Home, laid out like Bank's UX Pilot design (27 Oct 2026).
+ * Desktop: hero → platforms → who it's for → why Khram → INDIGO (numbers, inside, Acts) → formats → from the pages
+ *          → collections → 7 Nights free → FAQ → tonight's question.
+ * Phones:  hero → proof strip → who it's for → INDIGO → formats → from the pages → what Khram believes → 7 Nights free
+ *          → FAQ → tonight's question, with a slim buy bar. Sections that only exist on one layout hide themselves.
  */
 export function HomeView({ lang }: { lang: Lang }) {
+  const subtitle = findProduct(buildCatalog, "indigo-digital", lang)?.subtitle ?? "A Shadow Work & Emotional Healing Journal";
   return (
-    <>
-      <div className="journey" data-journey>
-        <SkyJourney />
-        <Hero lang={lang} />
-        <FeaturedJournal lang={lang} />
-        <Inside lang={lang} />
-        <WhoFor lang={lang} />
-        <Philosophy lang={lang} />
-        <Story lang={lang} />
-        <Horizon lang={lang} />
-        <CollectionsPreview lang={lang} />
-        <FreeStart lang={lang} />
-        <Closing lang={lang} />
-      </div>
+    <div className="home" data-home>
+      <Hero lang={lang} />
+      <ProofStrip lang={lang} />
+      <Platforms lang={lang} />
+      <Pain lang={lang} />
+      <WhyKhram lang={lang} />
+      <Product lang={lang} subtitle={subtitle} />
+      <Formats lang={lang} />
+      <FromThePages lang={lang} />
+      <Believe lang={lang} />
+      <Collections lang={lang} />
+      <FreeSample lang={lang} />
+      <Faq lang={lang} />
+      <FinalCta lang={lang} />
       <BuyBar lang={lang} />
-    </>
+    </div>
   );
 }

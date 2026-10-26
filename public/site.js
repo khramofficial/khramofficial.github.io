@@ -1,4 +1,4 @@
-/* Khram site behaviour: mobile menu, product galleries, copy button, anonymous visit counter.
+/* Khram site behaviour: mobile menu, product galleries, copy button, anonymous visit counter, home buy bar.
    Plain JavaScript on purpose: every page works without it, this only adds comfort. */
 (function () {
   "use strict";
@@ -31,8 +31,24 @@
       b.focus();
     }
   });
-  window.matchMedia("(min-width: 768px)").addEventListener("change", function (mq) {
+  window.matchMedia("(min-width: 1024px)").addEventListener("change", function (mq) {
     if (mq.matches) setMenu(false);
+  });
+
+  /* ---------- shop dropdown: close on outside click, Escape, or after choosing ---------- */
+  doc.addEventListener("click", function (e) {
+    var open = doc.querySelectorAll("[data-shop-menu][open]");
+    open.forEach(function (d) {
+      if (!d.contains(e.target) || (e.target.closest && e.target.closest(".shop-panel a"))) d.removeAttribute("open");
+    });
+  });
+  doc.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    doc.querySelectorAll("[data-shop-menu][open]").forEach(function (d) {
+      d.removeAttribute("open");
+      var s = d.querySelector("summary");
+      if (s) s.focus();
+    });
   });
 
   /* ---------- product galleries ---------- */
@@ -202,158 +218,14 @@
   );
 })();
 
-/* Home page: the journey over the painting (light theme, 25 Oct 2026).
-   - The camera only travels through the bright band of the painting (dawn clouds → horizon → sunlit water,
-     BAND_TOP..BAND_BOTTOM of the column). The column is zoomed (--sky-zoom) so the band is taller than the
-     screen. Each section says where in that band it belongs (data-sky-stop, 0 = top of the band, 1 = bottom);
-     between sections the painting moves evenly, so every section meets the same sky on any screen size.
-   - A light morning haze rises while a reading section (.page-k, closing) is on screen and clears again
-     between them (--sky-dim on .sky), so ink text never needs a box behind it.
-   - Header turns solid once you leave the top. Sections fade up gently as they arrive.
-   Reduced motion: the painting stays still and nothing animates. */
-(function () {
-  "use strict";
-  var doc = document;
-  var col = doc.querySelector("[data-sky-col]");
-  var sky = doc.querySelector(".sky");
-  var panels = [];
-  var header = doc.querySelector(".site-header");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var stops = [];
-  var BAND_TOP = 0.27; /* bright part of the painting, as a share of the column height */
-  var BAND_BOTTOM = 0.64;
-  var ROOM = 1.25; /* the band is zoomed to at least 1.25 screens tall, so there is a little to travel */
-  var camFrom = 0;
-  var camTo = 0;
-  var ticking = false;
-
-  function measure() {
-    if (!col) return;
-    var vh = window.innerHeight;
-    col.style.setProperty("--sky-zoom", "1");
-    var h0 = col.offsetHeight || 1;
-    var zoom = Math.max(1, (vh * ROOM) / ((BAND_BOTTOM - BAND_TOP) * h0));
-    col.style.setProperty("--sky-zoom", zoom.toFixed(3));
-    var h = h0 * zoom;
-    camFrom = BAND_TOP * h;
-    camTo = Math.max(camFrom, BAND_BOTTOM * h - vh);
-    var maxScroll = Math.max(1, doc.documentElement.scrollHeight - vh);
-    panels = Array.prototype.slice.call(doc.querySelectorAll("[data-journey] .page-k, [data-journey] .closing-copy"));
-    var list = [];
-    doc.querySelectorAll("[data-sky-stop]").forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      var top = r.top + window.scrollY;
-      var at = Math.min(maxScroll, Math.max(0, top + r.height / 2 - vh / 2));
-      if (el.getAttribute("data-sky-stop") === "0") at = 0;
-      list.push([at, parseFloat(el.getAttribute("data-sky-stop")) || 0]);
-    });
-    list.sort(function (a, b) {
-      return a[0] - b[0];
-    });
-    stops = [];
-    list.forEach(function (s) {
-      var last = stops[stops.length - 1];
-      if (last && s[0] <= last[0] + 1) {
-        last[1] = Math.max(last[1], s[1]);
-        return;
-      }
-      if (last && s[1] < last[1]) s[1] = last[1];
-      stops.push(s);
-    });
-  }
-
-  function progress(y) {
-    if (!stops.length) return 0;
-    if (y <= stops[0][0]) return stops[0][1];
-    for (var i = 1; i < stops.length; i++) {
-      if (y <= stops[i][0]) {
-        var a = stops[i - 1];
-        var b = stops[i];
-        return a[1] + ((b[1] - a[1]) * (y - a[0])) / (b[0] - a[0]);
-      }
-    }
-    return stops[stops.length - 1][1];
-  }
-
-  function update() {
-    ticking = false;
-    var y = window.scrollY;
-    if (header) header.classList.toggle("is-scrolled", y > 40);
-    if (!col) return;
-    var p = reduce.matches ? 0 : progress(y);
-    col.style.setProperty("--sky-y", (-(camFrom + p * (camTo - camFrom))).toFixed(1) + "px");
-    if (sky) sky.style.setProperty("--sky-dim", dimFor(window.innerHeight).toFixed(3));
-  }
-
-  /* How much of the screen a reading section fills: 0 = none, 1 = a third or more of what it could (drives the haze). */
-  function dimFor(vh) {
-    var cover = 0;
-    for (var i = 0; i < panels.length; i++) {
-      var r = panels[i].getBoundingClientRect();
-      var seen = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-      if (seen > 0) cover = Math.max(cover, seen / Math.min(vh, r.height || 1));
-    }
-    var t = Math.min(1, cover / 0.35);
-    return t * t * (3 - 2 * t);
-  }
-
-  function onScroll() {
-    if (!ticking) {
-      ticking = true;
-      window.requestAnimationFrame(update);
-    }
-  }
-
-  function refresh() {
-    measure();
-    update();
-  }
-
-  if (col) {
-    refresh();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", refresh);
-    window.addEventListener("load", refresh);
-    if (reduce.addEventListener) reduce.addEventListener("change", refresh);
-    if ("ResizeObserver" in window) {
-      var journey = doc.querySelector("[data-journey]");
-      if (journey) new ResizeObserver(refresh).observe(journey);
-    }
-  } else if (header) {
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
-
-  /* gentle reveals */
-  var items = doc.querySelectorAll(".reveal");
-  if (items.length && "IntersectionObserver" in window && !reduce.matches) {
-    doc.documentElement.classList.add("reveal-ready");
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-in");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
-    );
-    items.forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight) el.classList.add("is-in");
-      io.observe(el);
-    });
-  }
-})();
-
-/* Home page, phones: the slim "Get INDIGO" bar. It shows once the hero has scrolled away and hides
-   again while the INDIGO buy block, the closing or the footer is on screen, or the menu is open. */
+/* Home page, phones and tablets: the slim "Get INDIGO" bar. It shows once the hero has scrolled away and hides
+   again while the formats (where it would point) or the footer is on screen, or while the menu is open. */
 (function () {
   "use strict";
   var doc = document;
   var bar = doc.querySelector("[data-buy-bar]");
   if (!bar || !("IntersectionObserver" in window)) return;
-  var watched = [doc.querySelector(".hero-sky"), doc.getElementById("indigo"), doc.querySelector(".closing-sea"), doc.querySelector("footer")].filter(Boolean);
+  var watched = [doc.getElementById("hero"), doc.getElementById("formats"), doc.querySelector("footer")].filter(Boolean);
   var onScreen = new Set();
   function update() {
     var menuOpen = !!doc.querySelector(".mobile-menu.is-open");

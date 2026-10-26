@@ -5,7 +5,7 @@ import { SITE_ORIGIN, supabaseConfig } from "@/lib/config";
 import "./globals.css";
 
 const FONTS =
-  "https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600&family=Noto+Serif+Thai:wght@400;500;600&display=swap";
+  "https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600&family=Cinzel+Decorative&family=Noto+Serif+Thai:wght@400;500;600&display=swap";
 
 const t = ui("en");
 

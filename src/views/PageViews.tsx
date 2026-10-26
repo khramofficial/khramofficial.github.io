@@ -138,8 +138,8 @@ export function FaqView({ lang }: { lang: Lang }) {
       </PageIntro>
       <section className="section">
         <Container className="grid gap-16 lg:grid-cols-[minmax(0,0.35fr)_minmax(0,1fr)] lg:gap-20">
-          <nav aria-label={t.topics} className="hidden lg:block">
-            <ul className="sticky top-[calc(var(--header-h)+2rem)] flex flex-col gap-3" role="list">
+          <nav aria-label={t.topics}>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:flex-col lg:gap-3" role="list">
               {groups.map((g) => (
                 <li key={g.id}>
                   <a href={`#${g.id}`} className="nav-link">

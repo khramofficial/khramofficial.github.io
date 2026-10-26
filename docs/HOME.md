@@ -6,7 +6,7 @@ use Khram's real data, and blend the old look with the new one.
 ## Where things are
 - `src/views/HomeView.tsx`: section order (same on every screen). Desktop layout = 1024px (`lg`) and up.
 - `src/components/home/HomeStatic.tsx`: hero, who it's for, Why Khram, INDIGO (numbers, inside pages, Acts), From the pages, FAQ.
-- `src/components/home/HomeLive.tsx`: parts that read the live catalog: hero buttons (lowest price), store bar + phone store strip (logos Bank supplied, `public/images/stores/`), formats (PDF + paperbacks, phone toggle), collections, 7 Nights, tonight's question, phone buy bar, FIRSTLIGHT line (`OFFER_END`, delete after 30 Oct 2026).
+- `src/components/home/HomeLive.tsx`: parts that read the live catalog: hero buttons (lowest price), store bar + phone store strip (logos Bank supplied, `public/images/stores/`), formats (PDF + paperbacks), collections, 7 Nights, tonight's question, phone buy bar, FIRSTLIGHT line (`OFFER_END`, delete after 30 Oct 2026).
 - `src/i18n/home.ts`: all home text, EN + TH.
 - Header (`Header.tsx`): on the home page the desktop menu jumps to #product, #inside, #collections, #story, #faq and the
   announcement line sits above it; other pages keep the page menu. "Get INDIGO" always goes to the formats (`/#formats`).
@@ -14,8 +14,11 @@ use Khram's real data, and blend the old look with the new one.
 
 ## Phones = same content as desktop (Bank, 27 Oct 05:36: "always")
 Every section, line and link on the desktop home is on the phone home too. Only the layout differs: stacked
-columns, swipe rows (who it's for, inside pages, from the pages, collections), the PDF / Paperback toggle, the
-store strip under the hero instead of the store bar, and the slim buy bar. When the desktop text changes, the
+columns (both format cards one under the other), swipe rows (who it's for, inside pages, from the pages,
+collections), the "Made by Khram" strip under the hero (desktop has it inside the hero), and the slim buy bar.
+Our Story, the FAQ answer "What does Khram mean?" and the emotional-healing-journal guide use the same words as
+the home "Why Khram" (Bank's own text, 27 Oct). Check: a script compared the visible text of all 39 pages at
+1440 px and 390 px (EN + TH) on 27 Oct: identical. When the desktop text changes, the
 phone shows the same text automatically (one string per line in `src/i18n/home.ts`, no phone-only versions).
 
 ## Real data rules (do not break)

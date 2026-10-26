@@ -963,22 +963,6 @@
   .store-link:hover .store-wordmark {
     opacity: 0.85;
   }
-  .store-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    min-height: 2.25rem;
-    padding: 0.3rem 0.7rem;
-    font-size: 0.8rem;
-    color: color-mix(in oklab, var(--color-ivory) 85%, transparent);
-    border: 1px solid color-mix(in oklab, var(--color-gold) 25%, transparent);
-    border-radius: 999px;
-    text-decoration: none;
-  }
-  .store-chip:hover {
-    border-color: var(--color-moon);
-    color: var(--color-moon);
-  }
 
   /* Paperback card: the cover on a sheet of rice paper */
   .paper-stage {

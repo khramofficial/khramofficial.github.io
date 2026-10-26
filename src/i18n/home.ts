@@ -94,7 +94,6 @@ const en = {
     eyebrow: "Choose your format",
     h2: ["Same prompts. ", "Two ways to write."],
     p: "Checkout happens on Gumroad or Amazon. It's secure and takes about a minute.",
-    tabs: { pdf: "Digital PDF", paper: "Paperback" },
     pdf: {
       badge: "Instant download",
       via: "via Gumroad",
@@ -285,7 +284,6 @@ const th: HomeDict = {
     eyebrow: "เลือกรูปแบบ",
     h2: ["คำถามเดียวกัน ", "เขียนได้สองแบบ"],
     p: "ชำระเงินบน Gumroad หรือ Amazon ปลอดภัย ใช้เวลาประมาณหนึ่งนาที",
-    tabs: { pdf: "PDF ดิจิทัล", paper: "เล่มกระดาษ" },
     pdf: {
       badge: "ดาวน์โหลดได้ทันที",
       via: "ผ่าน Gumroad",

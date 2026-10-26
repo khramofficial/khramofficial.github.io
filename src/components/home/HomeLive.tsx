@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useState, useSyncExternalStore } from "react";
+import { type CSSProperties, useSyncExternalStore } from "react";
 import { ExternalMark } from "@/components/ui/Button";
 import { homeText } from "@/i18n/home";
 import { ui } from "@/i18n/ui";
@@ -102,25 +102,25 @@ function useStores(lang: Lang) {
   return list.filter((s) => s.url);
 }
 
-/** Desktop: where checkout happens, with a link straight to each store. */
+/** Where checkout happens, with a link straight to each store. One row on desktop, stacked on phones. */
 export function Platforms({ lang }: { lang: Lang }) {
   const t = homeText(lang).platforms;
   const nt = ui(lang).newTab;
   const stores = useStores(lang);
   return (
-    <section aria-label={t.label} className="hidden border-y border-gold/10 bg-navy/60 lg:block">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-8 py-5 text-[0.95rem] text-ivory/70">
+    <section aria-label={t.label} className="mt-10 border-y border-gold/10 bg-navy/60 lg:mt-0">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-6 text-[0.95rem] text-ivory/70 sm:px-8 lg:flex-row lg:gap-5 lg:py-5">
         <span className="eyebrow text-[0.7rem] text-gold">{t.label}</span>
-        <ul className="flex items-center gap-10" role="list">
+        <ul className="flex items-center gap-8 lg:gap-10" role="list">
           {stores.map((s) => (
             <li key={s.name}>
               <a href={s.url ?? "#"} data-track={s.track} title={s.label} className="store-link group" {...external}>
                 {s.wordmark ? (
-                  <img src={s.logo.src} alt={s.name} width={s.logo.w} height={s.logo.h} className="store-wordmark h-[2.25rem] w-auto" />
+                  <img src={s.logo.src} alt={s.name} width={s.logo.w} height={s.logo.h} className="store-wordmark h-[2rem] w-auto lg:h-[2.25rem]" />
                 ) : (
                   <>
-                    <img src={s.logo.src} alt="" width={s.logo.w} height={s.logo.h} className="h-11 w-11" />
-                    <span className="font-body text-[1.65rem] leading-none text-ivory/85 transition-colors group-hover:text-gold">{s.name}</span>
+                    <img src={s.logo.src} alt="" width={s.logo.w} height={s.logo.h} className="h-10 w-10 lg:h-11 lg:w-11" />
+                    <span className="font-body text-[1.5rem] leading-none text-ivory/85 transition-colors group-hover:text-gold lg:text-[1.65rem]">{s.name}</span>
                   </>
                 )}
                 <Icon name="external" className="h-3.5 w-3.5 text-ivory/40 transition-colors group-hover:text-gold" />
@@ -131,8 +131,8 @@ export function Platforms({ lang }: { lang: Lang }) {
             </li>
           ))}
         </ul>
-        <span className="flex items-center gap-2">
-          <Icon name="lock" className="h-3.5 w-3.5 text-moon" />
+        <span className="flex items-center gap-2 text-center">
+          <Icon name="lock" className="h-3.5 w-3.5 shrink-0 text-moon" />
           {t.note}
         </span>
       </div>
@@ -140,45 +140,26 @@ export function Platforms({ lang }: { lang: Lang }) {
   );
 }
 
-/** Phones: who makes it and where you buy, in one strip under the hero (desktop has this inside the hero and the store bar). */
+/** Phones: who makes it, under the hero (desktop shows the same line inside the hero). */
 export function ProofStrip({ lang }: { lang: Lang }) {
   const t = homeText(lang).hero;
-  const nt = ui(lang).newTab;
-  const stores = useStores(lang);
   return (
-    <div className="mx-5 flex flex-wrap items-center gap-x-3 gap-y-3 rounded-2xl border border-ivory/5 bg-navy/70 px-4 py-3.5 sm:mx-8 lg:hidden">
+    <div className="mx-5 mt-2 flex items-center gap-3 rounded-2xl border border-ivory/5 bg-navy/70 px-4 py-3.5 sm:mx-8 lg:hidden">
       <img src="/images/brand/khram-badge.webp" alt="" width={56} height={56} className="h-9 w-9 shrink-0 rounded-full" />
-      <div className="min-w-[10.5rem] flex-1 text-[0.8rem] leading-snug">
+      <div className="min-w-0 text-[0.85rem] leading-snug">
         <div className="font-display tracking-[0.12em] text-gold uppercase">{t.maker}</div>
         <div className="text-ivory/65">{t.makerSub}</div>
       </div>
-      <ul className="ml-auto flex shrink-0 items-center gap-2" role="list" aria-label={homeText(lang).platforms.label}>
-        {stores.map((s) => (
-          <li key={s.name}>
-            <a href={s.url ?? "#"} data-track={s.track} aria-label={`${s.label} ${nt}`} className="store-chip" {...external}>
-              {s.wordmark ? (
-                <img src={s.logo.src} alt={s.name} width={s.logo.w} height={s.logo.h} className="mt-1 h-[0.95rem] w-auto" />
-              ) : (
-                <>
-                  <img src={s.logo.src} alt="" width={s.logo.w} height={s.logo.h} className="h-5 w-5" />
-                  {s.name}
-                </>
-              )}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
 
-/** Choose your format: the PDF (Gumroad) and the paperbacks (Amazon). Side by side on desktop, a toggle on phones. */
+/** Choose your format: the PDF (Gumroad) and the paperbacks (Amazon). Side by side on desktop, stacked on phones. */
 export function Formats({ lang }: { lang: Lang }) {
   const t = homeText(lang);
   const f = t.formats;
   const nt = ui(lang).newTab;
   const { pdf, papers, pdfPrice, paperFrom } = useIndigo(lang);
-  const [tab, setTab] = useState<"pdf" | "paper">("pdf");
   const pdfUrl = buyUrl(pdf);
 
   return (
@@ -193,24 +174,9 @@ export function Formats({ lang }: { lang: Lang }) {
           <p className="mt-4 text-[1.02rem] text-ivory/70 lg:text-lg">{f.p}</p>
         </div>
 
-        <div className="mt-7 grid grid-cols-2 rounded-full border border-ivory/10 bg-night p-1 text-sm lg:hidden" role="group" aria-label={f.eyebrow}>
-          {(["pdf", "paper"] as const).map((k) => (
-            <button
-              key={k}
-              type="button"
-              onClick={() => setTab(k)}
-              aria-pressed={tab === k}
-              className={cn("flex items-center justify-center gap-2 rounded-full py-3 font-display text-[0.8rem] tracking-[0.08em] transition", tab === k ? "bg-moon text-night" : "text-ivory/70")}
-            >
-              <Icon name={k === "pdf" ? "tablet" : "book"} className="h-4 w-4" />
-              {f.tabs[k]}
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-5 grid gap-6 lg:mt-14 lg:grid-cols-2">
+        <div className="mt-10 grid gap-8 lg:mt-14 lg:grid-cols-2 lg:gap-6">
           {/* PDF: dark edition */}
-          <div id="format-pdf" data-product={pdf?.slug} className={cn("relative flex-col rounded-3xl border-2 border-moon/70 bg-gradient-to-b from-navy to-night p-5 sm:p-8 lg:bg-night", tab === "pdf" ? "flex" : "hidden", "lg:flex")}>
+          <div id="format-pdf" data-product={pdf?.slug} className="relative flex flex-col rounded-3xl border-2 border-moon/70 bg-night p-5 sm:p-8">
             <span className="absolute -top-3.5 left-6 rounded-full bg-moon px-3.5 py-1 font-display text-[11px] font-semibold tracking-[0.15em] text-night uppercase sm:left-8">{f.pdf.badge}</span>
             <div className="relative mt-2 overflow-hidden rounded-2xl bg-navy">
               <img src="/images/products/indigo-digital-hero.webp" alt={f.pdf.imgAlt} width={1280} height={720} loading="lazy" className="aspect-video h-auto w-full object-cover" />
@@ -249,7 +215,7 @@ export function Formats({ lang }: { lang: Lang }) {
           </div>
 
           {/* Paperback: rice paper */}
-          <div id="format-paper" className={cn("on-paper relative flex-col rounded-3xl p-5 sm:p-8", tab === "paper" ? "flex" : "hidden", "lg:flex")}>
+          <div id="format-paper" className="on-paper relative flex flex-col rounded-3xl p-5 sm:p-8">
             <span className="absolute -top-3.5 left-6 rounded-full bg-ink px-3.5 py-1 font-display text-[11px] font-semibold tracking-[0.15em] text-rice uppercase sm:left-8">{f.paper.badge}</span>
             <div className="paper-stage relative mt-2 flex aspect-video items-center justify-center overflow-hidden rounded-2xl">
               <img src="/images/products/indigo-paperback-cover.webp" alt={f.paper.imgAlt} width={1000} height={1499} loading="lazy" className="relative h-[86%] w-auto -rotate-3 rounded-[3px] shadow-[0_24px_40px_-18px_rgba(6,15,36,0.75)]" />

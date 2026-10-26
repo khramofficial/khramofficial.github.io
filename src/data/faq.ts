@@ -13,7 +13,7 @@ const en: FaqGroup[] = [
     items: [
       {
         q: "What does Khram mean?",
-        a: "Khram (คราม) is the person who makes these journals: someone who has gotten a lot wrong, more than once, and has lived through dark years, but who still has light inside and keeps walking toward it. It goes back to one sentence from a time they nearly died: \"I did the best I could.\" The full story is on the Our Story page.",
+        a: "Khram (คราม) is the person who makes these journals: an ordinary person who has gotten a lot wrong, who nearly died once, and who decided that this time they won't give up, so their last day isn't spent regretting never doing what they wanted to do. The line the brand keeps coming back to is \"I did the best I could.\" The full story is on the Our Story page.",
       },
       {
         q: "What is shadow work?",
@@ -63,7 +63,7 @@ const th: FaqGroup[] = [
     items: [
       {
         q: "คราม หมายถึงอะไร",
-        a: "ครามคือคนที่ทำสมุดเหล่านี้ คนที่ใช้ชีวิตผิดพลาดมาหลายครั้งหลายคราว เคยผ่านช่วงที่มืดมาจริงๆ แต่ข้างในยังมีแสง และยังเดินไปหาแสงนั้นอยู่ ชื่อนี้เริ่มจากประโยคเดียวตอนที่เกือบตาย: “กูทำดีที่สุดแล้ว” อ่านเรื่องเต็มได้ที่หน้าเรื่องของเรา",
+        a: "ครามคือคนที่ทำสมุดเหล่านี้ คนธรรมดาที่ผิดพลาดมาเยอะ เคยเกือบตาย และตัดสินใจว่าครั้งนี้จะไม่ยอมแพ้อีกแล้ว เพราะไม่อยากให้วันสุดท้ายต้องมานั่งเสียใจที่ไม่เคยได้ทำในสิ่งที่อยากทำ ประโยคที่แบรนด์กลับมาหาเสมอคือ “กูทำดีที่สุดแล้ว” อ่านเรื่องเต็มได้ที่หน้าเรื่องของเรา",
       },
       {
         q: "Shadow work คืออะไร",

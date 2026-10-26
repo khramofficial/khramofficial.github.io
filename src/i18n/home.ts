@@ -9,14 +9,12 @@ const en = {
   announce: { lead: "New to shadow work?", link: "Start with 7 Nights in INDIGO, free" },
   nav: { indigo: "INDIGO", inside: "Inside", collections: "Collections", story: "Our Story", faq: "FAQ" },
   hero: {
-    tag: "Shadow work journal · Available now",
     h1: ["For the nights your mind ", "won't stop."],
     lede: ["INDIGO is an art-led shadow work journal for people who feel deeply and think too much. ", "150+ honest prompts", " on overthinking, people-pleasing and the inner child, one question at a time."],
     small: "Ten minutes a night is enough.",
     primary: (price: string) => `Get INDIGO — from ${price}`,
     secondary: "Try 7 Nights free",
     trust: ["14-day money-back on the PDF", "Made for GoodNotes & Notability", "Paperback on Amazon"],
-    trustShort: ["14-day refund", "Instant PDF", "Amazon shipping"],
     quote: "“What have I been trying not to feel?”",
     maker: "Made by Khram",
     makerSub: "A small studio in Thailand",
@@ -86,7 +84,6 @@ const en = {
         alt: "Moon tracker page titled 30 Days of Reflection: thirty crescent moons in a grid and the line Even the darkest nights have moons.",
       },
     ],
-    overviewAlt: "Inside INDIGO: the 30 Days of Reflection moon tracker, The Feelings I Hide prompt page and A Letter to My Younger Self.",
   },
   acts: [
     { n: "I", title: "The Deep Night", text: "Notice what you hide: the feelings, fears and patterns you keep in the dark." },
@@ -127,8 +124,6 @@ const en = {
     guarantee: {
       days: "days",
       h: "Write for two weeks. If it isn't for you, get every cent back.",
-      hShort: "Not for you? Get every cent back.",
-      pShort: "Full refund on the PDF within 14 days. Paperbacks follow Amazon's return policy.",
       p: "Reply to your Gumroad receipt within 14 days of buying the PDF for a full refund. Paperbacks follow Amazon's return policy.",
     },
   },
@@ -144,13 +139,6 @@ const en = {
     ],
     source: "From INDIGO",
   },
-  believe: {
-    eyebrow: "What Khram believes",
-    h2: ["You don't have to be healed ", "to begin."],
-    p: "You did what you could with what you had. You still get to choose what comes next.",
-    steps: ["The dark was real.", "So is the light.", "Still walking."],
-    link: "Read our story",
-  },
   collections: {
     eyebrow: "The collections",
     h2: "A journal for each kind of night",
@@ -160,7 +148,6 @@ const en = {
   },
   free: {
     eyebrow: "Free · Not ready for 121 pages?",
-    eyebrowShort: "Free mini-journal",
     h2: ["Start with ", "7\u00a0Nights in INDIGO"],
     p: "A free mini-journal: seven nights, fourteen questions, no right answers. Each night opens with one small grounding step, then two prompts and a page to write on.",
     cta: "Get 7 Nights free",
@@ -195,10 +182,8 @@ const en = {
     eyebrow: "Tonight's question",
     quote: "“What have I been trying not to feel?”",
     p: "Ten minutes is enough. Write one answer, then close the book. Again tomorrow.",
-    pShort: "Ten minutes is enough. Again tomorrow.",
     pdf: (price: string) => `Get the PDF · ${price}`,
     paper: "Paperback on Amazon",
-    mobile: "Begin INDIGO tonight",
     guarantee: "14-day money-back guarantee on the PDF",
   },
   buyBar: { name: "INDIGO", sub: (price: string) => `from ${price} · 14-day refund`, cta: "Get INDIGO" },
@@ -211,7 +196,6 @@ const th: HomeDict = {
   announce: { lead: "เพิ่งเริ่มทำ shadow work?", link: "เริ่มจาก 7 Nights in INDIGO ฟรี" },
   nav: { indigo: "INDIGO", inside: "ข้างในเล่ม", collections: "คอลเลกชัน", story: "เรื่องของเรา", faq: "คำถาม" },
   hero: {
-    tag: "สมุดบันทึกสำรวจใจ · พร้อมขาย",
     h1: ["สำหรับคืนที่ความ\u2060คิด", "ไม่ยอมหยุด"],
     lede: [
       "INDIGO คือสมุดบันทึกสำรวจใจ (shadow work) มี",
@@ -222,7 +206,6 @@ const th: HomeDict = {
     primary: (price: string) => `ซื้อ INDIGO — เริ่มต้น ${price}`,
     secondary: "ลอง 7 Nights ฟรี",
     trust: ["PDF ขอคืนเงินได้ใน 14 วัน", "ใช้กับ GoodNotes และ Notability ได้", "เล่มกระดาษขายบน Amazon"],
-    trustShort: ["คืนเงินได้ 14 วัน", "PDF ได้ทันที", "Amazon จัดส่ง"],
     quote: "“ฉันพยายามหลบความรู้สึกอะไรอยู่”",
     maker: "ทำโดย Khram",
     makerSub: "สตูดิโอเล็กๆ ในประเทศไทย",
@@ -292,7 +275,6 @@ const th: HomeDict = {
         alt: "หน้าตารางดวงจันทร์ชื่อ 30 Days of Reflection มีพระจันทร์เสี้ยวสามสิบดวงเรียงเป็นตาราง และประโยค Even the darkest nights have moons",
       },
     ],
-    overviewAlt: "ข้างใน INDIGO: ตารางดวงจันทร์ 30 วัน หน้าคำถาม The Feelings I Hide และจดหมายถึงตัวเองตอนเด็ก",
   },
   acts: [
     { n: "I", title: "The Deep Night", text: "สังเกตสิ่งที่ซ่อนไว้: ความรู้สึก ความกลัว และรูปแบบเดิมที่เก็บไว้ในความมืด" },
@@ -329,8 +311,6 @@ const th: HomeDict = {
     guarantee: {
       days: "วัน",
       h: "ลองเขียนสองสัปดาห์ ถ้าไม่ใช่สำหรับคุณ รับเงินคืนเต็มจำนวน",
-      hShort: "ไม่ใช่สำหรับคุณ? รับเงินคืนเต็มจำนวน",
-      pShort: "PDF ขอคืนเงินเต็มจำนวนได้ภายใน 14 วัน ส่วนเล่มกระดาษเป็นไปตามนโยบายของ Amazon",
       p: "ตอบกลับอีเมลใบเสร็จจาก Gumroad ภายใน 14 วันหลังซื้อ PDF เพื่อขอคืนเงินเต็มจำนวน ส่วนเล่มกระดาษเป็นไปตามนโยบายคืนสินค้าของ Amazon",
     },
   },
@@ -346,13 +326,6 @@ const th: HomeDict = {
     ],
     source: "จาก INDIGO (ภาษาอังกฤษ)",
   },
-  believe: {
-    eyebrow: "สิ่งที่ครามเชื่อ",
-    h2: ["ไม่ต้องหายดีก่อน ", "ก็เริ่มได้"],
-    p: "ตอนนั้นคุณทำได้เท่าที่ทำได้ ด้วยสิ่งที่มีอยู่ และจากตรงนี้คุณยังเลือกต่อได้",
-    steps: ["ความมืดเป็นเรื่องจริง", "แสงก็เป็นเรื่องจริง", "ยังเดินต่อ"],
-    link: "อ่านเรื่องของคราม",
-  },
   collections: {
     eyebrow: "คอลเลกชัน",
     h2: "สมุดสำหรับคืนแต่ละแบบ",
@@ -362,7 +335,6 @@ const th: HomeDict = {
   },
   free: {
     eyebrow: "ฟรี · ยังไม่พร้อมกับ 121 หน้า?",
-    eyebrowShort: "สมุดเล่มเล็กแจกฟรี",
     h2: ["เริ่มจาก ", "7\u00a0Nights in INDIGO"],
     p: "สมุดเล่มเล็กแจกฟรี เจ็ดคืน สิบสี่คำถาม ไม่มีคำตอบที่ถูกหรือผิด แต่ละคืนเริ่มด้วยการตั้งหลักสั้นๆ แล้วตามด้วยสองคำถามและหน้าให้เขียน (เนื้อหาในเล่มเป็นภาษาอังกฤษ)",
     cta: "รับ 7 Nights ฟรี",
@@ -397,10 +369,8 @@ const th: HomeDict = {
     eyebrow: "คำถามของคืนนี้",
     quote: "“ฉันพยายามหลบความรู้สึกอะไรอยู่”",
     p: "สิบนาทีก็พอ เขียนคำตอบหนึ่งข้อ แล้วปิดสมุด พรุ่งนี้ค่อยเขียนต่อ",
-    pShort: "สิบนาทีก็พอ พรุ่งนี้ค่อยเขียนต่อ",
     pdf: (price: string) => `ซื้อ PDF · ${price}`,
     paper: "เล่มกระดาษบน Amazon",
-    mobile: "เริ่ม INDIGO คืนนี้",
     guarantee: "PDF ขอคืนเงินได้ภายใน 14 วัน",
   },
   buyBar: { name: "INDIGO", sub: (price: string) => `เริ่มต้น ${price} · คืนเงินได้ 14 วัน`, cta: "ซื้อ INDIGO" },

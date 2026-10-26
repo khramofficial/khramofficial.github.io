@@ -79,7 +79,7 @@ export function HeroActions({ lang }: { lang: Lang }) {
         <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
       </a>
       <a href="#free-sample" className="btn btn-ghost btn-lg">
-        <Icon name="moon" className="h-3.5 w-3.5 lg:hidden" />
+        <Icon name="moon" className="h-3.5 w-3.5" />
         {h.secondary}
       </a>
     </div>
@@ -190,7 +190,7 @@ export function Formats({ lang }: { lang: Lang }) {
             {f.h2[0]}
             <span className="text-gold lg:text-gold">{f.h2[1]}</span>
           </h2>
-          <p className="mt-4 hidden text-lg text-ivory/70 lg:block">{f.p}</p>
+          <p className="mt-4 text-[1.02rem] text-ivory/70 lg:text-lg">{f.p}</p>
         </div>
 
         <div className="mt-7 grid grid-cols-2 rounded-full border border-ivory/10 bg-night p-1 text-sm lg:hidden" role="group" aria-label={f.eyebrow}>
@@ -304,12 +304,10 @@ export function Formats({ lang }: { lang: Lang }) {
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="font-display text-[1.05rem] font-semibold leading-snug tracking-[0.02em] lg:text-2xl">
-              <span className="lg:hidden">{f.guarantee.hShort}</span>
-              <span className="hidden lg:inline">{f.guarantee.h}</span>
+              {f.guarantee.h}
             </h3>
             <p className="mt-1.5 text-[0.9rem] text-ivory/70 lg:mt-2 lg:text-base">
-              <span className="lg:hidden">{f.guarantee.pShort}</span>
-              <span className="hidden lg:inline">{f.guarantee.p}</span>
+              {f.guarantee.p}
             </p>
           </div>
         </div>
@@ -325,20 +323,20 @@ export function Collections({ lang }: { lang: Lang }) {
   const catalog = useCatalog();
   const items = catalog.collections.map((c) => localizeCollection(c, lang));
   return (
-    <section id="collections" className="home-band hidden border-y border-gold/10 lg:block" aria-labelledby="collections-h">
-      <div className="mx-auto max-w-7xl px-8 py-28">
-        <div className="max-w-2xl">
+    <section id="collections" className="home-band scroll-mt-16 border-y border-gold/10" aria-labelledby="collections-h">
+      <div className="mx-auto max-w-7xl py-14 lg:px-8 lg:py-28">
+        <div className="max-w-2xl px-5 sm:px-8 lg:px-0">
           <p className="eyebrow mb-4 text-moon">{t.eyebrow}</p>
           <h2 id="collections-h" className="h-sec">
             {t.h2}
           </h2>
-          <p className="mt-4 text-lg text-ivory/70">{t.p}</p>
+          <p className="mt-4 text-[1.02rem] text-ivory/70 lg:text-lg">{t.p}</p>
         </div>
-        <ul className="mt-12 grid grid-cols-4 gap-5" role="list">
+        <ul className="no-scrollbar mt-8 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 sm:scroll-px-8 sm:px-8 lg:mt-12 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0" role="list">
           {items.map((c) => {
             const isLive = c.status === "available";
             return (
-              <li key={c.slug}>
+              <li key={c.slug} className="w-[66%] shrink-0 snap-start sm:w-[42%] lg:w-auto">
                 <a
                   href={isLive ? "#formats" : href(lang, routes.collection(c.slug))}
                   className={cn("group relative block aspect-[3/4] overflow-hidden rounded-2xl text-ivory no-underline", isLive ? "ring-2" : "ring-1 ring-white/10")}
@@ -365,7 +363,7 @@ export function Collections({ lang }: { lang: Lang }) {
           })}
         </ul>
         {catalog.settings.amazonAuthor ? (
-          <div className="mt-10 flex items-center justify-center gap-4">
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 px-5 text-center sm:flex-row sm:gap-4">
             <span className="italic text-ivory/70">{t.followQ}</span>
             <a href={catalog.settings.amazonAuthor} className="btn btn-ghost" {...external}>
               {t.follow}
@@ -386,12 +384,11 @@ export function FreeSample({ lang }: { lang: Lang }) {
   const seven = findProduct(catalog, "seven-nights", lang);
   if (!seven?.url) return null;
   return (
-    <section id="free-sample" className="scroll-mt-16 px-5 py-6 sm:px-8 lg:py-28" aria-labelledby="free-h">
+    <section id="free-sample" className="scroll-mt-16 px-5 py-14 sm:px-8 lg:py-28" aria-labelledby="free-h">
       <div className="mx-auto grid max-w-7xl overflow-hidden rounded-3xl border border-ivory/10 bg-gradient-to-br from-navy via-[#0b1736] to-night lg:grid-cols-2 lg:rounded-[32px] lg:border-gold/15 lg:bg-navy">
         <div className="order-last p-6 sm:p-12 lg:order-first lg:p-16" data-product={seven.slug}>
           <p className="eyebrow mb-3 text-moon lg:mb-4">
-            <span className="lg:hidden">{t.eyebrowShort}</span>
-            <span className="hidden lg:inline">{t.eyebrow}</span>
+            {t.eyebrow}
           </p>
           <h2 id="free-h" className="font-display text-[1.85rem] font-semibold leading-tight tracking-[0.02em] sm:text-4xl">
             {t.h2[0]}
@@ -439,20 +436,14 @@ export function FinalCta({ lang }: { lang: Lang }) {
       </picture>
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-night via-night/30 to-night" />
       <div className="relative mx-auto flex min-h-[460px] max-w-3xl flex-col items-center justify-center px-5 py-20 text-center sm:px-8 lg:min-h-[600px] lg:py-24">
-        <Icon name="moon" className="h-5 w-5 text-moon lg:hidden" />
-        <p className="eyebrow mt-4 text-moon lg:mt-0">{t.eyebrow}</p>
+        <p className="eyebrow text-moon">{t.eyebrow}</p>
         <h2 id="final-h" className="mt-3 font-body text-[2.1rem] italic leading-tight text-ivory sm:text-6xl lg:mt-5">
           {t.quote}
         </h2>
         <p className="mt-4 text-[0.95rem] text-ivory/80 lg:mt-6 lg:text-lg">
-          <span className="lg:hidden">{t.pShort}</span>
-          <span className="hidden lg:inline">{t.p}</span>
+          {t.p}
         </p>
-        <a href="#formats" className="btn btn-primary btn-lg mt-7 w-full sm:w-auto lg:hidden">
-          {t.mobile}
-          <Icon name="arrow" className="h-3.5 w-3.5" />
-        </a>
-        <div className="mt-10 hidden gap-3 lg:flex">
+        <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row lg:mt-10">
           {pdfUrl && pdf && pdfPrice !== null ? (
             <a href={pdfUrl} className="btn btn-primary btn-lg" data-track={`${pdf.slug}:Gumroad`} {...external}>
               {t.pdf(money(pdfPrice))}
@@ -466,7 +457,7 @@ export function FinalCta({ lang }: { lang: Lang }) {
             </a>
           ) : null}
         </div>
-        <p className="mt-5 hidden items-center gap-2 text-ivory/65 lg:flex">
+        <p className="mt-5 flex items-center gap-2 text-[0.95rem] text-ivory/65">
           <Icon name="shield" className="h-4 w-4 text-moon" />
           {t.guarantee}
         </p>

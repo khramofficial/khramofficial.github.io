@@ -953,20 +953,15 @@
     border-radius: 999px;
     text-decoration: none;
   }
-  .store-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 50%;
-    background: var(--color-moon);
-    color: var(--color-night);
-    transition: background-color 0.2s ease;
+  .store-link img {
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  .store-link:hover .store-icon,
-  .store-link:focus-visible .store-icon {
-    background: var(--color-gold);
+  .store-link:hover img,
+  .store-link:focus-visible img {
+    transform: translateY(-1px);
+  }
+  .store-link:hover .store-wordmark {
+    opacity: 0.85;
   }
   .store-chip {
     display: inline-flex;

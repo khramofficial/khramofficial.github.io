@@ -86,14 +86,18 @@ export function HeroActions({ lang }: { lang: Lang }) {
   );
 }
 
-/** The two stores, each one tap to INDIGO there: Gumroad → the PDF checkout, Amazon → the paperback. Store names with a plain icon (no store logos). */
+/**
+ * The two stores, each one tap to INDIGO there: Gumroad → the PDF checkout, Amazon → the paperback.
+ * Logos: files Bank supplied (27 Oct) in public/images/stores/. Gumroad = round "G" mark beside the name;
+ * Amazon = its wordmark (already says "amazon"), recoloured to Soft Ivory with the orange arrow kept so it reads on the dark bar.
+ */
 function useStores(lang: Lang) {
   const t = homeText(lang).platforms;
   const { pdf, papers } = useIndigo(lang);
   const paper = papers[0];
-  const list: { name: string; url: string | null; track: string; label: string; icon: "tablet" | "book" }[] = [
-    { name: "Gumroad", url: buyUrl(pdf), track: `${pdf?.slug ?? "indigo-digital"}:Gumroad`, label: t.gumroad, icon: "tablet" },
-    { name: "Amazon", url: paper?.url ?? null, track: `${paper?.slug ?? "indigo-paperback"}:Amazon`, label: t.amazon, icon: "book" },
+  const list: { name: string; url: string | null; track: string; label: string; logo: { src: string; w: number; h: number }; wordmark: boolean }[] = [
+    { name: "Gumroad", url: buyUrl(pdf), track: `${pdf?.slug ?? "indigo-digital"}:Gumroad`, label: t.gumroad, logo: { src: "/images/stores/gumroad.png", w: 112, h: 112 }, wordmark: false },
+    { name: "Amazon", url: paper?.url ?? null, track: `${paper?.slug ?? "indigo-paperback"}:Amazon`, label: t.amazon, logo: { src: "/images/stores/amazon.png", w: 300, h: 91 }, wordmark: true },
   ];
   return list.filter((s) => s.url);
 }
@@ -111,10 +115,14 @@ export function Platforms({ lang }: { lang: Lang }) {
           {stores.map((s) => (
             <li key={s.name}>
               <a href={s.url ?? "#"} data-track={s.track} title={s.label} className="store-link group" {...external}>
-                <span className="store-icon">
-                  <Icon name={s.icon} className="h-[1.15rem] w-[1.15rem]" />
-                </span>
-                <span className="font-body text-[1.65rem] leading-none text-ivory/85 transition-colors group-hover:text-gold">{s.name}</span>
+                {s.wordmark ? (
+                  <img src={s.logo.src} alt={s.name} width={s.logo.w} height={s.logo.h} className="store-wordmark h-[2.25rem] w-auto" />
+                ) : (
+                  <>
+                    <img src={s.logo.src} alt="" width={s.logo.w} height={s.logo.h} className="h-11 w-11" />
+                    <span className="font-body text-[1.65rem] leading-none text-ivory/85 transition-colors group-hover:text-gold">{s.name}</span>
+                  </>
+                )}
                 <Icon name="external" className="h-3.5 w-3.5 text-ivory/40 transition-colors group-hover:text-gold" />
                 <span className="sr-only">
                   {s.label} {nt}
@@ -148,8 +156,14 @@ export function ProofStrip({ lang }: { lang: Lang }) {
         {stores.map((s) => (
           <li key={s.name}>
             <a href={s.url ?? "#"} data-track={s.track} aria-label={`${s.label} ${nt}`} className="store-chip" {...external}>
-              <Icon name={s.icon} className="h-3.5 w-3.5 text-moon" />
-              {s.name}
+              {s.wordmark ? (
+                <img src={s.logo.src} alt={s.name} width={s.logo.w} height={s.logo.h} className="mt-1 h-[0.95rem] w-auto" />
+              ) : (
+                <>
+                  <img src={s.logo.src} alt="" width={s.logo.w} height={s.logo.h} className="h-5 w-5" />
+                  {s.name}
+                </>
+              )}
             </a>
           </li>
         ))}

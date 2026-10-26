@@ -39,7 +39,7 @@ const en = {
     eyebrow: "Why Khram",
     h2: "“I did the best I could.”",
     p: [
-      "Khram is me. Someone who has gotten a lot wrong, more than once, and has lived through dark years, but who still has a lot of light inside. It goes back to what I told myself the time I nearly died.",
+      "Khram is me. An ordinary person who has gotten a lot wrong. There was a time I nearly died, and what I told myself then was: “I've never taken a single damn thing seriously. I've just drifted along, daydreaming.” I'm not talented. I've never been someone my family could count on. But for once in my life, I'm not going to give up. I just don't want my last day to be spent regretting that I never did what I wanted to do.",
       "That's who these journals are for. They won't fix you, and they won't ask you to pretend. You don't have to be healed to begin.",
     ],
     steps: [
@@ -245,7 +245,7 @@ const th: HomeDict = {
     eyebrow: "ทำไมต้องคราม",
     h2: "“กูทำดีที่สุดแล้ว”",
     p: [
-      "ครามคือตัวฉันเอง คนที่ใช้ชีวิตผิดพลาดมาหลายครั้งหลายคราว เคยผ่านช่วงที่มืดมาจริงๆ แต่ข้างในยังมีแสงอยู่เยอะ ทั้งหมดนี้เริ่มจากประโยคที่ฉันบอกตัวเองตอนที่เกือบตาย",
+      "ครามคือตัวฉันเอง คนธรรมดาที่ผิดพลาดมาเยอะ มีช่วงหนึ่งที่ฉันเกือบตาย และสิ่งที่บอกตัวเองตอนนั้นคือ “กูแม่งไม่เคยทำห่าอะไรจริงจังเลยสักอย่าง เพ้อ\u2060ฝันไปวันๆ” ฉันไม่ได้เป็นคนเก่ง ไม่เคยเป็นคนที่ครอบครัวจะฝากชีวิตไว้ได้เลย แต่สักครั้งในชีวิต ฉันจะไม่ยอมแพ้อีกแล้ว ก็แค่ไม่อยากให้วันสุดท้ายต้องมานั่งเสียใจที่ไม่เคยได้ทำในสิ่งที่อยากทำ",
       "สมุดของครามทำมาเพื่อคนแบบนี้ มันไม่ได้ซ่อมใคร และไม่ขอให้ใครแกล้งทำเป็นโอเค ไม่ต้องหายดีก่อน ก็เริ่มได้",
     ],
     steps: [

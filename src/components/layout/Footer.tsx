@@ -37,9 +37,6 @@ export function Footer({ lang }: { lang: Lang }) {
           <a href={href(lang, routes.home)} className="flex items-center gap-3 no-underline">
             <img src="/images/brand/khram-badge.webp" alt={t.footer.logoAlt} width={56} height={56} loading="lazy" className="h-11 w-11 rounded-full" />
             <span className="wordmark text-[1.4rem]">KHRAM</span>
-            <span className="text-base text-lavender" lang="th">
-              คราม
-            </span>
           </a>
           <p className="italic text-ivory/65">
             <span className="lg:hidden">{t.signoff}</span>

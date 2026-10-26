@@ -1,5 +1,5 @@
-import { BuyBar, Collections, FinalCta, Formats, FreeSample } from "@/components/home/HomeLive";
-import { Believe, Faq, FromThePages, Hero, Pain, Platforms, Product, ProofStrip, WhyKhram } from "@/components/home/HomeStatic";
+import { BuyBar, Collections, FinalCta, Formats, FreeSample, Platforms, ProofStrip } from "@/components/home/HomeLive";
+import { Believe, Faq, FromThePages, Hero, Pain, Product, WhyKhram } from "@/components/home/HomeStatic";
 import { buildCatalog, findProduct } from "@/lib/catalog";
 import type { Lang } from "@/lib/types";
 

@@ -127,44 +127,6 @@ export function Hero({ lang }: { lang: Lang }) {
   );
 }
 
-/** Phones: who makes it and where you buy, in one strip under the hero (desktop has this inside the hero and the platform bar). */
-export function ProofStrip({ lang }: { lang: Lang }) {
-  const t = homeText(lang).hero;
-  return (
-    <div className="mx-5 flex items-center gap-3 rounded-2xl border border-ivory/5 bg-navy/70 px-4 py-4 sm:mx-8 lg:hidden">
-      <img src="/images/brand/khram-badge.webp" alt="" width={56} height={56} className="h-9 w-9 shrink-0 rounded-full" />
-      <div className="min-w-0 text-[0.8rem] leading-snug">
-        <div className="font-display tracking-[0.12em] text-gold uppercase">{t.maker}</div>
-        <div className="text-ivory/65">{t.makerSub}</div>
-      </div>
-      <div className="ml-auto flex shrink-0 flex-col items-end text-[0.75rem] leading-tight text-ivory/70">
-        <span>Gumroad</span>
-        <span>Amazon</span>
-      </div>
-    </div>
-  );
-}
-
-/** Desktop: where checkout happens. */
-export function Platforms({ lang }: { lang: Lang }) {
-  const t = homeText(lang).platforms;
-  return (
-    <section aria-label={t.label} className="hidden border-y border-gold/10 bg-navy/60 lg:block">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-8 py-6 text-[0.95rem] text-ivory/70">
-        <span className="eyebrow text-[0.7rem] text-gold">{t.label}</span>
-        <div className="flex items-center gap-12 font-display text-xl tracking-[0.06em] text-ivory/85">
-          <span>Gumroad</span>
-          <span>Amazon</span>
-        </div>
-        <span className="flex items-center gap-2">
-          <Icon name="lock" className="h-3.5 w-3.5 text-moon" />
-          {t.note}
-        </span>
-      </div>
-    </section>
-  );
-}
-
 export function Pain({ lang }: { lang: Lang }) {
   const t = homeText(lang).pain;
   return (

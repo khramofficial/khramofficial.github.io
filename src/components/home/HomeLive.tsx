@@ -86,6 +86,78 @@ export function HeroActions({ lang }: { lang: Lang }) {
   );
 }
 
+/** The two stores, each one tap to INDIGO there: Gumroad → the PDF checkout, Amazon → the paperback. Store names with a plain icon (no store logos). */
+function useStores(lang: Lang) {
+  const t = homeText(lang).platforms;
+  const { pdf, papers } = useIndigo(lang);
+  const paper = papers[0];
+  const list: { name: string; url: string | null; track: string; label: string; icon: "tablet" | "book" }[] = [
+    { name: "Gumroad", url: buyUrl(pdf), track: `${pdf?.slug ?? "indigo-digital"}:Gumroad`, label: t.gumroad, icon: "tablet" },
+    { name: "Amazon", url: paper?.url ?? null, track: `${paper?.slug ?? "indigo-paperback"}:Amazon`, label: t.amazon, icon: "book" },
+  ];
+  return list.filter((s) => s.url);
+}
+
+/** Desktop: where checkout happens, with a link straight to each store. */
+export function Platforms({ lang }: { lang: Lang }) {
+  const t = homeText(lang).platforms;
+  const nt = ui(lang).newTab;
+  const stores = useStores(lang);
+  return (
+    <section aria-label={t.label} className="hidden border-y border-gold/10 bg-navy/60 lg:block">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-8 py-5 text-[0.95rem] text-ivory/70">
+        <span className="eyebrow text-[0.7rem] text-gold">{t.label}</span>
+        <ul className="flex items-center gap-10" role="list">
+          {stores.map((s) => (
+            <li key={s.name}>
+              <a href={s.url ?? "#"} data-track={s.track} title={s.label} className="store-link group" {...external}>
+                <span className="store-icon">
+                  <Icon name={s.icon} className="h-[1.15rem] w-[1.15rem]" />
+                </span>
+                <span className="font-body text-[1.65rem] leading-none text-ivory/85 transition-colors group-hover:text-gold">{s.name}</span>
+                <Icon name="external" className="h-3.5 w-3.5 text-ivory/40 transition-colors group-hover:text-gold" />
+                <span className="sr-only">
+                  {s.label} {nt}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <span className="flex items-center gap-2">
+          <Icon name="lock" className="h-3.5 w-3.5 text-moon" />
+          {t.note}
+        </span>
+      </div>
+    </section>
+  );
+}
+
+/** Phones: who makes it and where you buy, in one strip under the hero (desktop has this inside the hero and the store bar). */
+export function ProofStrip({ lang }: { lang: Lang }) {
+  const t = homeText(lang).hero;
+  const nt = ui(lang).newTab;
+  const stores = useStores(lang);
+  return (
+    <div className="mx-5 flex flex-wrap items-center gap-x-3 gap-y-3 rounded-2xl border border-ivory/5 bg-navy/70 px-4 py-3.5 sm:mx-8 lg:hidden">
+      <img src="/images/brand/khram-badge.webp" alt="" width={56} height={56} className="h-9 w-9 shrink-0 rounded-full" />
+      <div className="min-w-[10.5rem] flex-1 text-[0.8rem] leading-snug">
+        <div className="font-display tracking-[0.12em] text-gold uppercase">{t.maker}</div>
+        <div className="text-ivory/65">{t.makerSub}</div>
+      </div>
+      <ul className="ml-auto flex shrink-0 items-center gap-2" role="list" aria-label={homeText(lang).platforms.label}>
+        {stores.map((s) => (
+          <li key={s.name}>
+            <a href={s.url ?? "#"} data-track={s.track} aria-label={`${s.label} ${nt}`} className="store-chip" {...external}>
+              <Icon name={s.icon} className="h-3.5 w-3.5 text-moon" />
+              {s.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 /** Choose your format: the PDF (Gumroad) and the paperbacks (Amazon). Side by side on desktop, a toggle on phones. */
 export function Formats({ lang }: { lang: Lang }) {
   const t = homeText(lang);

@@ -57,9 +57,6 @@ export function Header({ lang, path }: { lang: Lang; path?: string | null }) {
           <a href={href(lang, routes.home)} className="flex items-center gap-2.5 no-underline" aria-label={t.home}>
             <img src="/images/brand/khram-badge.webp" alt="" width={56} height={56} className="h-8 w-8 rounded-full lg:hidden" />
             <span className="wordmark">KHRAM</span>
-            <span className="hidden text-sm text-lavender sm:inline lg:hidden xl:inline" lang="th">
-              คราม
-            </span>
           </a>
           <nav aria-label="Main" className="hidden lg:block">
             <ul className="flex items-center gap-6 xl:gap-8" role="list">

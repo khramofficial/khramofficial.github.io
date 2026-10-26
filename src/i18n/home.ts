@@ -23,7 +23,7 @@ const en = {
     artAlt: "The INDIGO paperback, a full moon over a still lake with a pale-blue butterfly, beside an inside page titled The Feelings I Hide.",
   },
   offer: (price: string) => `Until Oct 30: the PDF is ${price}, 30% off, applied at checkout.`,
-  platforms: { label: "Buy securely on", note: "Secure checkout, handled by the store" },
+  platforms: { label: "Buy securely on", note: "Secure checkout, handled by the store", gumroad: "Buy the INDIGO PDF on Gumroad", amazon: "Buy the INDIGO paperback on Amazon" },
   pain: {
     eyebrow: "Who it's for",
     h2: ["If this sounds like you, ", "you're not alone."],
@@ -214,9 +214,9 @@ const th: HomeDict = {
     tag: "สมุดบันทึกสำรวจใจ · พร้อมขาย",
     h1: ["สำหรับคืนที่ความ\u2060คิด", "ไม่ยอมหยุด"],
     lede: [
-      "INDIGO คือสมุดบันทึกสำรวจใจ (shadow work) ที่มีภาพวาดเป็นหัวใจ สำหรับคนที่รู้สึกลึกและคิดเยอะ ",
+      "INDIGO คือสมุดบันทึกสำรวจใจ (shadow work) มี",
       "คำถามตรงๆ กว่า 150 ข้อ",
-      " เรื่องการคิดวน การเอาใจคนอื่นจนเหนื่อย และเด็กในตัวเรา ทีละคำถาม (เนื้อหาในเล่มเป็นภาษาอังกฤษ)",
+      " เรื่องการคิดวน การเอาใจคนอื่นจนเหนื่อย และเด็กในตัวเรา ที\u2060ละ\u2060คำถาม (เนื้อหาในเล่มเป็นภาษาอังกฤษ)",
     ],
     small: "คืนละสิบนาทีก็พอ",
     primary: (price: string) => `ซื้อ INDIGO — เริ่มต้น ${price}`,
@@ -229,7 +229,7 @@ const th: HomeDict = {
     artAlt: "สมุด INDIGO ฉบับพิมพ์ ปกพระจันทร์เต็มดวงเหนือทะเลสาบนิ่งกับผีเสื้อสีฟ้าซีด วางคู่กับหน้าด้านในชื่อ The Feelings I Hide",
   },
   offer: (price: string) => `ถึง 30 ต.ค. PDF เหลือ ${price} (ลด 30% ให้อัตโนมัติตอนจ่าย)`,
-  platforms: { label: "ซื้ออย่างปลอดภัยที่", note: "ชำระเงินผ่านระบบของร้านค้าโดยตรง" },
+  platforms: { label: "ซื้ออย่างปลอดภัยที่", note: "ชำระเงินผ่านระบบของร้านค้าโดยตรง", gumroad: "ซื้อ INDIGO ฉบับ PDF ที่ Gumroad", amazon: "ซื้อ INDIGO เล่มกระดาษที่ Amazon" },
   pain: {
     eyebrow: "เหมาะกับใคร",
     h2: ["ถ้าเรื่องเหล่านี้ฟังดูคุ้นๆ ", "คุณไม่ได้เป็นคนเดียว"],

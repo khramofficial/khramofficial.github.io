@@ -40,7 +40,7 @@ const en = {
     h2: "“I did the best I could.”",
     p: [
       "Khram is me. An ordinary person who has gotten a lot wrong. There was a time I nearly died, and what I told myself then was: “I've never taken a single damn thing seriously. I've just drifted along, daydreaming.” I'm not talented. I've never been someone my family could count on. But for once in my life, I'm not going to give up. I just don't want my last day to be spent regretting that I never did what I wanted to do.",
-      "That's who these journals are for. They won't fix you, and they won't ask you to pretend. You don't have to be healed to begin.",
+      "Whether this book is right for you is something you'll have to find out for yourself.",
     ],
     steps: [
       { a: "The dark", b: "was real" },
@@ -246,7 +246,7 @@ const th: HomeDict = {
     h2: "“กูทำดีที่สุดแล้ว”",
     p: [
       "ครามคือตัวฉันเอง คนธรรมดาที่ผิดพลาดมาเยอะ มีช่วงหนึ่งที่ฉันเกือบตาย และสิ่งที่บอกตัวเองตอนนั้นคือ “กูแม่งไม่เคยทำห่าอะไรจริงจังเลยสักอย่าง เพ้อ\u2060ฝันไปวันๆ” ฉันไม่ได้เป็นคนเก่ง ไม่เคยเป็นคนที่ครอบครัวจะฝากชีวิตไว้ได้เลย แต่สักครั้งในชีวิต ฉันจะไม่ยอมแพ้อีกแล้ว ก็แค่ไม่อยากให้วันสุดท้ายต้องมานั่งเสียใจที่ไม่เคยได้ทำในสิ่งที่อยากทำ",
-      "สมุดของครามทำมาเพื่อคนแบบนี้ มันไม่ได้ซ่อมใคร และไม่ขอให้ใครแกล้งทำเป็นโอเค ไม่ต้องหายดีก่อน ก็เริ่มได้",
+      "หนังสือเล่มนี้จะเหมาะกับคุณหรือไม่ คุณต้องเป็นคนหาคำตอบด้วยตัวเอง",
     ],
     steps: [
       { a: "ความมืด", b: "เป็นเรื่องจริง" },

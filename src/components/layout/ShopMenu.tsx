@@ -9,17 +9,18 @@ import { href, routes } from "@/lib/utils";
 /*
  * Product categories menu (Bank, 27 Oct: Khram is an umbrella, not only a journal brand).
  * Categories come from the live catalog, so a new product lands in the right group without code:
- * still being made → "In the making", sold on Amazon → "Paperbacks", everything else with a link → "Digital".
+ * still being made → "In the making", a planner → "Planners", sold on Amazon → "Paperbacks", everything else with a link → "Digital".
  * When another kind of product arrives (tees, bags…), add its category to `kinds` and to `kindOf`.
  */
-type Kind = "digital" | "paperback" | "making";
-const kinds: Kind[] = ["digital", "paperback", "making"];
+type Kind = "digital" | "paperback" | "planner" | "making";
+const kinds: Kind[] = ["digital", "paperback", "planner", "making"];
 
 const words = {
   en: {
     shop: "Shop",
     digital: { title: "Digital PDFs", note: "Instant download" },
     paperback: { title: "Paperbacks", note: "Printed & shipped by Amazon" },
+    planner: { title: "Planners", note: "Paperback on Amazon" },
     making: { title: "In the making", note: "Not for sale yet" },
     all: "All collections",
   },
@@ -27,6 +28,7 @@ const words = {
     shop: "ร้านค้า",
     digital: { title: "PDF ดิจิทัล", note: "ดาวน์โหลดได้ทันที" },
     paperback: { title: "เล่มกระดาษ", note: "Amazon พิมพ์และจัดส่ง" },
+    planner: { title: "แพลนเนอร์", note: "เล่มกระดาษบน Amazon" },
     making: { title: "กำลังทำ", note: "ยังไม่เปิดขาย" },
     all: "ดูทุกคอลเลกชัน",
   },
@@ -34,6 +36,7 @@ const words = {
 
 function kindOf(p: Product): Kind {
   if (p.status === "in-progress" || p.status === "coming-soon") return "making";
+  if (/planner/i.test(p.subtitle)) return "planner";
   if (p.store === "Amazon") return "paperback";
   return "digital";
 }
@@ -51,7 +54,7 @@ function useShop(lang: Lang) {
       items: products
         .filter((p) => kindOf(p) === k)
         .map((p) => {
-          const edition = k === "paperback" ? p.format.split("·").pop()?.trim() : k === "making" || p.status !== "free" ? p.format : null;
+          const edition = k === "paperback" || k === "planner" ? p.format.split("·").pop()?.trim() : k === "making" || p.status !== "free" ? p.format : null;
           const price = p.status === "free" ? t.status.product.free : p.status === "available" ? p.priceLabel : "";
           return { slug: p.slug, name: p.name, edition, price };
         }),
@@ -72,7 +75,7 @@ export function ShopDropdown({ lang }: { lang: Lang }) {
         </svg>
       </summary>
       <div className="shop-panel">
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid gap-8" style={{ gridTemplateColumns: `repeat(${groups.length}, minmax(0, 1fr))` }}>
           {groups.map((g) => (
             <div key={g.kind} className="min-w-0">
               <p className="eyebrow text-[0.68rem] text-moon">{w[g.kind].title}</p>

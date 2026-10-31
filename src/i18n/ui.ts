@@ -34,8 +34,8 @@ const en = {
   collectionsPage: {
     title: "Journals",
     h1: "A journal for each kind of night",
-    p: "Every Khram collection has its own color and its own subject. INDIGO is available now. CRIMSON is being made. SAFFRON and EBONY are planned.",
-    description: "Four Khram collections, each with its own color and subject: INDIGO (shadow work), CRIMSON (attachment), SAFFRON (calming the body) and EBONY (grief).",
+    p: "Every Khram collection has its own color and its own subject. INDIGO and THE QUIET YEAR are available now. CRIMSON is being made. SAFFRON and EBONY are planned.",
+    description: "Khram collections, each with its own color and subject: INDIGO (shadow work), THE QUIET YEAR (undated planner), CRIMSON (attachment), SAFFRON (calming the body) and EBONY (grief).",
     readyEyebrow: "Ready today",
     readyH2: "Available now",
   },
@@ -217,8 +217,8 @@ const th: Dict = {
   collectionsPage: {
     title: "สมุด",
     h1: "สมุดสำหรับคืนแต่ละแบบ",
-    p: "ทุกคอลเลกชันของ Khram มีสีและเรื่องของตัวเอง INDIGO พร้อมขายแล้ว CRIMSON กำลังทำ SAFFRON และ EBONY อยู่ในแผน",
-    description: "สี่คอลเลกชันของ Khram แต่ละเล่มมีสีและเรื่องของตัวเอง: INDIGO (สำรวจใจ), CRIMSON (ความผูกพัน), SAFFRON (ทำให้ร่างกายสงบ) และ EBONY (ความสูญเสีย)",
+    p: "ทุกคอลเลกชันของ Khram มีสีและเรื่องของตัวเอง INDIGO และ THE QUIET YEAR พร้อมขายแล้ว CRIMSON กำลังทำ SAFFRON และ EBONY อยู่ในแผน",
+    description: "คอลเลกชันของ Khram แต่ละเล่มมีสีและเรื่องของตัวเอง: INDIGO (สำรวจใจ), THE QUIET YEAR (แพลนเนอร์ไม่ระบุวันที่), CRIMSON (ความผูกพัน), SAFFRON (ทำให้ร่างกายสงบ) และ EBONY (ความสูญเสีย)",
     readyEyebrow: "พร้อมวันนี้",
     readyH2: "พร้อมขาย",
   },

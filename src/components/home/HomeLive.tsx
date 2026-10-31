@@ -282,7 +282,7 @@ export function Formats({ lang }: { lang: Lang }) {
   );
 }
 
-/** The four collections (desktop). Colour, status and text come from the catalog. */
+/** The collections. Colour, status and text come from the catalog; INDIGO jumps to its formats, the others open their collection page. */
 export function Collections({ lang }: { lang: Lang }) {
   const t = homeText(lang).collections;
   const tu = ui(lang);
@@ -298,13 +298,13 @@ export function Collections({ lang }: { lang: Lang }) {
           </h2>
           <p className="mt-4 text-[1.02rem] text-ivory/70 lg:text-lg">{t.p}</p>
         </div>
-        <ul className="no-scrollbar mt-8 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 sm:scroll-px-8 sm:px-8 lg:mt-12 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0" role="list">
+        <ul className="no-scrollbar mt-8 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 sm:scroll-px-8 sm:px-8 lg:mt-12 lg:grid lg:grid-cols-5 lg:gap-5 lg:overflow-visible lg:px-0" role="list">
           {items.map((c) => {
             const isLive = c.status === "available";
             return (
               <li key={c.slug} className="w-[66%] shrink-0 snap-start sm:w-[42%] lg:w-auto">
                 <a
-                  href={isLive ? "#formats" : href(lang, routes.collection(c.slug))}
+                  href={c.slug === "indigo" ? "#formats" : href(lang, routes.collection(c.slug))}
                   className={cn("group relative block aspect-[3/4] overflow-hidden rounded-2xl text-ivory no-underline", isLive ? "ring-2" : "ring-1 ring-white/10")}
                   style={{ "--accent": c.accent.text, ...(isLive ? { "--tw-ring-color": "color-mix(in oklab, var(--accent) 70%, transparent)" } : {}) } as CSSProperties}
                 >
@@ -320,7 +320,7 @@ export function Collections({ lang }: { lang: Lang }) {
                     <span className="text-sm" style={{ color: "var(--accent)" }}>
                       {c.theme}
                     </span>
-                    <span className="font-deco text-[1.75rem] tracking-[0.05em] text-ivory">{c.name}</span>
+                    <span className="font-deco text-[1.75rem] leading-tight tracking-[0.05em] text-ivory lg:text-[1.45rem]">{c.name}</span>
                     <span className="mt-1 text-[0.95rem] italic leading-snug text-ivory/75">{c.summary}</span>
                   </span>
                 </a>

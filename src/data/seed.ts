@@ -1,4 +1,4 @@
-import type { Collection, ImageAsset, Outline, Product, SiteSettings } from "@/lib/types";
+import type { Collection, ImageAsset, Outline, Product, SiteSettings, Spec } from "@/lib/types";
 
 /**
  * Seed catalog: the starting content loaded into Supabase (supabase/seed.sql is generated from this file)
@@ -52,6 +52,39 @@ export const seedCollections: Collection[] = [
     },
   },
   {
+    slug: "quiet-year",
+    name: "THE QUIET YEAR",
+    dyeThai: "",
+    dyeEnglish: "",
+    dyeNote: "",
+    theme: "Undated planner",
+    summary: "An undated year of planning: months, weeks, habits, mood and money. Start in any month.",
+    description: [
+      "The Quiet Year is an undated 12-month planner with monthly and weekly pages, habit and mood tracking, a monthly spending page, and space to look back on each month and on the whole year.",
+      "Two paperback editions on Amazon: full color on white paper, or black and white on cream paper.",
+    ],
+    art: "A crescent moon over a lavender night sky, with wildflowers and wild grass below.",
+    accent: { base: "#8F82BD", text: "#B8ABE3" },
+    status: "available",
+    statusNote: "Available now",
+    swatch: { src: "/images/swatches/quiet-year.webp", alt: "Lavender wildflowers and wild grass under a soft night sky, from The Quiet Year cover.", width: 900, height: 1125 },
+    motif: null,
+    sort: 2,
+    i18n: {
+      th: {
+        dyeNote: "",
+        theme: "แพลนเนอร์ไม่ระบุวันที่",
+        summary: "แพลนเนอร์หนึ่งปีแบบไม่ระบุวันที่ ทั้งรายเดือน รายสัปดาห์ นิสัย อารมณ์ และการใช้เงิน เริ่มเดือนไหนก็ได้",
+        description: [
+          "The Quiet Year คือแพลนเนอร์ 12 เดือนแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงินรายเดือน และพื้นที่ทบทวนทั้งรายเดือนและทั้งปี",
+          "มีเล่มกระดาษสองฉบับบน Amazon: ฉบับสีทั้งเล่มบนกระดาษขาว และฉบับขาวดำบนกระดาษครีม",
+        ],
+        art: "พระจันทร์เสี้ยวเหนือท้องฟ้ากลางคืนสีลาเวนเดอร์ กับดอกไม้ป่าและหญ้าด้านล่าง",
+        statusNote: "พร้อมขาย",
+      },
+    },
+  },
+  {
     slug: "crimson",
     name: "CRIMSON",
     dyeThai: "ครั่ง",
@@ -69,7 +102,7 @@ export const seedCollections: Collection[] = [
     statusNote: "In the making",
     swatch: { src: "/images/swatches/crimson.webp", alt: "Deep crimson texture, uneven in places.", width: 900, height: 1125 },
     motif: "thread-moon",
-    sort: 2,
+    sort: 3,
     i18n: {
       th: {
         dyeNote: "",
@@ -102,7 +135,7 @@ export const seedCollections: Collection[] = [
     statusNote: "Planned",
     swatch: { src: "/images/swatches/saffron.webp", alt: "Warm saffron-yellow texture.", width: 900, height: 1125 },
     motif: "dawn-ripples",
-    sort: 3,
+    sort: 4,
     i18n: {
       th: {
         dyeNote: "",
@@ -135,7 +168,7 @@ export const seedCollections: Collection[] = [
     statusNote: "Planned",
     swatch: { src: "/images/swatches/ebony.webp", alt: "Near-black ebony texture with faint brown tones.", width: 900, height: 1125 },
     motif: "new-moon-flower",
-    sort: 4,
+    sort: 5,
     i18n: {
       th: {
         dyeNote: "",
@@ -194,6 +227,12 @@ const img = {
     alt: "Deep crimson texture. CRIMSON artwork is still being made.",
     width: 900,
     height: 1125,
+  },
+  quietYearCover: {
+    src: "/images/products/quiet-year-cover.webp",
+    alt: "The Quiet Year cover: the word PLANNER under a gold crescent moon, a night sky over lavender wildflowers and wild grass.",
+    width: 1000,
+    height: 1499,
   },
 } satisfies Record<string, ImageAsset>;
 
@@ -680,3 +719,148 @@ export const seedProducts: Product[] = [
     },
   },
 ];
+
+/* THE QUIET YEAR — facts checked 1 Nov 2026 against amazon.com/dp/B0HPSV8ZX9 (full color) and /dp/B0HPPG5411 (black & white). */
+const quietYearIntro = [
+  "The Quiet Year is an undated 12-month planner with monthly and weekly pages, habit and mood tracking, a monthly spending page, and space to look back on each month and on the whole year.",
+  "No dates are printed on the planning pages. You write in the month and number the days yourself, so you can start in any month. Pages 6–7 hold reference calendars for 2027 and 2028 (weeks start on Monday).",
+];
+const quietYearIntroTh = [
+  "The Quiet Year คือแพลนเนอร์ 12 เดือนแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงินรายเดือน และพื้นที่ทบทวนทั้งรายเดือนและทั้งปี",
+  "หน้าวางแผนไม่มีวันที่พิมพ์ไว้ คุณเขียนชื่อเดือนและใส่เลขวันเอง จึงเริ่มเดือนไหนก็ได้ หน้า 6–7 มีปฏิทินอ้างอิงปี 2027 และ 2028 (สัปดาห์เริ่มวันจันทร์)",
+];
+const quietYearIncluded = [
+  "Opening pages: This Planner Belongs To, Before You Start, How to Use This Planner, Year at a Glance, 2027 and 2028 reference calendars",
+  "Annual Intentions (Self, Work/Study, Money, Body & Rest, People, Small Joys), Important Dates and a Rest & Self-Care Plan",
+  "12 monthly sections of 18 pages each",
+  "Closing pages: Year in Review, Annual Review, Next Year / Carry Forward, A Letter to Next Year's Me and notes pages",
+];
+const quietYearIncludedTh = [
+  "หน้าเปิดเล่ม: This Planner Belongs To, Before You Start, How to Use This Planner, Year at a Glance และปฏิทินอ้างอิงปี 2027 กับ 2028",
+  "Annual Intentions (Self, Work/Study, Money, Body & Rest, People, Small Joys), Important Dates และ Rest & Self-Care Plan",
+  "12 ส่วนรายเดือน เดือนละ 18 หน้า",
+  "หน้าปิดเล่ม: Year in Review, Annual Review, Next Year / Carry Forward, A Letter to Next Year's Me และหน้าโน้ต",
+];
+const quietYearMonth: Outline = {
+  heading: "What each month holds (18 pages)",
+  items: [
+    { title: "Month divider", text: "Space for the month and year" },
+    { title: "Monthly calendar", text: "Monday to Sunday, with key dates and the month's focus" },
+    { title: "Intention & priorities", text: "A monthly intention and your top 3 priorities" },
+    { title: "Habit tracker", text: "Up to 10 habits across 31 days" },
+    { title: "Mood & energy", text: "Rated 1 to 5 for each day" },
+    { title: "Weekly spreads", text: "Five two-page spreads, Monday to Sunday, with a weekly top 3 and an end-of-week look-back" },
+    { title: "Spending", text: "Income, essentials, flexible spending, savings, what's left over and a purchase log" },
+    { title: "Review & notes", text: "A monthly review and a dot-grid notes page" },
+  ],
+};
+const quietYearMonthTh: Outline = {
+  heading: "ในแต่ละเดือนมีอะไรบ้าง (18 หน้า)",
+  items: [
+    { title: "หน้าคั่นเดือน", text: "มีที่ให้เขียนเดือนและปี" },
+    { title: "ปฏิทินรายเดือน", text: "จันทร์ถึงอาทิตย์ พร้อมวันสำคัญและเรื่องที่โฟกัสในเดือนนั้น" },
+    { title: "เป้าหมายและสิ่งสำคัญ", text: "ความตั้งใจประจำเดือน และ 3 เรื่องที่สำคัญที่สุด" },
+    { title: "ติดตามนิสัย", text: "ได้สูงสุด 10 นิสัย ตลอด 31 วัน" },
+    { title: "อารมณ์และพลังงาน", text: "ให้คะแนน 1 ถึง 5 ทุกวัน" },
+    { title: "หน้ารายสัปดาห์", text: "ห้าสัปดาห์ สัปดาห์ละสองหน้า จันทร์ถึงอาทิตย์ มี 3 เรื่องสำคัญของสัปดาห์และช่องทบทวนท้ายสัปดาห์" },
+    { title: "การใช้เงิน", text: "รายรับ ค่าใช้จ่ายจำเป็น ค่าใช้จ่ายยืดหยุ่น เงินออม เงินที่เหลือ และบันทึกการซื้อ" },
+    { title: "ทบทวนและโน้ต", text: "ทบทวนประจำเดือน และหน้าโน้ตแบบจุด" },
+  ],
+};
+const quietYearSpecs = (interior: string): Spec[] => [
+  { label: "Format", value: "Paperback" },
+  { label: "Pages", value: "234" },
+  { label: "Trim size", value: "6 × 9 in" },
+  { label: "Interior", value: interior },
+  { label: "Cover", value: "Matte" },
+  { label: "Dates", value: "Undated, start any month" },
+  { label: "Reference calendars", value: "2027 and 2028, Monday start" },
+  { label: "Language", value: "English" },
+];
+const quietYearSpecsTh = (interior: string): Spec[] => [
+  { label: "รูปแบบ", value: "เล่มปกอ่อน" },
+  { label: "จำนวนหน้า", value: "234" },
+  { label: "ขนาด", value: "6 × 9 นิ้ว" },
+  { label: "เนื้อใน", value: interior },
+  { label: "ปก", value: "ด้าน" },
+  { label: "วันที่", value: "ไม่ระบุวันที่ เริ่มเดือนไหนก็ได้" },
+  { label: "ปฏิทินอ้างอิง", value: "ปี 2027 และ 2028 เริ่มวันจันทร์" },
+  { label: "ภาษาในเล่ม", value: "อังกฤษ" },
+];
+const amazonNotes = ["Printed, sold and shipped by Amazon", "Orders, delivery and returns go through Amazon"];
+const amazonNotesTh = ["Amazon พิมพ์ ขาย และจัดส่งเอง", "คำสั่งซื้อ การจัดส่ง และการคืนสินค้าทำผ่าน Amazon"];
+
+function quietYearEdition(o: { slug: string; edition: string; editionTh: string; price: number; asin: string; interior: string; interiorTh: string; line: string; lineTh: string; sort: number }): Product {
+  return {
+    slug: o.slug,
+    collection: "quiet-year",
+    name: "The Quiet Year",
+    format: `Paperback · ${o.edition}`,
+    subtitle: "Undated 12-Month Planner",
+    status: "available",
+    price: o.price,
+    priceLabel: `$${o.price.toFixed(2)}`,
+    store: "Amazon",
+    url: `https://www.amazon.com/dp/${o.asin}`,
+    ctaLabel: "Buy on Amazon",
+    notes: amazonNotes,
+    summary: "An undated year of planning: monthly and weekly pages, habit and mood trackers, a spending page and space to look back. Start in any month.",
+    description: [...quietYearIntro, o.line],
+    included: quietYearIncluded,
+    includedHeading: "Inside (234 pages)",
+    specs: quietYearSpecs(o.interior),
+    howItWorks: null,
+    outline: quietYearMonth,
+    samplePrompts: null,
+    faq: null,
+    cover: img.quietYearCover,
+    gallery: [img.quietYearCover],
+    ogImage: "/images/og/quiet-year.jpg",
+    published: true,
+    sort: o.sort,
+    i18n: {
+      th: {
+        format: `เล่มกระดาษ · ${o.editionTh}`,
+        subtitle: "แพลนเนอร์ 12 เดือน ไม่ระบุวันที่",
+        summary: "แพลนเนอร์หนึ่งปีแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงิน และพื้นที่ทบทวน เริ่มเดือนไหนก็ได้",
+        description: [...quietYearIntroTh, o.lineTh],
+        included: quietYearIncludedTh,
+        includedHeading: "ข้างในเล่ม (234 หน้า)",
+        specs: quietYearSpecsTh(o.interiorTh),
+        outline: quietYearMonthTh,
+        priceLabel: `$${o.price.toFixed(2)}`,
+        ctaLabel: "ซื้อที่ Amazon",
+        notes: amazonNotesTh,
+      },
+    },
+  };
+}
+
+export const quietYearProducts: Product[] = [
+  quietYearEdition({
+    slug: "quiet-year-paperback-color",
+    edition: "Full color",
+    editionTh: "สีทั้งเล่ม",
+    price: 24.99,
+    asin: "B0HPSV8ZX9",
+    interior: "Full color on white paper",
+    interiorTh: "สีทั้งเล่ม กระดาษขาว",
+    line: "The Full Color Edition prints every page in color on white paper. Prefer cream paper? Choose the Black & White Edition.",
+    lineTh: "ฉบับสีพิมพ์สีทุกหน้าบนกระดาษขาว ถ้าชอบกระดาษครีม เลือกฉบับขาวดำ",
+    sort: 6,
+  }),
+  quietYearEdition({
+    slug: "quiet-year-paperback-bw",
+    edition: "Black & white",
+    editionTh: "ขาวดำ",
+    price: 17.99,
+    asin: "B0HPPG5411",
+    interior: "Black & white on cream paper",
+    interiorTh: "ขาวดำ กระดาษครีม",
+    line: "The Black & White Edition prints the interior in black and white on cream paper. Want every page in color? Choose the Full Color Edition.",
+    lineTh: "ฉบับขาวดำพิมพ์เนื้อในขาวดำบนกระดาษครีม ถ้าอยากได้สีทุกหน้า เลือกฉบับสี",
+    sort: 7,
+  }),
+];
+
+seedProducts.push(...quietYearProducts);

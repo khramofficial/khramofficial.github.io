@@ -460,7 +460,7 @@
     position: absolute;
     top: calc(100% + 1.1rem);
     left: -1.5rem;
-    width: min(46rem, calc(100vw - 4rem));
+    width: min(58rem, calc(100vw - 4rem));
     padding: 1.75rem;
     z-index: 60;
     background: #08132c;

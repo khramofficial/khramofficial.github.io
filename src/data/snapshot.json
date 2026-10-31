@@ -41,6 +41,46 @@
    "updated_at": "2026-10-24T21:31:21.343953+00:00"
   },
   {
+   "slug": "quiet-year",
+   "name": "THE QUIET YEAR",
+   "dye_thai": "",
+   "dye_english": "",
+   "dye_note": "",
+   "theme": "Undated planner",
+   "summary": "An undated year of planning: months, weeks, habits, mood and money. Start in any month.",
+   "description": [
+    "The Quiet Year is an undated 12-month planner with monthly and weekly pages, habit and mood tracking, a monthly spending page, and space to look back on each month and on the whole year.",
+    "Two paperback editions on Amazon: full color on white paper, or black and white on cream paper."
+   ],
+   "art": "A crescent moon over a lavender night sky, with wildflowers and wild grass below.",
+   "accent_base": "#8F82BD",
+   "accent_text": "#B8ABE3",
+   "status": "available",
+   "status_note": "Available now",
+   "swatch": {
+    "alt": "Lavender wildflowers and wild grass under a soft night sky, from The Quiet Year cover.",
+    "src": "/images/swatches/quiet-year.webp",
+    "width": 900,
+    "height": 1125
+   },
+   "motif": null,
+   "i18n": {
+    "th": {
+     "art": "พระจันทร์เสี้ยวเหนือท้องฟ้ากลางคืนสีลาเวนเดอร์ กับดอกไม้ป่าและหญ้าด้านล่าง",
+     "theme": "แพลนเนอร์ไม่ระบุวันที่",
+     "dyeNote": "",
+     "summary": "แพลนเนอร์หนึ่งปีแบบไม่ระบุวันที่ ทั้งรายเดือน รายสัปดาห์ นิสัย อารมณ์ และการใช้เงิน เริ่มเดือนไหนก็ได้",
+     "statusNote": "พร้อมขาย",
+     "description": [
+      "The Quiet Year คือแพลนเนอร์ 12 เดือนแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงินรายเดือน และพื้นที่ทบทวนทั้งรายเดือนและทั้งปี",
+      "มีเล่มกระดาษสองฉบับบน Amazon: ฉบับสีทั้งเล่มบนกระดาษขาว และฉบับขาวดำบนกระดาษครีม"
+     ]
+    }
+   },
+   "sort": 2,
+   "updated_at": "2026-10-31T22:13:19.835506+00:00"
+  },
+  {
    "slug": "crimson",
    "name": "CRIMSON",
    "dye_thai": "ครั่ง",
@@ -77,8 +117,8 @@
      ]
     }
    },
-   "sort": 2,
-   "updated_at": "2026-10-24T21:31:56.526156+00:00"
+   "sort": 3,
+   "updated_at": "2026-10-31T22:13:20.44246+00:00"
   },
   {
    "slug": "saffron",
@@ -117,8 +157,8 @@
      ]
     }
    },
-   "sort": 3,
-   "updated_at": "2026-10-24T21:32:18.480084+00:00"
+   "sort": 4,
+   "updated_at": "2026-10-31T22:13:20.666836+00:00"
   },
   {
    "slug": "ebony",
@@ -157,8 +197,8 @@
      ]
     }
    },
-   "sort": 4,
-   "updated_at": "2026-10-24T21:32:36.229144+00:00"
+   "sort": 5,
+   "updated_at": "2026-10-31T22:13:20.896646+00:00"
   }
  ],
  "products": [
@@ -1118,6 +1158,444 @@
    "sort": 5,
    "created_at": "2026-10-21T11:35:59.42876+00:00",
    "updated_at": "2026-10-24T21:33:09.395474+00:00"
+  },
+  {
+   "slug": "quiet-year-paperback-color",
+   "collection": "quiet-year",
+   "name": "The Quiet Year",
+   "format": "Paperback · Full color",
+   "subtitle": "Undated 12-Month Planner",
+   "status": "available",
+   "price": 24.99,
+   "price_label": "$24.99",
+   "store": "Amazon",
+   "url": "https://www.amazon.com/dp/B0HPSV8ZX9",
+   "cta_label": "Buy on Amazon",
+   "notes": [
+    "Printed, sold and shipped by Amazon",
+    "Orders, delivery and returns go through Amazon"
+   ],
+   "summary": "An undated year of planning: monthly and weekly pages, habit and mood trackers, a spending page and space to look back. Start in any month.",
+   "description": [
+    "The Quiet Year is an undated 12-month planner with monthly and weekly pages, habit and mood tracking, a monthly spending page, and space to look back on each month and on the whole year.",
+    "No dates are printed on the planning pages. You write in the month and number the days yourself, so you can start in any month. Pages 6–7 hold reference calendars for 2027 and 2028 (weeks start on Monday).",
+    "The Full Color Edition prints every page in color on white paper. Prefer cream paper? Choose the Black & White Edition."
+   ],
+   "included": [
+    "Opening pages: This Planner Belongs To, Before You Start, How to Use This Planner, Year at a Glance, 2027 and 2028 reference calendars",
+    "Annual Intentions (Self, Work/Study, Money, Body & Rest, People, Small Joys), Important Dates and a Rest & Self-Care Plan",
+    "12 monthly sections of 18 pages each",
+    "Closing pages: Year in Review, Annual Review, Next Year / Carry Forward, A Letter to Next Year's Me and notes pages"
+   ],
+   "included_heading": "Inside (234 pages)",
+   "specs": [
+    {
+     "label": "Format",
+     "value": "Paperback"
+    },
+    {
+     "label": "Pages",
+     "value": "234"
+    },
+    {
+     "label": "Trim size",
+     "value": "6 × 9 in"
+    },
+    {
+     "label": "Interior",
+     "value": "Full color on white paper"
+    },
+    {
+     "label": "Cover",
+     "value": "Matte"
+    },
+    {
+     "label": "Dates",
+     "value": "Undated, start any month"
+    },
+    {
+     "label": "Reference calendars",
+     "value": "2027 and 2028, Monday start"
+    },
+    {
+     "label": "Language",
+     "value": "English"
+    }
+   ],
+   "how_it_works": null,
+   "outline": {
+    "items": [
+     {
+      "text": "Space for the month and year",
+      "title": "Month divider"
+     },
+     {
+      "text": "Monday to Sunday, with key dates and the month's focus",
+      "title": "Monthly calendar"
+     },
+     {
+      "text": "A monthly intention and your top 3 priorities",
+      "title": "Intention & priorities"
+     },
+     {
+      "text": "Up to 10 habits across 31 days",
+      "title": "Habit tracker"
+     },
+     {
+      "text": "Rated 1 to 5 for each day",
+      "title": "Mood & energy"
+     },
+     {
+      "text": "Five two-page spreads, Monday to Sunday, with a weekly top 3 and an end-of-week look-back",
+      "title": "Weekly spreads"
+     },
+     {
+      "text": "Income, essentials, flexible spending, savings, what's left over and a purchase log",
+      "title": "Spending"
+     },
+     {
+      "text": "A monthly review and a dot-grid notes page",
+      "title": "Review & notes"
+     }
+    ],
+    "heading": "What each month holds (18 pages)"
+   },
+   "sample_prompts": null,
+   "faq": null,
+   "cover": {
+    "alt": "The Quiet Year cover: the word PLANNER under a gold crescent moon, a night sky over lavender wildflowers and wild grass.",
+    "src": "/images/products/quiet-year-cover.webp",
+    "width": 1000,
+    "height": 1499
+   },
+   "gallery": [
+    {
+     "alt": "The Quiet Year cover: the word PLANNER under a gold crescent moon, a night sky over lavender wildflowers and wild grass.",
+     "src": "/images/products/quiet-year-cover.webp",
+     "width": 1000,
+     "height": 1499
+    }
+   ],
+   "og_image": "/images/og/quiet-year.jpg",
+   "i18n": {
+    "th": {
+     "notes": [
+      "Amazon พิมพ์ ขาย และจัดส่งเอง",
+      "คำสั่งซื้อ การจัดส่ง และการคืนสินค้าทำผ่าน Amazon"
+     ],
+     "specs": [
+      {
+       "label": "รูปแบบ",
+       "value": "เล่มปกอ่อน"
+      },
+      {
+       "label": "จำนวนหน้า",
+       "value": "234"
+      },
+      {
+       "label": "ขนาด",
+       "value": "6 × 9 นิ้ว"
+      },
+      {
+       "label": "เนื้อใน",
+       "value": "สีทั้งเล่ม กระดาษขาว"
+      },
+      {
+       "label": "ปก",
+       "value": "ด้าน"
+      },
+      {
+       "label": "วันที่",
+       "value": "ไม่ระบุวันที่ เริ่มเดือนไหนก็ได้"
+      },
+      {
+       "label": "ปฏิทินอ้างอิง",
+       "value": "ปี 2027 และ 2028 เริ่มวันจันทร์"
+      },
+      {
+       "label": "ภาษาในเล่ม",
+       "value": "อังกฤษ"
+      }
+     ],
+     "format": "เล่มกระดาษ · สีทั้งเล่ม",
+     "outline": {
+      "items": [
+       {
+        "text": "มีที่ให้เขียนเดือนและปี",
+        "title": "หน้าคั่นเดือน"
+       },
+       {
+        "text": "จันทร์ถึงอาทิตย์ พร้อมวันสำคัญและเรื่องที่โฟกัสในเดือนนั้น",
+        "title": "ปฏิทินรายเดือน"
+       },
+       {
+        "text": "ความตั้งใจประจำเดือน และ 3 เรื่องที่สำคัญที่สุด",
+        "title": "เป้าหมายและสิ่งสำคัญ"
+       },
+       {
+        "text": "ได้สูงสุด 10 นิสัย ตลอด 31 วัน",
+        "title": "ติดตามนิสัย"
+       },
+       {
+        "text": "ให้คะแนน 1 ถึง 5 ทุกวัน",
+        "title": "อารมณ์และพลังงาน"
+       },
+       {
+        "text": "ห้าสัปดาห์ สัปดาห์ละสองหน้า จันทร์ถึงอาทิตย์ มี 3 เรื่องสำคัญของสัปดาห์และช่องทบทวนท้ายสัปดาห์",
+        "title": "หน้ารายสัปดาห์"
+       },
+       {
+        "text": "รายรับ ค่าใช้จ่ายจำเป็น ค่าใช้จ่ายยืดหยุ่น เงินออม เงินที่เหลือ และบันทึกการซื้อ",
+        "title": "การใช้เงิน"
+       },
+       {
+        "text": "ทบทวนประจำเดือน และหน้าโน้ตแบบจุด",
+        "title": "ทบทวนและโน้ต"
+       }
+      ],
+      "heading": "ในแต่ละเดือนมีอะไรบ้าง (18 หน้า)"
+     },
+     "summary": "แพลนเนอร์หนึ่งปีแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงิน และพื้นที่ทบทวน เริ่มเดือนไหนก็ได้",
+     "ctaLabel": "ซื้อที่ Amazon",
+     "included": [
+      "หน้าเปิดเล่ม: This Planner Belongs To, Before You Start, How to Use This Planner, Year at a Glance และปฏิทินอ้างอิงปี 2027 กับ 2028",
+      "Annual Intentions (Self, Work/Study, Money, Body & Rest, People, Small Joys), Important Dates และ Rest & Self-Care Plan",
+      "12 ส่วนรายเดือน เดือนละ 18 หน้า",
+      "หน้าปิดเล่ม: Year in Review, Annual Review, Next Year / Carry Forward, A Letter to Next Year's Me และหน้าโน้ต"
+     ],
+     "subtitle": "แพลนเนอร์ 12 เดือน ไม่ระบุวันที่",
+     "priceLabel": "$24.99",
+     "description": [
+      "The Quiet Year คือแพลนเนอร์ 12 เดือนแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงินรายเดือน และพื้นที่ทบทวนทั้งรายเดือนและทั้งปี",
+      "หน้าวางแผนไม่มีวันที่พิมพ์ไว้ คุณเขียนชื่อเดือนและใส่เลขวันเอง จึงเริ่มเดือนไหนก็ได้ หน้า 6–7 มีปฏิทินอ้างอิงปี 2027 และ 2028 (สัปดาห์เริ่มวันจันทร์)",
+      "ฉบับสีพิมพ์สีทุกหน้าบนกระดาษขาว ถ้าชอบกระดาษครีม เลือกฉบับขาวดำ"
+     ],
+     "includedHeading": "ข้างในเล่ม (234 หน้า)"
+    }
+   },
+   "published": true,
+   "sort": 6,
+   "created_at": "2026-10-31T22:13:20.145569+00:00",
+   "updated_at": "2026-10-31T22:13:20.145569+00:00"
+  },
+  {
+   "slug": "quiet-year-paperback-bw",
+   "collection": "quiet-year",
+   "name": "The Quiet Year",
+   "format": "Paperback · Black & white",
+   "subtitle": "Undated 12-Month Planner",
+   "status": "available",
+   "price": 17.99,
+   "price_label": "$17.99",
+   "store": "Amazon",
+   "url": "https://www.amazon.com/dp/B0HPPG5411",
+   "cta_label": "Buy on Amazon",
+   "notes": [
+    "Printed, sold and shipped by Amazon",
+    "Orders, delivery and returns go through Amazon"
+   ],
+   "summary": "An undated year of planning: monthly and weekly pages, habit and mood trackers, a spending page and space to look back. Start in any month.",
+   "description": [
+    "The Quiet Year is an undated 12-month planner with monthly and weekly pages, habit and mood tracking, a monthly spending page, and space to look back on each month and on the whole year.",
+    "No dates are printed on the planning pages. You write in the month and number the days yourself, so you can start in any month. Pages 6–7 hold reference calendars for 2027 and 2028 (weeks start on Monday).",
+    "The Black & White Edition prints the interior in black and white on cream paper. Want every page in color? Choose the Full Color Edition."
+   ],
+   "included": [
+    "Opening pages: This Planner Belongs To, Before You Start, How to Use This Planner, Year at a Glance, 2027 and 2028 reference calendars",
+    "Annual Intentions (Self, Work/Study, Money, Body & Rest, People, Small Joys), Important Dates and a Rest & Self-Care Plan",
+    "12 monthly sections of 18 pages each",
+    "Closing pages: Year in Review, Annual Review, Next Year / Carry Forward, A Letter to Next Year's Me and notes pages"
+   ],
+   "included_heading": "Inside (234 pages)",
+   "specs": [
+    {
+     "label": "Format",
+     "value": "Paperback"
+    },
+    {
+     "label": "Pages",
+     "value": "234"
+    },
+    {
+     "label": "Trim size",
+     "value": "6 × 9 in"
+    },
+    {
+     "label": "Interior",
+     "value": "Black & white on cream paper"
+    },
+    {
+     "label": "Cover",
+     "value": "Matte"
+    },
+    {
+     "label": "Dates",
+     "value": "Undated, start any month"
+    },
+    {
+     "label": "Reference calendars",
+     "value": "2027 and 2028, Monday start"
+    },
+    {
+     "label": "Language",
+     "value": "English"
+    }
+   ],
+   "how_it_works": null,
+   "outline": {
+    "items": [
+     {
+      "text": "Space for the month and year",
+      "title": "Month divider"
+     },
+     {
+      "text": "Monday to Sunday, with key dates and the month's focus",
+      "title": "Monthly calendar"
+     },
+     {
+      "text": "A monthly intention and your top 3 priorities",
+      "title": "Intention & priorities"
+     },
+     {
+      "text": "Up to 10 habits across 31 days",
+      "title": "Habit tracker"
+     },
+     {
+      "text": "Rated 1 to 5 for each day",
+      "title": "Mood & energy"
+     },
+     {
+      "text": "Five two-page spreads, Monday to Sunday, with a weekly top 3 and an end-of-week look-back",
+      "title": "Weekly spreads"
+     },
+     {
+      "text": "Income, essentials, flexible spending, savings, what's left over and a purchase log",
+      "title": "Spending"
+     },
+     {
+      "text": "A monthly review and a dot-grid notes page",
+      "title": "Review & notes"
+     }
+    ],
+    "heading": "What each month holds (18 pages)"
+   },
+   "sample_prompts": null,
+   "faq": null,
+   "cover": {
+    "alt": "The Quiet Year cover: the word PLANNER under a gold crescent moon, a night sky over lavender wildflowers and wild grass.",
+    "src": "/images/products/quiet-year-cover.webp",
+    "width": 1000,
+    "height": 1499
+   },
+   "gallery": [
+    {
+     "alt": "The Quiet Year cover: the word PLANNER under a gold crescent moon, a night sky over lavender wildflowers and wild grass.",
+     "src": "/images/products/quiet-year-cover.webp",
+     "width": 1000,
+     "height": 1499
+    }
+   ],
+   "og_image": "/images/og/quiet-year.jpg",
+   "i18n": {
+    "th": {
+     "notes": [
+      "Amazon พิมพ์ ขาย และจัดส่งเอง",
+      "คำสั่งซื้อ การจัดส่ง และการคืนสินค้าทำผ่าน Amazon"
+     ],
+     "specs": [
+      {
+       "label": "รูปแบบ",
+       "value": "เล่มปกอ่อน"
+      },
+      {
+       "label": "จำนวนหน้า",
+       "value": "234"
+      },
+      {
+       "label": "ขนาด",
+       "value": "6 × 9 นิ้ว"
+      },
+      {
+       "label": "เนื้อใน",
+       "value": "ขาวดำ กระดาษครีม"
+      },
+      {
+       "label": "ปก",
+       "value": "ด้าน"
+      },
+      {
+       "label": "วันที่",
+       "value": "ไม่ระบุวันที่ เริ่มเดือนไหนก็ได้"
+      },
+      {
+       "label": "ปฏิทินอ้างอิง",
+       "value": "ปี 2027 และ 2028 เริ่มวันจันทร์"
+      },
+      {
+       "label": "ภาษาในเล่ม",
+       "value": "อังกฤษ"
+      }
+     ],
+     "format": "เล่มกระดาษ · ขาวดำ",
+     "outline": {
+      "items": [
+       {
+        "text": "มีที่ให้เขียนเดือนและปี",
+        "title": "หน้าคั่นเดือน"
+       },
+       {
+        "text": "จันทร์ถึงอาทิตย์ พร้อมวันสำคัญและเรื่องที่โฟกัสในเดือนนั้น",
+        "title": "ปฏิทินรายเดือน"
+       },
+       {
+        "text": "ความตั้งใจประจำเดือน และ 3 เรื่องที่สำคัญที่สุด",
+        "title": "เป้าหมายและสิ่งสำคัญ"
+       },
+       {
+        "text": "ได้สูงสุด 10 นิสัย ตลอด 31 วัน",
+        "title": "ติดตามนิสัย"
+       },
+       {
+        "text": "ให้คะแนน 1 ถึง 5 ทุกวัน",
+        "title": "อารมณ์และพลังงาน"
+       },
+       {
+        "text": "ห้าสัปดาห์ สัปดาห์ละสองหน้า จันทร์ถึงอาทิตย์ มี 3 เรื่องสำคัญของสัปดาห์และช่องทบทวนท้ายสัปดาห์",
+        "title": "หน้ารายสัปดาห์"
+       },
+       {
+        "text": "รายรับ ค่าใช้จ่ายจำเป็น ค่าใช้จ่ายยืดหยุ่น เงินออม เงินที่เหลือ และบันทึกการซื้อ",
+        "title": "การใช้เงิน"
+       },
+       {
+        "text": "ทบทวนประจำเดือน และหน้าโน้ตแบบจุด",
+        "title": "ทบทวนและโน้ต"
+       }
+      ],
+      "heading": "ในแต่ละเดือนมีอะไรบ้าง (18 หน้า)"
+     },
+     "summary": "แพลนเนอร์หนึ่งปีแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงิน และพื้นที่ทบทวน เริ่มเดือนไหนก็ได้",
+     "ctaLabel": "ซื้อที่ Amazon",
+     "included": [
+      "หน้าเปิดเล่ม: This Planner Belongs To, Before You Start, How to Use This Planner, Year at a Glance และปฏิทินอ้างอิงปี 2027 กับ 2028",
+      "Annual Intentions (Self, Work/Study, Money, Body & Rest, People, Small Joys), Important Dates และ Rest & Self-Care Plan",
+      "12 ส่วนรายเดือน เดือนละ 18 หน้า",
+      "หน้าปิดเล่ม: Year in Review, Annual Review, Next Year / Carry Forward, A Letter to Next Year's Me และหน้าโน้ต"
+     ],
+     "subtitle": "แพลนเนอร์ 12 เดือน ไม่ระบุวันที่",
+     "priceLabel": "$17.99",
+     "description": [
+      "The Quiet Year คือแพลนเนอร์ 12 เดือนแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงินรายเดือน และพื้นที่ทบทวนทั้งรายเดือนและทั้งปี",
+      "หน้าวางแผนไม่มีวันที่พิมพ์ไว้ คุณเขียนชื่อเดือนและใส่เลขวันเอง จึงเริ่มเดือนไหนก็ได้ หน้า 6–7 มีปฏิทินอ้างอิงปี 2027 และ 2028 (สัปดาห์เริ่มวันจันทร์)",
+      "ฉบับขาวดำพิมพ์เนื้อในขาวดำบนกระดาษครีม ถ้าอยากได้สีทุกหน้า เลือกฉบับสี"
+     ],
+     "includedHeading": "ข้างในเล่ม (234 หน้า)"
+    }
+   },
+   "published": true,
+   "sort": 7,
+   "created_at": "2026-10-31T22:13:20.145569+00:00",
+   "updated_at": "2026-10-31T22:13:20.145569+00:00"
   }
  ],
  "settings": {
@@ -1128,5 +1606,5 @@
   "amazonAuthor": "https://www.amazon.com/stores/Khram/author/B0HNP4N18N",
   "gumroadStore": "https://khramofficial.gumroad.com"
  },
- "fetchedAt": "2026-10-26T22:50:45.694Z"
+ "fetchedAt": "2026-10-31T22:14:05.845Z"
 }

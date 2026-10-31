@@ -141,7 +141,7 @@ const en = {
   collections: {
     eyebrow: "The collections",
     h2: "A journal for each kind of night",
-    p: "Each collection has its own color and its own subject: the feelings you hide, the fear of being left, a body that won't settle, and grief. INDIGO is ready now. The others are on their way.",
+    p: "Each collection has its own color and its own subject: the feelings you hide, a quiet year of planning, the fear of being left, a body that won't settle, and grief. INDIGO and The Quiet Year are ready now. The others are on their way.",
     followQ: "Want to hear when CRIMSON opens?",
     follow: "Follow Khram on Amazon",
   },
@@ -327,7 +327,7 @@ const th: HomeDict = {
   collections: {
     eyebrow: "คอลเลกชัน",
     h2: "สมุดสำหรับคืนแต่ละแบบ",
-    p: "แต่ละคอลเลกชันมีสีและเรื่องของตัวเอง: ความรู้สึกที่ซ่อนไว้ ความกลัวว่าจะถูกทิ้ง ร่างกายที่ยังไม่สงบ และความสูญเสีย INDIGO พร้อมแล้ว เล่มอื่นกำลังตามมา",
+    p: "แต่ละคอลเลกชันมีสีและเรื่องของตัวเอง: ความรู้สึกที่ซ่อนไว้ การวางแผนหนึ่งปีแบบเงียบๆ ความกลัวว่าจะถูกทิ้ง ร่างกายที่ยังไม่สงบ และความสูญเสีย INDIGO กับ The Quiet Year พร้อมแล้ว เล่มอื่นกำลังตามมา",
     followQ: "อยากรู้ตอน CRIMSON ออกไหม?",
     follow: "ติดตาม Khram บน Amazon",
   },

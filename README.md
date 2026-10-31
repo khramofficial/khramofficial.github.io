@@ -1,6 +1,6 @@
 # Khram website
 
-Live site: **https://khramofficial.github.io** · Admin: **https://khramofficial.github.io/admin/**
+Live site: **https://khram.co** · Admin: **https://khram.co/admin/** (old address khramofficial.github.io redirects here)
 
 Bilingual (English at `/`, Thai at `/th/`) static site for Khram journals, with a Supabase backend for
 editing products and an anonymous visit counter.
@@ -32,7 +32,7 @@ path, referrer domain, device type, browser language, time zone, `utm_source`, a
 No cookies, no IP addresses. Visits from the admin's own browser (after logging in) and from bots are not counted.
 `admin_stats(days)` (admins only) powers the dashboard.
 
-Tag links you post: `https://khramofficial.github.io/?utm_source=pinterest`.
+Tag links you post: `https://khram.co/?utm_source=pinterest`.
 
 ## Commands
 

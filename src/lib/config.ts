@@ -8,5 +8,5 @@ export const supabaseConfig = {
   key: process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "sb_publishable_ou_BMA_RnblMtiuvlGh-wA_CASSXdDg",
 } as const;
 
-/** The live address. GitHub Pages serves the site from the org's root domain. */
-export const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL ?? "https://khramofficial.github.io";
+/** The live address: custom domain khram.co (GitHub Pages, repo khramofficial.github.io). */
+export const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL ?? "https://khram.co";

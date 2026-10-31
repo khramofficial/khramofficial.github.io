@@ -19,7 +19,7 @@ Art rule (brand guide §5): no text baked into images; keep text in HTML.
 ## 2. Business details to confirm
 
 - [ ] **Contact email** shown on the site: `khram.official@gmail.com`. This is also the Amazon/KDP sign-in email. Change it any time in Admin → ตั้งค่าเว็บ.
-- [ ] **Domain**: live at https://khramofficial.github.io. For a custom domain: add it in the repo's Settings → Pages, update `SITE_ORIGIN` in `src/lib/config.ts`, and the Site URL + redirect URL in Supabase → Authentication → URL Configuration.
+- [x] **Domain**: khram.co (GoDaddy DNS → GitHub Pages: A @ 185.199.108-111.153, AAAA @ 2606:50c0:8000-8003::153, CNAME www → khramofficial.github.io). Repo Settings → Pages custom domain = khram.co + Enforce HTTPS; `SITE_ORIGIN` in `src/lib/config.ts`; Supabase → Authentication → URL Configuration Site URL https://khram.co + redirect https://khram.co/admin/**.
 - [ ] **B&W paperback price** shows `$17.99` (the price saved in KDP). Confirm before it goes live, then add the Amazon link in Admin → สินค้า.
 - [ ] **CRIMSON** copy says “planned in three Acts: The Pull, The Knot and The Steady Hand” and lists planned contents from manuscript v1. Edit if the plan changes.
 - [ ] **SAFFRON / EBONY** themes are from the brand guide roadmap with “no release date”. Remove them from the site if you'd rather not show unreleased collections yet.

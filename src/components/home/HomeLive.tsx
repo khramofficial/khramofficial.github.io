@@ -4,6 +4,7 @@ import { type CSSProperties, useSyncExternalStore } from "react";
 import { ExternalMark } from "@/components/ui/Button";
 import { homeText } from "@/i18n/home";
 import { ui } from "@/i18n/ui";
+import { insideFor } from "@/data/insidePages";
 import { findProduct, localizeCollection, localizeProduct, productsIn } from "@/lib/catalog";
 import type { Lang, Product } from "@/lib/types";
 import { useCatalog } from "@/lib/useCatalog";
@@ -512,8 +513,10 @@ export function NewArrivals({ lang }: { lang: Lang }) {
             const first = f.items[0];
             if (!first) return null;
             const featured = i === 0;
-            const wide = featured ? first.gallery.find((g) => g.width > g.height) : undefined;
+            const inside = insideFor(first.collection);
+            const wide = featured ? (inside?.hero ?? first.gallery.find((g) => g.width > g.height)) : undefined;
             const image = wide ?? first.cover;
+            const peek = featured ? (inside?.pages ?? []).slice(0, 4) : [];
             return (
               <li
                 key={f.key}
@@ -533,6 +536,15 @@ export function NewArrivals({ lang }: { lang: Lang }) {
                     </span>
                   ) : null}
                 </a>
+                {peek.length ? (
+                  <a href={`${href(lang, routes.product(first.slug))}#inside`} className="grid grid-cols-4 gap-2 border-y border-gold/10 bg-night/40 p-3 no-underline" aria-label={w.details}>
+                    {peek.map((pg) => (
+                      <span key={pg.img.src} className="block overflow-hidden rounded bg-ivory/95">
+                        <img src={pg.img.src} alt={pg.img.alt} width={pg.img.width} height={pg.img.height} loading="lazy" className="aspect-[3/4] h-full w-full object-cover object-top" />
+                      </span>
+                    ))}
+                  </a>
+                ) : null}
                 <div className="flex flex-1 flex-col p-5 lg:p-6">
                   <h3 className="font-display text-[1.45rem] font-semibold leading-tight tracking-[0.04em] text-ivory">{first.name}</h3>
                   <p className="mt-1 italic text-gold">{first.subtitle}</p>
@@ -557,7 +569,7 @@ export function NewArrivals({ lang }: { lang: Lang }) {
                       );
                     })}
                   </div>
-                  <a href={href(lang, routes.product(first.slug))} className="link-k mt-4 text-[0.95rem]">
+                  <a href={`${href(lang, routes.product(first.slug))}${peek.length ? "#inside" : ""}`} className="link-k mt-4 text-[0.95rem]">
                     {w.details}
                   </a>
                 </div>

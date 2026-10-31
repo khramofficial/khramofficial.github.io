@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { CollectionGrid } from "@/components/collections/CollectionGrid";
+import { insideFor } from "@/data/insidePages";
 import { Swatch } from "@/components/collections/Swatch";
 import { BuyBox } from "@/components/products/BuyBox";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -186,6 +187,9 @@ export function ProductView({ slug, lang }: { slug: string; lang: Lang }) {
       ? sameCollection
       : productsIn(catalog, "indigo", lang).filter((p) => p.status === "available" || p.status === "free");
   const useSwatch = product.status === "in-progress" && (product.gallery.length === 0 || product.gallery.every((g) => g.src.includes("/swatches/")));
+  const inside = insideFor(product.collection);
+  const baseGallery = product.gallery.length ? product.gallery : [product.cover];
+  const gallery = inside?.hero && !baseGallery.some((g) => g.src === inside.hero?.src) ? [...baseGallery, inside.hero] : baseGallery;
 
   return (
     <div style={{ "--accent": collection.accent.text } as CSSProperties}>
@@ -204,7 +208,7 @@ export function ProductView({ slug, lang }: { slug: string; lang: Lang }) {
                 <Swatch collection={collection} priority sizes="(min-width: 1024px) 40vw, 100vw" />
               </div>
             ) : (
-              <ProductGallery images={product.gallery.length ? product.gallery : [product.cover]} label={`${product.name}, ${product.format}`} lang={lang} />
+              <ProductGallery images={gallery} label={`${product.name}, ${product.format}`} lang={lang} />
             )}
             <div className="flex min-w-0 flex-col gap-7">
               <div className="flex flex-col gap-3">
@@ -228,6 +232,30 @@ export function ProductView({ slug, lang }: { slug: string; lang: Lang }) {
           </div>
         </Container>
       </section>
+
+      {inside ? (
+        <section id="inside" className="section scroll-mt-16 border-b border-gold/10" aria-labelledby="inside-h">
+          <Container>
+            <p className="eyebrow mb-4">{lang === "th" ? "ตัวอย่างข้างในเล่ม" : "A look inside"}</p>
+            <h2 id="inside-h" className="display-2">
+              {lang === "th" ? "หน้าจริงจากในเล่ม" : "Real pages from the book"}
+            </h2>
+            <p className="mt-4 max-w-2xl text-ivory/70">{inside.note[lang]}</p>
+            <ul className="mt-10 grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 lg:grid-cols-4" role="list">
+              {inside.pages.map((pg, i) => (
+                <li key={pg.img.src} className={i === 0 ? "col-span-2" : ""}>
+                  <figure className="flex h-full flex-col gap-3">
+                    <a href={pg.img.src} target="_blank" rel="noopener" className="block overflow-hidden rounded-lg bg-ivory/95 shadow-lg ring-1 ring-gold/20">
+                      <img src={pg.img.src} alt={pg.img.alt} width={pg.img.width} height={pg.img.height} loading="lazy" className="h-auto w-full" />
+                    </a>
+                    <figcaption className="text-[0.92rem] text-ivory/65">{pg.caption[lang]}</figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+      ) : null}
 
       <section className="section" aria-label={t.productPage.details}>
         <Container>

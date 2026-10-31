@@ -228,6 +228,12 @@ const img = {
     width: 900,
     height: 1125,
   },
+  quietYearWrap: {
+    src: "/images/products/quiet-year-wrap.webp",
+    alt: "The Quiet Year full cover: a white butterfly on the back, PLANNER on the spine, and PLANNER under a gold crescent moon over lavender wildflowers on the front.",
+    width: 1600,
+    height: 1153,
+  },
   quietYearCover: {
     src: "/images/products/quiet-year-cover.webp",
     alt: "The Quiet Year cover: the word PLANNER under a gold crescent moon, a night sky over lavender wildflowers and wild grass.",
@@ -814,10 +820,11 @@ function quietYearEdition(o: { slug: string; edition: string; editionTh: string;
     samplePrompts: null,
     faq: null,
     cover: img.quietYearCover,
-    gallery: [img.quietYearCover],
+    gallery: [img.quietYearCover, img.quietYearWrap],
     ogImage: "/images/og/quiet-year.jpg",
     published: true,
     sort: o.sort,
+    createdAt: "2026-11-01T00:00:00Z",
     i18n: {
       th: {
         format: `เล่มกระดาษ · ${o.editionTh}`,

@@ -95,6 +95,8 @@ export interface Product extends ProductText {
   ogImage: string | null;
   published: boolean;
   sort: number;
+  /** When the product was added (database created_at). Newest products show first on the home page. */
+  createdAt?: string | null;
   i18n?: { th?: Partial<ProductText> };
 }
 

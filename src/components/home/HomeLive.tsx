@@ -4,7 +4,7 @@ import { type CSSProperties, useSyncExternalStore } from "react";
 import { ExternalMark } from "@/components/ui/Button";
 import { homeText } from "@/i18n/home";
 import { ui } from "@/i18n/ui";
-import { findProduct, localizeCollection, productsIn } from "@/lib/catalog";
+import { findProduct, localizeCollection, localizeProduct, productsIn } from "@/lib/catalog";
 import type { Lang, Product } from "@/lib/types";
 import { useCatalog } from "@/lib/useCatalog";
 import { cn, external, href, routes } from "@/lib/utils";
@@ -447,5 +447,125 @@ export function BuyBar({ lang }: { lang: Lang }) {
         {t.cta}
       </a>
     </div>
+  );
+}
+
+/*
+ * New at Khram (Bank, 1 Nov 2026: the newest products always sit on the home page, top 3, with buy links).
+ * Built from the live catalog: editions of one product (same collection + name) form one card, cards are ordered by
+ * the newest edition's database created_at (then by sort, highest first), and only products people can get now show.
+ * A new product added in the admin moves to the front on its own; no code change needed.
+ */
+const newWords = {
+  en: {
+    eyebrow: "New at Khram",
+    h2: "The latest from the studio",
+    newest: "New",
+    details: "See what's inside",
+    free: "Get it free",
+  },
+  th: {
+    eyebrow: "ใหม่ที่ Khram",
+    h2: "ของใหม่ล่าสุดจากสตูดิโอ",
+    newest: "ใหม่",
+    details: "ดูข้างในเล่ม",
+    free: "รับฟรี",
+  },
+} satisfies Record<Lang, unknown>;
+
+type Family = { key: string; items: Product[]; created: number; sort: number };
+
+function useNewest(lang: Lang, count = 3) {
+  const catalog = useCatalog();
+  const families = new Map<string, Family>();
+  for (const raw of catalog.products) {
+    if (!raw.published || !raw.url || (raw.status !== "available" && raw.status !== "free")) continue;
+    const p = localizeProduct(raw, lang);
+    const key = `${raw.collection}::${raw.name}`;
+    const created = raw.createdAt ? Date.parse(raw.createdAt) || 0 : 0;
+    const f = families.get(key) ?? { key, items: [], created: 0, sort: 0 };
+    f.items.push(p);
+    f.created = Math.max(f.created, created);
+    f.sort = Math.max(f.sort, raw.sort);
+    families.set(key, f);
+  }
+  return [...families.values()]
+    .map((f) => ({ ...f, items: f.items.sort((a, b) => a.sort - b.sort) }))
+    .sort((a, b) => b.created - a.created || b.sort - a.sort)
+    .slice(0, count);
+}
+
+export function NewArrivals({ lang }: { lang: Lang }) {
+  const w = newWords[lang];
+  const nt = ui(lang).newTab;
+  const families = useNewest(lang);
+  if (families.length === 0) return null;
+  return (
+    <section id="new" className="scroll-mt-16 px-5 py-14 sm:px-8 lg:py-24" aria-labelledby="new-h">
+      <div className="mx-auto max-w-7xl">
+        <p className="eyebrow mb-4 text-moon">{w.eyebrow}</p>
+        <h2 id="new-h" className="h-sec">
+          {w.h2}
+        </h2>
+        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4" role="list">
+          {families.map((f, i) => {
+            const first = f.items[0];
+            if (!first) return null;
+            const featured = i === 0;
+            const wide = featured ? first.gallery.find((g) => g.width > g.height) : undefined;
+            const image = wide ?? first.cover;
+            return (
+              <li
+                key={f.key}
+                className={cn(
+                  "flex flex-col overflow-hidden rounded-2xl border border-gold/15 bg-navy/60",
+                  featured ? "sm:col-span-2 lg:col-span-2" : "",
+                )}
+                data-product={first.slug}
+              >
+                <a href={href(lang, routes.product(first.slug))} className="relative block bg-night/70 no-underline">
+                  <span className={cn("flex items-center justify-center p-4", featured ? "aspect-[16/10]" : "aspect-[4/3]")}>
+                    <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" className="h-full w-full object-contain" />
+                  </span>
+                  {featured ? (
+                    <span className="chip absolute left-4 top-4" data-status="available">
+                      {w.newest}
+                    </span>
+                  ) : null}
+                </a>
+                <div className="flex flex-1 flex-col p-5 lg:p-6">
+                  <h3 className="font-display text-[1.45rem] font-semibold leading-tight tracking-[0.04em] text-ivory">{first.name}</h3>
+                  <p className="mt-1 italic text-gold">{first.subtitle}</p>
+                  <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-ivory/70">{first.summary}</p>
+                  <div className={cn("mt-5 flex flex-col gap-2.5", featured ? "sm:flex-row sm:flex-wrap" : "")}>
+                    {f.items.map((p, j) => {
+                      const url = p.status === "free" ? p.url : buyUrl(p);
+                      if (!url) return null;
+                      const label = p.status === "free" ? w.free : `${f.items.length > 1 ? edition(p) : p.ctaLabel} · ${p.priceLabel}`;
+                      return (
+                        <a
+                          key={p.slug}
+                          href={url}
+                          data-product={p.slug}
+                          data-track={`${p.slug}:${p.store ?? "Other"}`}
+                          className={cn("btn w-full", featured ? "sm:w-auto" : "", j === 0 ? "btn-primary" : "btn-ghost")}
+                          {...external}
+                        >
+                          {label}
+                          <ExternalMark label={nt} />
+                        </a>
+                      );
+                    })}
+                  </div>
+                  <a href={href(lang, routes.product(first.slug))} className="link-k mt-4 text-[0.95rem]">
+                    {w.details}
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
   );
 }

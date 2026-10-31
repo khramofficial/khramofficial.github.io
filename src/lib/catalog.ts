@@ -70,6 +70,7 @@ export interface ProductRow {
   i18n: { th?: Partial<ProductText> } | null;
   published: boolean;
   sort: number;
+  created_at?: string;
   updated_at?: string;
 }
 
@@ -159,6 +160,7 @@ export function productFromRow(r: ProductRow): Product {
     ogImage: r.og_image,
     published: r.published,
     sort: r.sort ?? 0,
+    createdAt: r.created_at ?? null,
     i18n: r.i18n ?? {},
   };
 }

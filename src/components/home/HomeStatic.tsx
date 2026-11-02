@@ -2,7 +2,7 @@ import { homeText } from "@/i18n/home";
 import { ui } from "@/i18n/ui";
 import type { Lang } from "@/lib/types";
 import { cn, href, routes } from "@/lib/utils";
-import { HeroActions, OfferLine } from "./HomeLive";
+import { HeroActions, HeroBooks, OfferLine } from "./HomeLive";
 import { Icon } from "./Icon";
 
 /*
@@ -69,9 +69,7 @@ export function Hero({ lang }: { lang: Lang }) {
             <span className="text-gold">{t.h1[1]}</span>
           </h1>
           <p className="mt-4 max-w-xl text-[1.02rem] leading-relaxed text-ivory/75 lg:mt-6 lg:text-xl lg:text-ivory/80">
-            {t.lede[0]}
-            <span className="text-ivory">{t.lede[1]}</span>
-            {t.lede[2]}
+            {t.lede.map((part, i) => (i % 2 ? <span key={i} className="text-ivory">{part}</span> : part))}
           </p>
           <p className="mt-3 text-[1.05rem] italic text-lavender lg:text-lg">{t.small}</p>
           <HeroActions lang={lang} />
@@ -93,25 +91,14 @@ export function Hero({ lang }: { lang: Lang }) {
           </div>
         </div>
 
-        <figure className="relative order-first lg:order-none">
+        <div className="relative order-first lg:order-none">
           <div className="hero-art relative overflow-hidden rounded-3xl ring-1 ring-ivory/10 lg:overflow-visible lg:rounded-none lg:ring-0">
             <picture className="lg:hidden">
               <img src="/images/home/night-sky-m.webp" alt="" width={960} height={720} className="absolute inset-0 h-full w-full object-cover" />
             </picture>
-            <img
-              src="/images/products/indigo-hero-books.webp"
-              alt={t.artAlt}
-              width={1500}
-              height={1300}
-              fetchPriority="high"
-              className="hero-books relative mx-auto h-auto w-[78%] py-5 lg:w-full lg:py-0"
-            />
+            <HeroBooks lang={lang} />
           </div>
-          <figcaption className="absolute -bottom-5 left-4 right-4 flex items-center gap-3 rounded-2xl border border-ivory/10 bg-night/95 px-4 py-3 backdrop-blur lg:-bottom-2 lg:left-auto lg:right-0 lg:max-w-[22rem]">
-            <Icon name="moon" className="h-4 w-4 shrink-0 text-moon" />
-            <span className="text-[1.05rem] italic leading-tight">{t.quote}</span>
-          </figcaption>
-        </figure>
+        </div>
       </div>
     </section>
   );

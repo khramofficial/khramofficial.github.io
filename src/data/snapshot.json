@@ -461,8 +461,8 @@
    "format": "Paperback · Full color",
    "subtitle": "A Shadow Work & Emotional Healing Journal",
    "status": "available",
-   "price": 24.99,
-   "price_label": "$24.99",
+   "price": 19.99,
+   "price_label": "$19.99",
    "store": "Amazon",
    "url": "https://www.amazon.com/dp/B0HNKH2M57",
    "cta_label": "Buy on Amazon",
@@ -570,6 +570,7 @@
    "og_image": "/images/og/indigo-paperback.jpg",
    "i18n": {
     "th": {
+     "faq": null,
      "notes": [
       "Amazon พิมพ์ ขาย และจัดส่งเอง",
       "คำสั่งซื้อ การจัดส่ง และการคืนสินค้าทำผ่าน Amazon"
@@ -641,18 +642,20 @@
       "บทสะท้อนตอนจบ และคำสัญญาที่เขียนถึงตัวเอง"
      ],
      "subtitle": "สมุดบันทึกสำรวจใจและเยียวยาอารมณ์",
+     "howItWorks": null,
      "priceLabel": "$24.99",
      "description": [
       "ตีสองแล้ว แต่หัวยังเล่นบทสนทนาเมื่อสามวันก่อนซ้ำไปซ้ำมา วันนี้คุณพูดว่า “ไม่เป็นไร” อีกแล้ว คุณตอบตกลงทั้งที่อยากปฏิเสธ แล้วก็สงสัยว่าทำไมถึงเหนื่อยขนาดนี้",
       "INDIGO ทำมาสำหรับคนที่รู้สึกลึก คิดเยอะ และเบื่อการถูกบอกให้ “คิดบวกเข้าไว้” ไม่ต้องฝืนขอบคุณ ไม่ต้องแกล้งทำเป็นโอเค มีแค่คำถามตรงๆ พื้นที่เงียบๆ และที่ว่างให้เข้าใจส่วนที่เราเคยซ่อนไว้",
       "ฉบับสีทั้งเล่มเก็บภาพจากเวอร์ชันดิจิทัลไว้บนกระดาษ ถ้าอยากใช้ปากกาธรรมดา ฉบับขาวดำมีช่องสีขาวให้เขียนทุกหน้า"
-     ]
+     ],
+     "includedHeading": null
     }
    },
    "published": true,
    "sort": 2,
    "created_at": "2026-10-21T11:35:59.42876+00:00",
-   "updated_at": "2026-10-21T11:35:59.42876+00:00"
+   "updated_at": "2026-11-02T18:42:13.407276+00:00"
   },
   {
    "slug": "indigo-paperback-bw",
@@ -661,8 +664,8 @@
    "format": "Paperback · Black & white",
    "subtitle": "A Shadow Work & Emotional Healing Journal",
    "status": "available",
-   "price": 17.99,
-   "price_label": "$17.99",
+   "price": 9.99,
+   "price_label": "$9.99",
    "store": "Amazon",
    "url": "https://www.amazon.com/dp/B0HNPFV52H",
    "cta_label": "Buy on Amazon",
@@ -756,6 +759,7 @@
    "og_image": "/images/og/indigo-paperback.jpg",
    "i18n": {
     "th": {
+     "faq": null,
      "notes": [
       "Amazon พิมพ์ ขาย และจัดส่งเอง",
       "คำสั่งซื้อ การจัดส่ง และการคืนสินค้าทำผ่าน Amazon"
@@ -819,18 +823,20 @@
       "บทสะท้อนตอนจบ และคำสัญญาที่เขียนถึงตัวเอง"
      ],
      "subtitle": "สมุดบันทึกสำรวจใจและเยียวยาอารมณ์",
+     "howItWorks": null,
      "priceLabel": "$17.99",
      "description": [
       "ตีสองแล้ว แต่หัวยังเล่นบทสนทนาเมื่อสามวันก่อนซ้ำไปซ้ำมา วันนี้คุณพูดว่า “ไม่เป็นไร” อีกแล้ว คุณตอบตกลงทั้งที่อยากปฏิเสธ แล้วก็สงสัยว่าทำไมถึงเหนื่อยขนาดนี้",
       "INDIGO ทำมาสำหรับคนที่รู้สึกลึก คิดเยอะ และเบื่อการถูกบอกให้ “คิดบวกเข้าไว้” ไม่ต้องฝืนขอบคุณ ไม่ต้องแกล้งทำเป็นโอเค มีแค่คำถามตรงๆ พื้นที่เงียบๆ และที่ว่างให้เข้าใจส่วนที่เราเคยซ่อนไว้",
       "ฉบับขาวดำคือฉบับใช้งานจริง มีช่องสีขาวให้เขียนด้วยปากกาที่ชอบ ถ้าอยากได้ภาพใต้แสงจันทร์แบบสี เลือกฉบับสีทั้งเล่ม"
-     ]
+     ],
+     "includedHeading": null
     }
    },
    "published": true,
    "sort": 3,
    "created_at": "2026-10-21T11:35:59.42876+00:00",
-   "updated_at": "2026-10-21T11:35:59.42876+00:00"
+   "updated_at": "2026-11-02T18:42:24.749836+00:00"
   },
   {
    "slug": "seven-nights",
@@ -1166,8 +1172,8 @@
    "format": "Paperback · Full color",
    "subtitle": "Undated 12-Month Planner",
    "status": "available",
-   "price": 24.99,
-   "price_label": "$24.99",
+   "price": 16.99,
+   "price_label": "$16.99",
    "store": "Amazon",
    "url": "https://www.amazon.com/dp/B0HPSV8ZX9",
    "cta_label": "Buy on Amazon",
@@ -1279,6 +1285,7 @@
    "og_image": "/images/og/quiet-year.jpg",
    "i18n": {
     "th": {
+     "faq": null,
      "notes": [
       "Amazon พิมพ์ ขาย และจัดส่งเอง",
       "คำสั่งซื้อ การจัดส่ง และการคืนสินค้าทำผ่าน Amazon"
@@ -1364,6 +1371,7 @@
       "หน้าปิดเล่ม: Year in Review, Annual Review, Next Year / Carry Forward, A Letter to Next Year's Me และหน้าโน้ต"
      ],
      "subtitle": "แพลนเนอร์ 12 เดือน ไม่ระบุวันที่",
+     "howItWorks": null,
      "priceLabel": "$24.99",
      "description": [
       "The Quiet Year คือแพลนเนอร์ 12 เดือนแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงินรายเดือน และพื้นที่ทบทวนทั้งรายเดือนและทั้งปี",
@@ -1376,7 +1384,7 @@
    "published": true,
    "sort": 6,
    "created_at": "2026-10-31T22:13:20.145569+00:00",
-   "updated_at": "2026-10-31T22:13:20.145569+00:00"
+   "updated_at": "2026-11-02T18:42:28.411969+00:00"
   },
   {
    "slug": "quiet-year-paperback-bw",
@@ -1385,8 +1393,8 @@
    "format": "Paperback · Black & white",
    "subtitle": "Undated 12-Month Planner",
    "status": "available",
-   "price": 17.99,
-   "price_label": "$17.99",
+   "price": 11.99,
+   "price_label": "$11.99",
    "store": "Amazon",
    "url": "https://www.amazon.com/dp/B0HPPG5411",
    "cta_label": "Buy on Amazon",
@@ -1498,6 +1506,7 @@
    "og_image": "/images/og/quiet-year.jpg",
    "i18n": {
     "th": {
+     "faq": null,
      "notes": [
       "Amazon พิมพ์ ขาย และจัดส่งเอง",
       "คำสั่งซื้อ การจัดส่ง และการคืนสินค้าทำผ่าน Amazon"
@@ -1583,6 +1592,7 @@
       "หน้าปิดเล่ม: Year in Review, Annual Review, Next Year / Carry Forward, A Letter to Next Year's Me และหน้าโน้ต"
      ],
      "subtitle": "แพลนเนอร์ 12 เดือน ไม่ระบุวันที่",
+     "howItWorks": null,
      "priceLabel": "$17.99",
      "description": [
       "The Quiet Year คือแพลนเนอร์ 12 เดือนแบบไม่ระบุวันที่ มีหน้ารายเดือนและรายสัปดาห์ ตารางติดตามนิสัยและอารมณ์ หน้าการใช้เงินรายเดือน และพื้นที่ทบทวนทั้งรายเดือนและทั้งปี",
@@ -1595,7 +1605,7 @@
    "published": true,
    "sort": 7,
    "created_at": "2026-10-31T22:13:20.145569+00:00",
-   "updated_at": "2026-10-31T22:13:20.145569+00:00"
+   "updated_at": "2026-11-02T18:42:32.025939+00:00"
   }
  ],
  "settings": {
@@ -1606,5 +1616,5 @@
   "amazonAuthor": "https://www.amazon.com/stores/Khram/author/B0HNP4N18N",
   "gumroadStore": "https://khramofficial.gumroad.com"
  },
- "fetchedAt": "2026-10-31T22:59:51.426Z"
+ "fetchedAt": "2026-11-02T19:45:16.249Z"
 }

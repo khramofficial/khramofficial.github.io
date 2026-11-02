@@ -938,6 +938,9 @@
   .hero-books {
     filter: drop-shadow(0 28px 40px rgb(0 0 0 / 0.45));
   }
+  .hero-cover {
+    box-shadow: 0 28px 50px -18px rgb(0 0 0 / 0.75), 0 8px 18px -8px rgb(0 0 0 / 0.5);
+  }
   @media (max-width: 1023px) {
     .hero-art {
       min-height: 15rem;

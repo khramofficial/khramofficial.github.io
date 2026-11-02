@@ -69,6 +69,53 @@ export function OfferLine({ lang, className }: { lang: Lang; className?: string 
   return <p className={className}>{homeText(lang).offer(money(Math.round(pdfPrice * 70) / 100))}</p>;
 }
 
+/**
+ * Hero books (Bank, 3 Nov 2026): the INDIGO and The Quiet Year front covers side by side, each linking to its collection,
+ * with the lowest live paperback price from the catalog (so a price change in the admin shows here too).
+ */
+const HERO_BOOKS = [
+  { slug: "indigo", cover: "/images/products/indigo-paperback-cover.webp" },
+  { slug: "quiet-year", cover: "/images/products/quiet-year-cover.webp" },
+] as const;
+
+export function HeroBooks({ lang }: { lang: Lang }) {
+  const catalog = useCatalog();
+  const t = homeText(lang).hero.books;
+  return (
+    <ul className="hero-duo relative mx-auto grid w-full max-w-[34rem] grid-cols-2 gap-4 px-4 py-6 sm:gap-6 lg:max-w-none lg:gap-7 lg:px-0 lg:py-0" role="list" aria-label={t.label}>
+      {HERO_BOOKS.map((b, i) => {
+        const item = t.items[b.slug];
+        const papers = productsIn(catalog, b.slug, lang).filter((p) => p.status === "available" && p.store === "Amazon" && p.url);
+        const prices = papers.map(priceOf).filter((n): n is number => n !== null);
+        const from = prices.length ? Math.min(...prices) : null;
+        return (
+          <li key={b.slug} className={cn("hero-duo-item min-w-0", i === 1 && "lg:translate-y-10")}>
+            <a href={href(lang, routes.collection(b.slug))} className="group block focus-visible:outline-none" data-track={`hero:${b.slug}`}>
+              <img
+                src={b.cover}
+                alt={item.alt}
+                width={1000}
+                height={1499}
+                fetchPriority="high"
+                className="hero-cover aspect-[2/3] w-full rounded-[4px] object-cover ring-1 ring-ivory/10 transition-transform duration-500 group-hover:-translate-y-1.5 group-focus-visible:ring-2 group-focus-visible:ring-moon"
+              />
+              <div className="mt-3 lg:mt-4">
+                <div className="font-display text-[0.95rem] tracking-[0.12em] text-ivory uppercase lg:text-[1.05rem]">{item.title}</div>
+                <div className="mt-0.5 text-[0.85rem] text-ivory/65 lg:text-[0.92rem]">{item.sub}</div>
+                <div className="mt-1 text-[0.85rem] text-gold lg:text-[0.92rem]">{from !== null ? t.from(money(from)) : t.soon}</div>
+                <span className="mt-2 inline-flex items-center gap-1.5 text-[0.85rem] text-moon underline decoration-moon/40 underline-offset-4 group-hover:decoration-moon lg:text-[0.92rem]">
+                  {item.cta}
+                  <Icon name="arrow" className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 /** Hero buttons: one to the formats, one to the free sample. */
 export function HeroActions({ lang }: { lang: Lang }) {
   const h = homeText(lang).hero;

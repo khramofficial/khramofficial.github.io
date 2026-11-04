@@ -2,106 +2,18 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { errText, sb } from "./lib";
+import { GROUPS, KINDS, kindsOf } from "./osConfig";
 import { osSeed } from "./osSeed";
 
 /**
- * Khram OS: everything about running the brand in one admin tab, stored in public.os_items
- * (migration 004_khram_os.sql). Tasks, content pipeline, sales channels, weekly numbers,
- * accounts register for handover, and who can open the back office.
+ * Khram OS: the whole brand in one admin tab, stored in public.os_items (migration 004_khram_os.sql).
+ * Sections live in osConfig.ts (brand, products, marketing, customers, money, ops, handover);
+ * a new section is one config entry. Starting data per section comes from osSeed.ts.
  */
 
-type Kind = "task" | "content" | "listing" | "metric" | "account";
+type Kind = string;
 type Item = { id: string; kind: Kind; title: string; status: string; due: string | null; data: Record<string, string>; sort: number; updated_at?: string };
-
-type FieldDef = { key: string; label: string; type?: "text" | "area" | "select" | "number" | "url"; options?: string[]; wide?: boolean };
-type KindDef = { label: string; titleLabel: string; statuses: string[]; done: string[]; dueLabel?: string; fields: FieldDef[]; listCols: string[]; hint?: string };
-
-const KINDS: Record<Kind, KindDef> = {
-  task: {
-    label: "งาน",
-    titleLabel: "งาน",
-    statuses: ["ต้องทำ", "กำลังทำ", "รอคนอื่น", "เสร็จ"],
-    done: ["เสร็จ"],
-    dueLabel: "กำหนดส่ง",
-    fields: [
-      { key: "owner", label: "ใครทำ", type: "select", options: ["Bank", "Claude", "Claude + Bank", "ครอบครัว", "อื่นๆ"] },
-      { key: "area", label: "ส่วนไหน", type: "select", options: ["แบรนด์", "เว็บ", "Amazon", "Gumroad", "สินค้า", "คอนเทนต์", "ระบบ", "เงิน"] },
-      { key: "note", label: "โน้ต", type: "area", wide: true },
-    ],
-    listCols: ["owner", "area"],
-  },
-  content: {
-    label: "คอนเทนต์",
-    titleLabel: "Hook / ชื่อชิ้นงาน",
-    statuses: ["ไอเดีย", "เขียนบท", "พร้อมทำ", "โพสต์แล้ว", "พัก"],
-    done: ["โพสต์แล้ว", "พัก"],
-    dueLabel: "วันโพสต์",
-    fields: [
-      { key: "platform", label: "แพลตฟอร์ม", type: "select", options: ["TikTok", "Pinterest", "Instagram", "YouTube Shorts", "Facebook"] },
-      { key: "sky", label: "ฟ้า (Brand Guide v2.0)", type: "select", options: ["Clear Sky", "Golden Sky", "Hot Sky", "Rainy Sky", "Indigo Sky", "Night Sky"] },
-      { key: "format", label: "รูปแบบ", type: "select", options: ["The Sky Today", "The Thought", "The Ritual", "The Object", "The Collection"] },
-      { key: "collection", label: "สินค้าที่เกี่ยว", type: "select", options: ["", "INDIGO", "7 Nights", "The Quiet Year", "CRIMSON"] },
-      { key: "script", label: "สคริปต์ / แคปชัน", type: "area", wide: true },
-      { key: "url", label: "ลิงก์โพสต์", type: "url", wide: true },
-      { key: "views", label: "ยอดวิว", type: "number" },
-      { key: "clicks", label: "คลิกลิงก์", type: "number" },
-    ],
-    listCols: ["platform", "sky", "format", "views"],
-    hint: "ทุกชิ้นต้องผ่าน Brand Guide v2.0: ไม่มีเรื่องผู้ก่อตั้ง ไม่บอกว่าเหมาะกับใคร ไม่สัญญาว่ารักษา",
-  },
-  listing: {
-    label: "ช่องทางขาย",
-    titleLabel: "สินค้า · ฟอร์แมต",
-    statuses: ["ขายอยู่", "รอรีวิว", "ต้องแก้", "ร่าง", "ปิด"],
-    done: ["ขายอยู่", "ปิด"],
-    dueLabel: "เช็คครั้งถัดไป",
-    fields: [
-      { key: "channel", label: "ร้าน", type: "select", options: ["Gumroad", "Amazon KDP", "khram.co", "Etsy", "Lulu", "TikTok Shop", "อื่นๆ"] },
-      { key: "price", label: "ราคา (USD)", type: "number" },
-      { key: "id", label: "รหัส (ASIN / slug)" },
-      { key: "url", label: "ลิงก์หน้าร้าน", type: "url", wide: true },
-      { key: "note", label: "โน้ต", type: "area", wide: true },
-    ],
-    listCols: ["channel", "price", "id"],
-    hint: "ราคาจริงยึดหน้า checkout ของร้าน · ข้อมูลสินค้าต้องเช็คกับไฟล์จริง",
-  },
-  metric: {
-    label: "ตัวเลขรายสัปดาห์",
-    titleLabel: "ช่องทาง",
-    statuses: [""],
-    done: [],
-    dueLabel: "สัปดาห์ที่เริ่ม (วันจันทร์)",
-    fields: [
-      { key: "views", label: "วิว / ผู้เข้าชม", type: "number" },
-      { key: "clicks", label: "คลิกลิงก์ / buy click", type: "number" },
-      { key: "downloads", label: "ดาวน์โหลดฟรี", type: "number" },
-      { key: "sales", label: "ยอดขาย (ชิ้น)", type: "number" },
-      { key: "revenue", label: "รายได้", type: "number" },
-      { key: "currency", label: "สกุลเงิน", type: "select", options: ["USD", "THB"] },
-      { key: "note", label: "โน้ต", type: "area", wide: true },
-    ],
-    listCols: ["views", "clicks", "downloads", "sales", "revenue"],
-    hint: "กรอกทุกวันจันทร์ ช่องทางละแถว (เว็บ, Gumroad, Amazon, TikTok, Pinterest) · รายได้คนละสกุลเงินไม่รวมกัน",
-  },
-  account: {
-    label: "บัญชี / ส่งต่อ",
-    titleLabel: "บริการ",
-    statuses: ["ใช้งาน", "ต้องตั้งค่า", "เลิกใช้"],
-    done: ["เลิกใช้"],
-    fields: [
-      { key: "login", label: "อีเมล / ชื่อผู้ใช้ที่ล็อกอิน" },
-      { key: "owner", label: "เจ้าของบัญชี" },
-      { key: "recovery", label: "2FA / กู้คืนอยู่ที่ไหน", wide: true },
-      { key: "url", label: "ลิงก์", type: "url", wide: true },
-      { key: "note", label: "โน้ต (เงินเข้าที่ไหน ต้องทำอะไรทุกเดือน)", type: "area", wide: true },
-    ],
-    listCols: ["login", "owner"],
-    hint: "ห้ามใส่รหัสผ่าน เลขบัตร หรือเลขบัญชีธนาคาร · เก็บรหัสไว้ใน password manager ที่ตั้ง emergency access ให้ครอบครัว",
-  },
-};
-
-const VIEWS = [{ id: "overview", label: "ภาพรวม" }, ...(Object.keys(KINDS) as Kind[]).map((k) => ({ id: k, label: KINDS[k].label })), { id: "people", label: "ผู้ดูแล" }] as const;
-type View = (typeof VIEWS)[number]["id"];
+type View = "overview" | "people" | Kind;
 
 const num = (s: string | undefined) => {
   const n = Number(String(s ?? "").replace(/,/g, ""));
@@ -130,11 +42,13 @@ export function OsAdmin() {
       setItems([]);
       return;
     }
-    if ((data ?? []).length === 0) {
-      const rows = osSeed.map((s, i) => ({ kind: s.kind, title: s.title, status: s.status, due: s.due ?? null, data: s.data, sort: s.sort ?? i }));
+    const have = new Set((data ?? []).map((r) => (r as Item).kind));
+    const missing = osSeed.filter((x) => !have.has(x.kind) && KINDS[x.kind]);
+    if (missing.length) {
+      const rows = missing.map((x, i) => ({ kind: x.kind, title: x.title, status: x.status, due: x.due ?? null, data: x.data, sort: x.sort ?? i }));
       const ins = await client.from("os_items").insert(rows).select("*");
       if (ins.error) setError(ins.error.message);
-      setItems((ins.data as Item[]) ?? []);
+      setItems([...((data as Item[]) ?? []), ...((ins.data as Item[]) ?? [])]);
       return;
     }
     setItems(data as Item[]);
@@ -159,12 +73,29 @@ export function OsAdmin() {
         <h2 className="adm-h2">Khram OS</h2>
         <p className="adm-hint">ทุกอย่างของแบรนด์ในที่เดียว · Brand Guide v2.0 — Every day has its own sky.</p>
       </div>
-      <nav className="flex flex-wrap gap-2" aria-label="ส่วนของ Khram OS">
-        {VIEWS.map((v) => (
-          <button key={v.id} type="button" className={`adm-btn-sm ${view === v.id ? "adm-primary" : ""}`} onClick={() => setView(v.id)}>
-            {v.label}
-            {v.id in KINDS ? ` (${items.filter((i) => i.kind === v.id && !KINDS[v.id as Kind].done.includes(i.status)).length})` : ""}
+      <nav className="flex flex-col gap-3" aria-label="ส่วนของ Khram OS">
+        <div className="flex flex-wrap gap-2">
+          <button type="button" className={`adm-btn-sm ${view === "overview" ? "adm-primary" : ""}`} onClick={() => setView("overview")}>
+            ภาพรวมทั้งแบรนด์
           </button>
+        </div>
+        {GROUPS.map((g) => (
+          <div key={g.id} className="flex flex-wrap items-center gap-2">
+            <span className="w-28 shrink-0 text-sm text-gold">{g.label}</span>
+            {kindsOf(g.id).map((k) => {
+              const open = items.filter((i) => i.kind === k && !KINDS[k]!.done.includes(i.status)).length;
+              return (
+                <button key={k} type="button" className={`adm-btn-sm ${view === k ? "adm-primary" : ""}`} onClick={() => setView(k)}>
+                  {KINDS[k]!.label} ({open})
+                </button>
+              );
+            })}
+            {g.id === "handover" ? (
+              <button type="button" className={`adm-btn-sm ${view === "people" ? "adm-primary" : ""}`} onClick={() => setView("people")}>
+                ผู้ดูแลหลังบ้าน
+              </button>
+            ) : null}
+          </div>
         ))}
       </nav>
       {error ? (
@@ -173,7 +104,7 @@ export function OsAdmin() {
         </p>
       ) : null}
       {view === "overview" ? <Overview items={items} go={setView} /> : null}
-      {view in KINDS ? <KindList kind={view as Kind} items={items.filter((i) => i.kind === view)} reload={load} setError={setError} /> : null}
+      {KINDS[view] ? <KindList kind={view} items={items.filter((i) => i.kind === view)} reload={load} setError={setError} /> : null}
       {view === "people" ? <People /> : null}
     </div>
   );
@@ -186,7 +117,18 @@ function Overview({ items, go }: { items: Item[]; go: (v: View) => void }) {
   const tasks = items.filter((i) => i.kind === "task" && i.status !== "เสร็จ").sort((a, b) => (a.due ?? "9999").localeCompare(b.due ?? "9999") || a.sort - b.sort);
   const overdue = tasks.filter((i) => i.due && i.due < t);
   const listingsFix = items.filter((i) => i.kind === "listing" && (i.status === "ต้องแก้" || i.status === "รอรีวิว"));
-  const content = KINDS.content.statuses.map((s) => ({ s, n: items.filter((i) => i.kind === "content" && i.status === s).length }));
+  const content = KINDS.content!.statuses.map((s) => ({ s, n: items.filter((i) => i.kind === "content" && i.status === s).length }));
+  const roadmap = KINDS.roadmap!.statuses.map((st) => ({ s: st, n: items.filter((i) => i.kind === "roadmap" && i.status === st).length }));
+  const feedbackNew = items.filter((i) => i.kind === "feedback" && i.status === "ใหม่");
+  const decisions = items.filter((i) => i.kind === "decision" && i.status !== "เลิกใช้").sort((a, b) => (b.due ?? "").localeCompare(a.due ?? "")).slice(0, 4);
+  const integrationsBad = items.filter((i) => i.kind === "integration" && i.status === "มีปัญหา");
+  const month = t.slice(0, 7);
+  const money = ["USD", "THB"].map((c) => {
+    const rows = items.filter((i) => i.kind === "finance" && (i.due ?? "").startsWith(month) && (i.data.currency || "USD") === c);
+    const inc = rows.filter((r) => r.status === "รายรับ").reduce((x, r) => x + num(r.data.amount), 0);
+    const out = rows.filter((r) => r.status === "รายจ่าย").reduce((x, r) => x + num(r.data.amount), 0);
+    return { c, inc, out };
+  });
   const accountsTodo = items.filter((i) => i.kind === "account" && i.status === "ต้องตั้งค่า");
   const accountsBlank = items.filter((i) => i.kind === "account" && i.status === "ใช้งาน" && (!i.data.login || !i.data.recovery));
 
@@ -295,6 +237,57 @@ function Overview({ items, go }: { items: Item[]; go: (v: View) => void }) {
         </button>
       </section>
 
+      <section className="adm-card flex flex-col gap-3 p-5">
+        <h3 className="adm-label">แผนสินค้า</h3>
+        <div className="grid grid-cols-5 gap-2 text-center">
+          {roadmap.map((c) => (
+            <div key={c.s} className="rounded-lg border border-gold/15 px-1 py-3">
+              <div className="font-display text-2xl text-gold">{c.n}</div>
+              <div className="text-xs text-ivory/65">{c.s}</div>
+            </div>
+          ))}
+        </div>
+        <button type="button" className="adm-link self-start" onClick={() => go("roadmap")}>
+          ดูแผนสินค้า →
+        </button>
+      </section>
+
+      <section className="adm-card flex flex-col gap-3 p-5">
+        <h3 className="adm-label">เงินเดือนนี้ ({month})</h3>
+        {money.map((m) => (
+          <p key={m.c} className="text-[0.95rem]">
+            {m.c}: รับ {m.inc.toLocaleString()} · จ่าย {m.out.toLocaleString()} · <span className="text-gold">คงเหลือ {(m.inc - m.out).toLocaleString()}</span>
+          </p>
+        ))}
+        <button type="button" className="adm-link self-start" onClick={() => go("finance")}>
+          ดูรายรับ-รายจ่าย →
+        </button>
+      </section>
+
+      <section className="adm-card flex flex-col gap-3 p-5">
+        <h3 className="adm-label">ลูกค้า</h3>
+        <p className="text-[0.95rem]">รีวิว / ข้อความใหม่ที่ยังไม่ตอบ: {feedbackNew.length}</p>
+        {integrationsBad.length ? <p className="text-[0.95rem] text-[#f0a3a3]">ระบบที่มีปัญหา: {integrationsBad.map((i) => i.title).join(", ")}</p> : null}
+        <button type="button" className="adm-link self-start" onClick={() => go("feedback")}>
+          ดูฟีดแบ็ก →
+        </button>
+      </section>
+
+      <section className="adm-card flex flex-col gap-3 p-5">
+        <h3 className="adm-label">การตัดสินใจล่าสุด</h3>
+        <ul className="flex flex-col gap-2 text-[0.95rem]">
+          {decisions.map((i) => (
+            <li key={i.id} className="border-b border-ivory/10 pb-2">
+              {i.title}
+              <span className="block text-sm text-ivory/55">{i.due}</span>
+            </li>
+          ))}
+        </ul>
+        <button type="button" className="adm-link self-start" onClick={() => go("decision")}>
+          ดูการตัดสินใจทั้งหมด →
+        </button>
+      </section>
+
       <section className="adm-card flex flex-col gap-3 p-5 md:col-span-2">
         <h3 className="adm-label">ความพร้อมส่งต่อ (บัญชี)</h3>
         <p className="text-[0.95rem] text-ivory/80">
@@ -312,7 +305,7 @@ function Overview({ items, go }: { items: Item[]; go: (v: View) => void }) {
 /* ---------------- one list per kind ---------------- */
 
 function KindList({ kind, items, reload, setError }: { kind: Kind; items: Item[]; reload: () => Promise<void>; setError: (s: string) => void }) {
-  const def = KINDS[kind];
+  const def = KINDS[kind]!;
   const [filter, setFilter] = useState<string>("open");
   const [editing, setEditing] = useState<Item | null>(null);
 
@@ -323,7 +316,7 @@ function KindList({ kind, items, reload, setError }: { kind: Kind; items: Item[]
   const blank = (): Item => ({
     id: "",
     kind,
-    title: kind === "metric" ? "เว็บ" : "",
+    title: def.titleOptions?.[0] ?? "",
     status: def.statuses[0] ?? "",
     due: kind === "metric" ? monday() : null,
     data: Object.fromEntries(def.fields.map((f) => [f.key, f.type === "select" ? (f.options?.[0] ?? "") : ""])),
@@ -337,7 +330,7 @@ function KindList({ kind, items, reload, setError }: { kind: Kind; items: Item[]
         <button type="button" className="adm-btn adm-primary" onClick={() => setEditing(blank())}>
           + เพิ่ม{def.label}
         </button>
-        {kind !== "metric" ? (
+        {def.statuses.length > 1 ? (
           <select className="adm-input w-auto" value={filter} onChange={(e) => setFilter(e.target.value)} aria-label="กรองตามสถานะ">
             <option value="open">ที่ยังเปิด</option>
             <option value="all">ทั้งหมด</option>
@@ -356,7 +349,7 @@ function KindList({ kind, items, reload, setError }: { kind: Kind; items: Item[]
             <div className="min-w-0 flex-1">
               <p className="text-ivory">
                 {kind === "metric" ? `${i.due} · ${i.title}` : i.title}
-                {i.status && kind !== "metric" ? <span className="ml-2 text-sm text-gold">· {i.status}</span> : null}
+                {i.status && def.statuses.length > 1 ? <span className="ml-2 text-sm text-gold">· {i.status}</span> : null}
               </p>
               <p className="text-sm text-ivory/60">
                 {def.listCols
@@ -402,7 +395,7 @@ function KindList({ kind, items, reload, setError }: { kind: Kind; items: Item[]
 }
 
 function Editor({ kind, item, onClose, reload, setError }: { kind: Kind; item: Item; onClose: () => void; reload: () => Promise<void>; setError: (s: string) => void }) {
-  const def = KINDS[kind];
+  const def = KINDS[kind]!;
   const [it, setIt] = useState<Item>(item);
   const [saving, setSaving] = useState(false);
   const set = (k: string, v: string) => setIt({ ...it, data: { ...it.data, [k]: v } });
@@ -437,12 +430,12 @@ function Editor({ kind, item, onClose, reload, setError }: { kind: Kind; item: I
       }}
     >
       <div className="adm-grid">
-        {kind === "metric" ? (
-          <Select label="ช่องทาง" value={it.title} options={["เว็บ", "Gumroad", "Amazon", "TikTok", "Pinterest", "Instagram", "อื่นๆ"]} onChange={(v) => setIt({ ...it, title: v })} />
+        {def.titleOptions ? (
+          <Select label={def.titleLabel} value={it.title} options={def.titleOptions} onChange={(v) => setIt({ ...it, title: v })} />
         ) : (
           <Input label={def.titleLabel} value={it.title} onChange={(v) => setIt({ ...it, title: v })} wide />
         )}
-        {kind !== "metric" ? <Select label="สถานะ" value={it.status} options={def.statuses} onChange={(v) => setIt({ ...it, status: v })} /> : null}
+        {def.statuses.length > 1 ? <Select label="สถานะ" value={it.status} options={def.statuses} onChange={(v) => setIt({ ...it, status: v })} /> : null}
         {def.dueLabel ? <Input label={def.dueLabel} type="date" value={it.due ?? ""} onChange={(v) => setIt({ ...it, due: v })} /> : null}
         {def.fields.map((f) =>
           f.type === "select" ? (
@@ -455,7 +448,7 @@ function Editor({ kind, item, onClose, reload, setError }: { kind: Kind; item: I
               <textarea id={`os-${f.key}`} className="adm-input" rows={4} value={it.data[f.key] ?? ""} onChange={(e) => set(f.key, e.target.value)} />
             </div>
           ) : (
-            <Input key={f.key} label={f.label} type={f.type === "number" ? "text" : f.type === "url" ? "url" : "text"} value={it.data[f.key] ?? ""} onChange={(v) => set(f.key, v)} wide={f.wide} />
+            <Input key={f.key} label={f.label} type={f.type === "url" ? "url" : f.type === "date" ? "date" : "text"} value={it.data[f.key] ?? ""} onChange={(v) => set(f.key, v)} wide={f.wide} />
           ),
         )}
       </div>

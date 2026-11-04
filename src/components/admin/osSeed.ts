@@ -1,6 +1,6 @@
 /**
- * Khram OS starting data (state on 4 Nov 2026, Brand Guide v2.0). Written once, the first time the
- * OS tab opens on an empty os_items table. Facts only; no passwords, card or bank numbers.
+ * Khram OS starting data (state on 4 Nov 2026, Brand Guide v2.0). Each section is written once, the first
+ * time the OS tab opens and that section has no rows. Facts only; no passwords, card or bank numbers.
  */
 export type SeedItem = { kind: string; title: string; status: string; due?: string; data: Record<string, string>; sort?: number };
 
@@ -37,6 +37,58 @@ export const osSeed: SeedItem[] = [
   { kind: "content", title: "It's 1:14 AM. Your brain has opinions.", status: "ไอเดีย", data: { platform: "TikTok", sky: "Night Sky", format: "The Sky Today", collection: "INDIGO", script: "", url: "", views: "", clicks: "" } },
   { kind: "content", title: "One page before sleep: how INDIGO works", status: "ไอเดีย", data: { platform: "TikTok", sky: "Night Sky", format: "The Object", collection: "INDIGO", script: "", url: "", views: "", clicks: "" } },
   { kind: "content", title: "A year, one page at a time (The Quiet Year flip-through)", status: "ไอเดีย", data: { platform: "Pinterest", sky: "Clear Sky", format: "The Collection", collection: "The Quiet Year", script: "", url: "", views: "", clicks: "" } },
+
+  // ---------- decisions (brand memory) ----------
+  { kind: "decision", title: "Brand Guide v2.0: Every day has its own sky.", status: "ล็อกแล้ว", due: "2026-11-04", data: { area: "แบรนด์", why: "Khram ต้องยืนได้เองโดยไม่ผูกกับผู้ก่อตั้ง ครอบครัวรับช่วงต่อได้ · แกนคือชีวิตคนหลายเฉดเหมือนสีฟ้า · ไม่ใช้เรื่องผู้ก่อตั้ง ไม่ใช้เรื่องสีย้อม · sign-off: Leave it on the page.", url: "https://claude.ai/artifact/T8pDJaP3b3UZYPQq6YyV8h" } },
+  { kind: "decision", title: "โลโก้ใหม่: รอยพู่กันครามเส้นเดียว สีต้นฉบับ บนพื้นขาว", status: "ล็อกแล้ว", due: "2026-11-04", data: { area: "แบรนด์", why: "แทนโลโก้วงแหวนเดิม · ห้ามเปลี่ยนสี (เวอร์ชันสีทองถูกปฏิเสธ)", url: "" } },
+  { kind: "decision", title: "Night Studio ไม่ใช่ตัวตนหลัก (เป็นแค่ฟ้ากลางคืน)", status: "ล็อกแล้ว", due: "2026-11-04", data: { area: "แบรนด์", why: "ผูกแบรนด์กับเวลานอนแคบเกินไป", url: "" } },
+  { kind: "decision", title: "ระบบอัตโนมัติ (Make + โพสต์อัตโนมัติ) ยังไม่เปิด · Khram OS เป็นที่เก็บข้อมูลหลัก", status: "ล็อกแล้ว", due: "2026-11-04", data: { area: "ระบบ", why: "ยังไม่มีคนดู ยังไม่มีช่องทางที่เชื่อม · เปิดเมื่อมีช่องทางที่มีคนดูจริง (ดูแท็บระบบเชื่อมต่อ)", url: "" } },
+  { kind: "decision", title: "ลดราคา KDP ทั้ง 4 เล่ม (กำไร ~100 บาท/เล่ม)", status: "ล็อกแล้ว", due: "2026-11-03", data: { area: "ราคา", why: "ยังไม่มียอดขาย · INDIGO สี $19.99, ขาวดำ $9.99 · Quiet Year สี $16.99, ขาวดำ $11.99", url: "" } },
+  { kind: "decision", title: "ย้ายเว็บไป khram.co", status: "ล็อกแล้ว", due: "2026-11-01", data: { area: "ช่องทาง", why: "โดเมนของแบรนด์เอง (GoDaddy) · GitHub Pages", url: "https://khram.co" } },
+  { kind: "decision", title: "คำอธิบายสินค้า: เขียนแต่ข้อเท็จจริงจากไฟล์ และไม่บอกว่าเหมาะกับใคร", status: "ล็อกแล้ว", due: "2026-10-28", data: { area: "สินค้า", why: "ให้ลูกค้าตัดสินเอง · ห้ามแต่งข้อมูล", url: "" } },
+  { kind: "decision", title: "INDIGO บน KDP มี 2 เล่ม: Full Color + Black & White", status: "ล็อกแล้ว", due: "2026-10-18", data: { area: "สินค้า", why: "ให้ลูกค้าเลือกได้ · ไม่ทำ Standard color", url: "" } },
+  { kind: "decision", title: "ตลาดภาษาอังกฤษก่อน ไทยทีหลัง", status: "ล็อกแล้ว", due: "2026-10-16", data: { area: "ช่องทาง", why: "ยกเลิกเทส LINE OpenChat · สำเร็จต่างประเทศก่อนแล้วค่อยกลับไทย", url: "" } },
+  { kind: "decision", title: "Amazon Merch on Demand ถูกปฏิเสธ → เสื้อไปทาง Printify/Etsy ทีหลัง", status: "ล็อกแล้ว", due: "2026-11-03", data: { area: "ช่องทาง", why: "Amazon ไม่ให้สมัครซ้ำ", url: "" } },
+
+  // ---------- brand files ----------
+  { kind: "asset", title: "KHRAM Brand Guide v2.0", status: "ใช้อยู่", data: { type: "เอกสาร", where: "Claude Docs (บัญชี Claude ของ Bank)", url: "https://claude.ai/artifact/T8pDJaP3b3UZYPQq6YyV8h", note: "source of truth ของทุกช่องทาง · ควร export เก็บใน Google Drive ของแบรนด์ด้วย" } },
+  { kind: "asset", title: "ชุดโลโก้ (khram-logo-pack.zip)", status: "ใช้อยู่", data: { type: "โลโก้", where: "แชท Claude 4 พ.ย. → ควรเก็บใน Google Drive khram.official", url: "", note: "1024/800/512/400/320/200/180 px พื้นขาว + transparent + favicon · ต้องทำ vector" } },
+  { kind: "asset", title: "พาเลตสี", status: "ใช้อยู่", data: { type: "สี", where: "Brand Guide v2.0 ส่วนที่ 5", url: "", note: "Night Indigo #060F24 · Deep Navy #101C3D · Antique Gold #D6AD82 · Moon Gold #D9B584 · Lavender Mist #A68DB6 · Soft Ivory #EDE6D8 · INDIGO Butterfly Blue #80B2DB" } },
+  { kind: "asset", title: "ฟอนต์", status: "ใช้อยู่", data: { type: "ฟอนต์", where: "Google Fonts", url: "", note: "Cinzel (หัวข้อ) + Cormorant Garamond (เนื้อความ)" } },
+  { kind: "asset", title: "Style block ภาพ (เทคนิค + ฟ้าแต่ละแบบ)", status: "ใช้อยู่", data: { type: "เอกสาร", where: "Brand Guide v2.0 ส่วนที่ 5", url: "", note: "painterly impasto · ห้ามมีตัวอักษร/โลโก้ในภาพที่ AI สร้าง" } },
+  { kind: "asset", title: "Canva: INDIGO master (121 หน้า)", status: "ใช้อยู่", data: { type: "ไฟล์ต้นฉบับสินค้า", where: "Canva", url: "https://www.canva.com", note: "หลายดีไซน์ชื่อ INDIGO · ตัวหลัก 6.125×9.25 in" } },
+  { kind: "asset", title: "Canva: 7 Nights (KHRAM_7NIGHTS_dark)", status: "ใช้อยู่", data: { type: "ไฟล์ต้นฉบับสินค้า", where: "Canva", url: "https://www.canva.com", note: "" } },
+  { kind: "asset", title: "ไฟล์พิมพ์ KDP (interior + cover ทุกเล่ม)", status: "ใช้อยู่", data: { type: "ไฟล์ต้นฉบับสินค้า", where: "Mac ของ Bank: ~/Downloads/Amazon KDP/", url: "", note: "ควรสำรองขึ้น Google Drive ของแบรนด์" } },
+  { kind: "asset", title: "โค้ดเว็บ khram.co", status: "ใช้อยู่", data: { type: "โค้ด", where: "GitHub khramofficial/khramofficial.github.io", url: "https://github.com/khramofficial/khramofficial.github.io", note: "deploy ผ่าน GitHub Actions" } },
+  { kind: "asset", title: "เอกสารงานทั้งหมด (โปรเจกต์ Claude 'Khram')", status: "ใช้อยู่", data: { type: "เอกสาร", where: "claude.ai Project: Khram", url: "", note: "status, research, manuscripts, scripts" } },
+
+  // ---------- product roadmap ----------
+  { kind: "roadmap", title: "INDIGO · Shadow work journal", status: "เปิดขาย", data: { collection: "INDIGO", sky: "Indigo Sky", format: "Journal", evidence: "Gumroad PDF + KDP 2 เล่ม", note: "สินค้าหลัก 90 วันแรก" } },
+  { kind: "roadmap", title: "7 Nights in INDIGO · ฟรี", status: "เปิดขาย", data: { collection: "7 Nights", sky: "Indigo Sky", format: "PDF ฟรี", evidence: "", note: "ทางเข้าหลักของ funnel" } },
+  { kind: "roadmap", title: "The Quiet Year · Undated planner", status: "เปิดขาย", data: { collection: "The Quiet Year", sky: "", format: "Planner", evidence: "KDP 2 เล่ม", note: "ritual product ไม่ใช่คอลเลกชัน" } },
+  { kind: "roadmap", title: "CRIMSON · Anxious attachment workbook", status: "กำลังทำ", data: { collection: "CRIMSON", sky: "Crimson Dusk", format: "Workbook", evidence: "เช็คตลาด 18 ต.ค. (claude/crimson-market-check.md)", note: "manuscript v1 เสร็จ 134 หน้า · ต้องแก้ประโยคเก่า (One more dip.) ให้เป็น v2.0 · ยังไม่เปิดจนกว่า INDIGO มียอดซ้ำ" } },
+  { kind: "roadmap", title: "Unsent · จดหมายที่ไม่ได้ส่ง", status: "ไอเดีย", data: { collection: "CRIMSON", sky: "Crimson Dusk", format: "PDF ฟรี", evidence: "เทรนด์ no contact journal บน TikTok", note: "ทดสอบเป็น edition ของ CRIMSON ก่อน" } },
+  { kind: "roadmap", title: "SAFFRON · กลับมาสงบ", status: "ไอเดีย", data: { collection: "SAFFRON", sky: "Saffron Dawn", format: "Journal", evidence: "", note: "วางแผนไว้ Q2 2027" } },
+  { kind: "roadmap", title: "EBONY · อยู่กับการสูญเสีย", status: "ไอเดีย", data: { collection: "EBONY", sky: "Moonless Night", format: "Journal", evidence: "research 21 ต.ค. (claude/new-product-research-oct2026.md)", note: "สำรอง" } },
+  { kind: "roadmap", title: "คอลเลกชันฟ้าสว่าง (ความฝัน / การเดินทาง / ของกิน)", status: "ไอเดีย", data: { collection: "ทั้งแบรนด์", sky: "Golden Sky", format: "Journal", evidence: "", note: "ตามแกน v2.0 ทุกแบบของวัน" } },
+  { kind: "roadmap", title: "เสื้อ 'เรียบ สงบ สบาย' + กระเป๋าผ้า", status: "ไอเดีย", data: { collection: "ทั้งแบรนด์", sky: "", format: "เสื้อ / กระเป๋า", evidence: "", note: "ใช้โลโก้ vector · Printify/Etsy" } },
+  { kind: "roadmap", title: "INDIGO บน Etsy / Lulu", status: "ไอเดีย", data: { collection: "INDIGO", sky: "Indigo Sky", format: "Journal", evidence: "", note: "ไฟล์ Lulu พร้อม แต่ปกหลังยังเป็นประโยคเก่า" } },
+
+  // ---------- campaigns ----------
+  { kind: "campaign", title: "Pinterest วันละ 1 pin", status: "วางแผน", data: { channel: "Pinterest", start: "", goal: "outbound click ไป 7 Nights / INDIGO", budget: "0", result: "", note: "10 pins พร้อมใน claude/pinterest-pins.md · ต้องปรับข้อความเป็น v2.0" } },
+  { kind: "campaign", title: "TikTok EN @khram.journals (faceless)", status: "วางแผน", data: { channel: "TikTok", start: "", goal: "3 คลิปเกิน 10,000 วิว + 7 Nights 100 ดาวน์โหลด", budget: "0", result: "", note: "5 รูปแบบคอนเทนต์ตาม Brand Guide v2.0" } },
+  { kind: "campaign", title: "Amazon Ads ทดสอบ INDIGO ขาวดำ", status: "วางแผน", data: { channel: "Amazon Ads", start: "", goal: "หา search term ที่ขายได้ · ACOS ไม่เกิน ~35%", budget: "", result: "", note: "รอ Bank ตัดสินใจงบ" } },
+  { kind: "campaign", title: "อีเมล follow-up 3 ฉบับหลังโหลด 7 Nights", status: "วางแผน", data: { channel: "Gumroad", start: "", goal: "คนโหลดฟรีซื้อ INDIGO", budget: "0", result: "", note: "Gumroad ล็อกไว้จนยอดขายครบ $100 + payout ครั้งแรก · ต้องแก้ข้อความเป็น v2.0" } },
+
+  // ---------- integrations ----------
+  { kind: "integration", title: "สถิติเว็บ (ตัวนับของเราเอง)", status: "ใช้งาน", data: { does: "นับผู้เข้าชม + buy click แบบไม่ระบุตัวตน", how: "public/site.js → Supabase track() · ดูที่แท็บสถิติเว็บ", url: "https://khram.co/admin/" } },
+  { kind: "integration", title: "Deploy เว็บ (GitHub Actions)", status: "ใช้งาน", data: { does: "สร้างเว็บใหม่ทุก push + ทุก 6 ชม.", how: "ถ้า push จาก Claude แล้วไม่ deploy ให้กด Run workflow เอง · หยุดเองถ้าไม่มี commit 60 วัน", url: "https://github.com/khramofficial/khramofficial.github.io/actions" } },
+  { kind: "integration", title: "Google Search Console", status: "ใช้งาน", data: { does: "ดูว่า Google เห็นเว็บแค่ไหน", how: "บัญชี khram.official · property https://khram.co/", url: "https://search.google.com/search-console" } },
+  { kind: "integration", title: "Gumroad → ตัวเลขขาย", status: "ยังไม่ตั้ง", data: { does: "ดึงยอดขาย/ดาวน์โหลดอัตโนมัติ", how: "ตอนนี้กรอกมือที่ตัวเลขรายสัปดาห์ · อนาคต: Gumroad webhook/API", url: "" } },
+  { kind: "integration", title: "Amazon KDP → ตัวเลขขาย", status: "ยังไม่ตั้ง", data: { does: "ยอดขายเล่มกระดาษ", how: "KDP ไม่มี API ยอดขาย · ดู KDP Reports แล้วกรอกมือ", url: "https://kdp.amazon.com/reports" } },
+  { kind: "integration", title: "Claude API → ร่างสคริปต์คอนเทนต์", status: "ยังไม่ตั้ง", data: { does: "ร่างสคริปต์จาก Brand Guide v2.0 แล้วรอคนอนุมัติ", how: "ต้องมี API key + งบ · ผูกกับแท็บคอนเทนต์", url: "" } },
+  { kind: "integration", title: "Make.com → ระบบอัตโนมัติ", status: "ยังไม่ตั้ง", data: { does: "ต่อระบบต่างๆ เข้าหากัน (แผน GPT)", how: "เปิดเมื่อมีช่องทางที่มีคนดูจริง · ห้ามโพสต์อัตโนมัติโดยไม่มีคนอนุมัติ", url: "" } },
+  { kind: "integration", title: "TikTok / Pinterest API → โพสต์ + ดึงตัวเลข", status: "ยังไม่ตั้ง", data: { does: "โพสต์และดึงยอดวิวอัตโนมัติ", how: "TikTok ต้องผ่าน audit ก่อนโพสต์สาธารณะ · Pinterest ต้องมี app ที่อนุมัติแล้ว", url: "" } },
 
   // ---------- accounts register (NO passwords) ----------
   { kind: "account", title: "Gmail (อีเมลหลักของแบรนด์)", status: "ใช้งาน", data: { login: "khram.official@gmail.com", owner: "Bank", recovery: "", url: "https://mail.google.com", note: "ใช้ล็อกอิน KDP, Supabase, Search Console, หลังบ้านเว็บ" } },

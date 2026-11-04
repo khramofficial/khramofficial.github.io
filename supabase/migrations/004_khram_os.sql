@@ -1,12 +1,12 @@
--- Khram OS: one admin-only place to run the brand (tasks, content pipeline, sales channels,
--- weekly numbers, accounts register for handover). Run once in the Supabase SQL editor of
+-- Khram OS: one admin-only place to run the whole brand: brand, products, channels, marketing,
+-- customers, money, operations and handover. Every section is a 'kind' in one table. Run once in the Supabase SQL editor of
 -- project hobwlswwwvmfqawdgjip (account khram.official@gmail.com). Safe to re-run.
 -- Never store passwords, card or bank numbers here: the accounts register keeps only
 -- which service, which login email, who owns it and where recovery lives.
 
 create table if not exists public.os_items (
   id uuid primary key default gen_random_uuid(),
-  kind text not null check (kind in ('task', 'content', 'listing', 'metric', 'account', 'note')),
+  kind text not null check (kind ~ '^[a-z_]{2,30}$'),  -- section of Khram OS; new sections need no migration
   title text not null default '',
   status text not null default '',
   due date,

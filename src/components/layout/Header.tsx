@@ -55,7 +55,7 @@ export function Header({ lang, path }: { lang: Lang; path?: string | null }) {
       <header className="site-header">
         <div className="container-k flex h-[var(--header-h)] items-center justify-between gap-6">
           <a href={href(lang, routes.home)} className="flex items-center gap-2.5 no-underline" aria-label={t.home}>
-            <img src="/images/brand/khram-mark.webp" alt="" width={485} height={248} className="h-6 w-auto lg:hidden" />
+            <img src="/images/brand/khram-logo.webp" alt="" width={56} height={56} className="h-8 w-8 rounded-full lg:hidden" />
             <span className="wordmark">KHRAM</span>
           </a>
           <nav aria-label="Main" className="hidden lg:block">

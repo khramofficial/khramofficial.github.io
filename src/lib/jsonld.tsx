@@ -33,7 +33,7 @@ export function siteLd(lang: Lang): Json[] {
       "@id": organizationId,
       name: "Khram",
       url: `${SITE_ORIGIN}/`,
-      logo: abs("/images/brand/khram-mark-indigo.png"),
+      logo: abs("/images/brand/khram-logo-512.png"),
       description: t.meta.description,
       email: s.email || undefined,
       sameAs: [s.gumroadStore, s.amazonAuthor, s.tiktok, s.instagram, s.pinterest].filter(Boolean),

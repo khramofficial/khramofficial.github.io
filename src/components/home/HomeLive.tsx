@@ -193,7 +193,7 @@ export function ProofStrip({ lang }: { lang: Lang }) {
   const t = homeText(lang).hero;
   return (
     <div className="mx-5 mt-2 flex items-center gap-3 rounded-2xl border border-ivory/5 bg-navy/70 px-4 py-3.5 sm:mx-8 lg:hidden">
-      <img src="/images/brand/khram-mark.webp" alt="" width={485} height={248} className="h-6 w-auto shrink-0" />
+      <img src="/images/brand/khram-logo.webp" alt="" width={56} height={56} className="h-9 w-9 shrink-0 rounded-full" />
       <div className="min-w-0 text-[0.85rem] leading-snug">
         <div className="font-display tracking-[0.12em] text-gold uppercase">{t.maker}</div>
         <div className="text-ivory/65">{t.makerSub}</div>

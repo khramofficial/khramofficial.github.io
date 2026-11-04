@@ -13,7 +13,7 @@ const en: FaqGroup[] = [
     items: [
       {
         q: "What does Khram mean?",
-        a: "Khram (คราม) is the person who makes these journals: an ordinary person who has gotten a lot wrong, who nearly died once, and who decided that this time they won't give up, so their last day isn't spent regretting never doing what they wanted to do. The line the brand keeps coming back to is \"I did the best I could.\" The full story is on the Our Story page.",
+        a: "Khram (คราม) means indigo in Thai, one of the many colours a sky can be. No two days have the same sky, and no two days of a life are the same either. Khram is a studio making journals for every kind of day. The full story is on the Our Story page.",
       },
       {
         q: "What is shadow work?",
@@ -63,7 +63,7 @@ const th: FaqGroup[] = [
     items: [
       {
         q: "คราม หมายถึงอะไร",
-        a: "ครามคือคนที่ทำสมุดเหล่านี้ คนธรรมดาที่ผิดพลาดมาเยอะ เคยเกือบตาย และตัดสินใจว่าครั้งนี้จะไม่ยอมแพ้อีกแล้ว เพราะไม่อยากให้วันสุดท้ายต้องมานั่งเสียใจที่ไม่เคยได้ทำในสิ่งที่อยากทำ ประโยคที่แบรนด์กลับมาหาเสมอคือ “กูทำดีที่สุดแล้ว” อ่านเรื่องเต็มได้ที่หน้าเรื่องของเรา",
+        a: "คราม คือสีครามในภาษาไทย หนึ่งในหลายสีที่ท้องฟ้าเป็นได้ ไม่มีวันไหนที่ฟ้าเหมือนกัน ชีวิตแต่ละวันก็เหมือนกัน Khram เป็นสตูดิโอที่ทำสมุดสำหรับทุกแบบของวัน อ่านเรื่องเต็มได้ที่หน้าเรื่องของเรา",
       },
       {
         q: "Shadow work คืออะไร",

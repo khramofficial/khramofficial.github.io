@@ -35,7 +35,7 @@ export function Footer({ lang }: { lang: Lang }) {
       <div className="container-k grid gap-8 py-12 text-center lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-12 lg:text-left">
         <div className="flex flex-col items-center gap-3 lg:items-start">
           <a href={href(lang, routes.home)} className="flex items-center gap-3 no-underline">
-            <img src="/images/brand/khram-badge.webp" alt={t.footer.logoAlt} width={56} height={56} loading="lazy" className="h-11 w-11 rounded-full" />
+            <img src="/images/brand/khram-mark.webp" alt={t.footer.logoAlt} width={485} height={248} loading="lazy" className="h-8 w-auto" />
             <span className="wordmark text-[1.4rem]">KHRAM</span>
           </a>
           <p className="italic text-ivory/65">

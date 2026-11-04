@@ -83,7 +83,7 @@ export function Hero({ lang }: { lang: Lang }) {
             ))}
           </ul>
           <div className="mt-8 hidden max-w-lg items-center gap-4 border-t border-gold/15 pt-7 lg:flex">
-            <img src="/images/brand/khram-badge.webp" alt="" width={56} height={56} className="h-11 w-11 rounded-full ring-2 ring-night" />
+            <img src="/images/brand/khram-mark.webp" alt="" width={485} height={248} className="h-7 w-auto" />
             <div>
               <div className="font-display text-[0.8rem] tracking-[0.18em] text-gold uppercase">{t.maker}</div>
               <div className="text-[0.95rem] text-ivory/70">{t.makerSub}</div>

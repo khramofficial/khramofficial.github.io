@@ -39,7 +39,7 @@ const en = {
   offer: (price: string) => `Until Oct 30: the PDF is ${price}, 30% off, applied at checkout.`,
   platforms: { label: "Buy securely on", note: "Secure checkout, handled by the store", gumroad: "Buy the INDIGO PDF on Gumroad", amazon: "Buy the INDIGO paperback on Amazon" },
   pain: {
-    eyebrow: "Who it's for",
+    eyebrow: "Sound familiar?",
     h2: ["If this sounds like you, ", "you're not alone."],
     cards: [
       { label: "2:07 a.m.", text: ["You're replaying a conversation from three days ago."] },
@@ -51,18 +51,19 @@ const en = {
   },
   why: {
     eyebrow: "Why Khram",
-    h2: "“I did the best I could.”",
+    h2: "Every day has its own sky.",
     p: [
-      "Khram is me. An ordinary person who has gotten a lot wrong. There was a time I nearly died, and what I told myself then was: “I've never taken a single damn thing seriously. I've just drifted along, daydreaming.” I'm not talented. I've never been someone my family could count on. But for once in my life, I'm not going to give up. I just don't want my last day to be spent regretting that I never did what I wanted to do.",
-      "Whether this book is right for you is something you'll have to find out for yourself.",
+      "Khram means indigo in Thai — one of the many colours a sky can be. No two days have the same sky. Some are bright. Some burn. Some rain all afternoon. Some turn deep blue and stay that way for a while.",
+      "People are like that too. We laugh, we dream, we get tired, we fall in love, we lose things, and sometimes we get hungry at the wrong hour. Khram makes journals for all kinds of days. Not to fix them. Just to give them somewhere to go.",
+      "Whether a Khram journal is right for you is something you'll have to find out for yourself.",
     ],
     steps: [
-      { a: "The dark", b: "was real" },
-      { a: "The light", b: "is too" },
-      { a: "Still", b: "walking" },
+      { a: "Bright", b: "some days" },
+      { a: "Rain", b: "some days" },
+      { a: "Indigo", b: "some days" },
     ],
-    art: "Still light inside.",
-    chip: "the dark, then the light",
+    art: "Every day has its own sky.",
+    chip: "every kind of day",
     artAlt: "Painting of a night sky opening into soft dawn clouds above a calm sea.",
     link: "Read our story",
   },
@@ -156,7 +157,7 @@ const en = {
   },
   collections: {
     eyebrow: "The collections",
-    h2: "A journal for each kind of night",
+    h2: "Every journal has its own sky",
     p: "Each collection has its own color and its own subject: the feelings you hide, a quiet year of planning, the fear of being left, a body that won't settle, and grief. INDIGO and The Quiet Year are ready now. The others are on their way.",
     followQ: "Want to hear when CRIMSON opens?",
     follow: "Follow Khram on Amazon",
@@ -202,7 +203,7 @@ const en = {
     guarantee: "14-day money-back guarantee on the PDF",
   },
   buyBar: { name: "INDIGO", sub: (price: string) => `from ${price} · 14-day refund`, cta: "Get INDIGO" },
-  footer: { line: "For people who feel deeply and think too much.", refunds: "Refunds" },
+  footer: { line: "For every kind of day.", refunds: "Refunds" },
 };
 
 export type HomeDict = typeof en;
@@ -241,7 +242,7 @@ const th: HomeDict = {
   offer: (price: string) => `ถึง 30 ต.ค. PDF เหลือ ${price} (ลด 30% ให้อัตโนมัติตอนจ่าย)`,
   platforms: { label: "ซื้ออย่างปลอดภัยที่", note: "ชำระเงินผ่านระบบของร้านค้าโดยตรง", gumroad: "ซื้อ INDIGO ฉบับ PDF ที่ Gumroad", amazon: "ซื้อ INDIGO เล่มกระดาษที่ Amazon" },
   pain: {
-    eyebrow: "เหมาะกับใคร",
+    eyebrow: "คุ้นๆ ไหม",
     h2: ["ถ้าเรื่องเหล่านี้ฟังดูคุ้นๆ ", "คุณไม่ได้เป็นคนเดียว"],
     cards: [
       { label: "ตีสอง", text: ["ยังนั่งคิดวนถึงบทสนทนาเมื่อสามวันก่อน"] },
@@ -253,18 +254,19 @@ const th: HomeDict = {
   },
   why: {
     eyebrow: "ทำไมต้องคราม",
-    h2: "“กูทำดีที่สุดแล้ว”",
+    h2: "ทุกวันมีฟ้าของมันเอง",
     p: [
-      "ครามคือตัวฉันเอง คนธรรมดาที่ผิดพลาดมาเยอะ มีช่วงหนึ่งที่ฉันเกือบตาย และสิ่งที่บอกตัวเองตอนนั้นคือ “กูแม่งไม่เคยทำห่าอะไรจริงจังเลยสักอย่าง เพ้อ\u2060ฝันไปวันๆ” ฉันไม่ได้เป็นคนเก่ง ไม่เคยเป็นคนที่ครอบครัวจะฝากชีวิตไว้ได้เลย แต่สักครั้งในชีวิต ฉันจะไม่ยอมแพ้อีกแล้ว ก็แค่ไม่อยากให้วันสุดท้ายต้องมานั่งเสียใจที่ไม่เคยได้ทำในสิ่งที่อยากทำ",
-      "หนังสือเล่มนี้จะเหมาะกับคุณหรือไม่ คุณต้องเป็นคนหาคำตอบด้วยตัวเอง",
+      "คราม คือสีครามในภาษาไทย หนึ่งในหลายสีที่ท้องฟ้าเป็นได้ ไม่มีวันไหนที่ฟ้าเหมือนกันเลย บางวันสดใส บางวันแดดแรง บางวันฝนตกทั้งบ่าย บางวันก็กลายเป็นสีครามเข้ม แล้วอยู่อย่างนั้นสักพัก",
+      "คนเราก็เหมือนกัน เราหัวเราะ เราฝัน เราเหนื่อย เรารัก เราเสียบางอย่างไป และบางทีก็หิวผิดเวลา Khram ทำสมุดสำหรับทุกแบบของวัน ไม่ได้ทำมาเพื่อแก้ไขมัน แค่ให้มันมีที่ไป",
+      "สมุดของ Khram จะเหมาะกับคุณหรือไม่ คุณต้องเป็นคนหาคำตอบด้วยตัวเอง",
     ],
     steps: [
-      { a: "ความมืด", b: "เป็นเรื่องจริง" },
-      { a: "แสง", b: "ก็จริงเหมือนกัน" },
-      { a: "ยัง", b: "เดินต่อ" },
+      { a: "ฟ้าใส", b: "บางวัน" },
+      { a: "ฝนตก", b: "บางวัน" },
+      { a: "ฟ้าคราม", b: "บางวัน" },
     ],
-    art: "ยังมีแสงอยู่ข้างใน",
-    chip: "จากความมืด สู่แสง",
+    art: "ทุกวันมีฟ้าของมันเอง",
+    chip: "ทุกแบบของวัน",
     artAlt: "ภาพวาดท้องฟ้ายามค่ำที่ค่อยๆ เปิดเป็นเมฆแสงรุ่งอรุณ เหนือทะเลที่สงบ",
     link: "อ่านเรื่องของคราม",
   },
@@ -354,7 +356,7 @@ const th: HomeDict = {
   },
   collections: {
     eyebrow: "คอลเลกชัน",
-    h2: "สมุดสำหรับคืนแต่ละแบบ",
+    h2: "สมุดแต่ละเล่ม ฟ้าคนละแบบ",
     p: "แต่ละคอลเลกชันมีสีและเรื่องของตัวเอง: ความรู้สึกที่ซ่อนไว้ การวางแผนหนึ่งปีแบบเงียบๆ ความกลัวว่าจะถูกทิ้ง ร่างกายที่ยังไม่สงบ และความสูญเสีย INDIGO กับ The Quiet Year พร้อมแล้ว เล่มอื่นกำลังตามมา",
     followQ: "อยากรู้ตอน CRIMSON ออกไหม?",
     follow: "ติดตาม Khram บน Amazon",
@@ -400,7 +402,7 @@ const th: HomeDict = {
     guarantee: "PDF ขอคืนเงินได้ภายใน 14 วัน",
   },
   buyBar: { name: "INDIGO", sub: (price: string) => `เริ่มต้น ${price} · คืนเงินได้ 14 วัน`, cta: "ซื้อ INDIGO" },
-  footer: { line: "สำหรับคนที่รู้สึกลึกและคิดเยอะ", refunds: "การคืนเงิน" },
+  footer: { line: "สำหรับทุกแบบของวัน", refunds: "การคืนเงิน" },
 };
 
 export const homeText = (lang: Lang): HomeDict => (lang === "th" ? th : en);

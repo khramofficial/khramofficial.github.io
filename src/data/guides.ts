@@ -348,7 +348,7 @@ export const guides: Guide[] = [
         p: "[INDIGO](/products/indigo-digital/) follows that shape in three Acts. **The Deep Night** is for recognizing: the emotions you hide and the patterns you keep repeating. **The Still Water** is for understanding: gentle inner child work, the rules you learned growing up, the boundaries you never got to set. **The First Light** is for growing: what you need, what you value, what you're ready to change. Every prompt page is followed by a full page to write on, and a 30-night moon tracker lets you watch the nights add up.",
       },
       {
-        p: "The name Khram (คราม) comes from the life of the person who makes these journals: an ordinary person who has gotten a lot wrong, nearly died once, and decided not to give up this time. The line the brand keeps coming back to is \"I did the best I could.\" ([Our story](/our-story/).) Whether INDIGO is right for you is something you'll have to find out for yourself. Ten minutes tonight. Again tomorrow. Still here. Still walking.",
+        p: "Khram (คราม) means indigo in Thai, one of the many colours a sky can be. Every day has its own sky, and Khram makes journals for all kinds of days. ([Our story](/our-story/).) Whether INDIGO is right for you is something you'll have to find out for yourself. Ten minutes tonight. Again tomorrow. Leave it on the page.",
       },
       { product: "indigo-digital" },
       { note: crisisNote },

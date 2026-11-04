@@ -3,15 +3,17 @@
 import type { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { CollectionsAdmin } from "./Collections";
+import { OsAdmin } from "./Os";
 import { seedIfEmpty } from "./firstRun";
 import { errText, sb } from "./lib";
 import { ProductsAdmin } from "./Products";
 import { SettingsAdmin } from "./Settings";
 import { StatsAdmin } from "./Stats";
 
-type Tab = "stats" | "products" | "collections" | "settings";
+type Tab = "os" | "stats" | "products" | "collections" | "settings";
 const tabs: { id: Tab; label: string }[] = [
-  { id: "stats", label: "ภาพรวม" },
+  { id: "os", label: "Khram OS" },
+  { id: "stats", label: "สถิติเว็บ" },
   { id: "products", label: "สินค้า" },
   { id: "collections", label: "คอลเลกชัน" },
   { id: "settings", label: "ตั้งค่าเว็บ" },
@@ -27,13 +29,13 @@ function readTab(): Tab {
   } catch {
     /* storage blocked */
   }
-  return "stats";
+  return "os";
 }
 
 export function AdminApp() {
   const [session, setSession] = useState<Session | null | undefined>(undefined);
   const [admin, setAdmin] = useState<boolean | null>(null);
-  const [tab, setTab] = useState<Tab>("stats");
+  const [tab, setTab] = useState<Tab>("os");
   const [siteUrl, setSiteUrl] = useState("");
 
   useEffect(() => {
@@ -125,6 +127,7 @@ export function AdminApp() {
         </p>
       ) : null}
       {!ready ? <p className="text-lavender">กำลังเตรียมข้อมูล…</p> : null}
+      {ready && tab === "os" ? <OsAdmin /> : null}
       {ready && tab === "stats" ? <StatsAdmin /> : null}
       {ready && tab === "products" ? <ProductsAdmin siteUrl={siteUrl} /> : null}
       {ready && tab === "collections" ? <CollectionsAdmin siteUrl={siteUrl} /> : null}
